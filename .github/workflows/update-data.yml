@@ -1,0 +1,49 @@
+name: Update TEPI data (fetch & push only)
+
+# 只负责「拉取 TEPI 数据 → 有变化则提交并推送」。
+# 构建与部署由 Cloudflare Pages 的 Git 集成自动完成（push 到 main 即触发）。
+# 与旧 deploy.yml（wrangler 直传）互斥，二者不可同时存在。
+
+on:
+  schedule:
+    - cron: '40 0 * * *'  # UTC 00:40 daily (Beijing 08:40)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Fetch TEPI data from token-parity
+        run: node scripts/fetch_data.mjs
+
+      - name: Check for data changes
+        id: check
+        run: |
+          if git diff --quiet -- public/api/parity/; then
+            echo "No data changes, nothing to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Data changed."
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push data updates
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add public/api/parity/latest.json public/api/parity/history.csv
+          git commit -m "chore(data): update TEPI series from token-parity ($(date -u +%Y-%m-%d))"
+          git push origin main

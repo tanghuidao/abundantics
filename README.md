@@ -5,7 +5,7 @@
 - **技术栈**：Astro + React (Recharts) + Tailwind CSS
 - **正式域名**：https://abundantics.org（Cloudflare Pages 托管，pages.dev 子域仅作预览）
 - **数据**：跨仓库只读拉取 [tanghuidao/token-parity](https://github.com/tanghuidao/token-parity) 的 CSV（`parity_series.csv`）
-- **CI/CD**：GitHub Actions，每日 UTC 00:40 自动拉数 + 构建 + 部署
+- **CI/CD**：GitHub Actions 每日 UTC 00:40 自动拉取 TEPI 数据并推送，Cloudflare Pages 的 Git 集成检测到 main 分支更新后自动构建部署（无冲突双机制）
 
 ## 快速开始
 
@@ -29,7 +29,7 @@ NODE_OPTIONS="--use-system-ca" npm run build
 ## 目录结构
 
 ```
-├── .github/workflows/deploy.yml   # CI/CD：每日 UTC 00:40 拉数+构建+部署
+├── .github/workflows/update-data.yml  # CI/CD：每日 UTC 00:40 拉数+提交+推送（构建部署由 Pages 承担）
 ├── scripts/fetch_data.mjs         # 从 token-parity 拉 CSV 并转换 latest.json（只转换，不计算）
 ├── public/
 │   ├── api/parity/                # latest.json, history.csv（静态 JSON API）
@@ -88,11 +88,15 @@ translation: slug-name  # 对应译文的文章 slug（可选，设置后隐藏"
 - 数据拉取失败时不中断构建，沿用上一次数据
 - `latest.json` 中 `mock: true` 表示 MOCK 数据，上线前必须替换
 
-## 部署（Cloudflare Pages）
+## 部署（Cloudflare Pages 托管）
 
-GitHub Actions 需配置以下 Secrets：
-- `CLOUDFLARE_API_TOKEN` — Cloudflare API 令牌
-- `CLOUDFLARE_ACCOUNT_ID` — Cloudflare 账户 ID
+部署走 **Cloudflare Pages 的 Git 集成**（在 Cloudflare Dashboard 中将 GitHub 仓库 `tanghuidao/abundantics` 接入 Pages 项目，构建命令 `npm run build`，输出目录 `dist`）：
+
+- **手动/代码更新**：push 到 `main` 即自动构建部署（约 2 分钟）
+- **每日数据自动更新**：GitHub Actions（`.github/workflows/update-data.yml`）每日 UTC 00:40 拉取 token-parity 数据，有变化则自动提交并推送，触发 Pages 重新构建
+- 无需配置任何 Cloudflare Secrets；`deploy.yml`（wrangler 直传方案）已移除
+
+> 手动触发一次数据更新：GitHub 仓库 → Actions → Update TEPI data → Run workflow。
 
 ## 域名绑定与地址统一（v1.3，2026-08-19）
 
@@ -104,12 +108,12 @@ GitHub Actions 需配置以下 Secrets：
 - 语言识别失败时默认落地 `/en/`（国际站定位，英文兜底）
 - 全站已无 pages.dev / github.io / 127.0.0.1 硬编码残留（站点输出范围）
 
-Cloudflare 面板待办（需在 Dashboard 手动执行，已列入交付说明）：
+Cloudflare 面板已完成（2026-08-19）：
 
-1. Cloudflare Pages 项目 → Custom domains → 添加 `abundantics.org`（apex 为主域名）
-2. 同时添加 `www.abundantics.org`，用 Redirect Rules 配 301 → 根域
-3. SSL/TLS 模式确认为 Full (Strict)，等待证书签发
-4. pages.dev 子域保留作预览，不对外宣传
+1. ✅ Pages 项目（Git 集成）已创建并部署，域名 `abundantics.org` 绑定 **Active**（SSL 自动签发）
+2. ✅ `www.abundantics.org` → DNS CNAME `www → @` + Page Rule `www.abundantics.org/*` → 301 → `https://abundantics.org/$1`
+3. ✅ SSL 由 Cloudflare Pages 自动管理（无需手动设置 Full (Strict)）
+4. ✅ `abundantics.pages.dev` 保留作预览，不对外宣传
 
 ## 自主决策清单（v1.3）
 
@@ -118,6 +122,7 @@ Cloudflare 面板待办（需在 Dashboard 手动执行，已列入交付说明�
 3. **数据拉取脚本**：候选路径新增 `parity_series.csv`（token-parity 主序列，已验证）；当 Node `fetch` 因本地 DNS 受限失败时自动回退 `curl`（GitHub Actions 上仍走 fetch 主路径）
 4. **`defaultLocale` 改为 `en` 并关闭 Astro 自动根重定向**：`i18n.routing.redirectToDefaultLocale: false`，保留手写 `src/pages/index.astro` 的浏览器语言分流（中文 → `/zh/`，其余 → `/en/`）。否则 Astro 会把根路径替换成仅指向 `/en/` 的静态重定向，中文用户将无法到达中文版
 5. **TEPI 数据已替换为真实序列**：`latest.json` 取自 token-parity `parity_series.csv`（截至 2026-08-19），MOCK 标记已移除
+6. **部署机制改版（deploy.yml → update-data.yml）**：弃用 wrangler 直传（需 Secrets、与 Pages Git 集成双部署冲突），改为 GitHub Actions 仅「拉数据 + 有变化则提交推送」，构建与部署完全交给 Cloudflare Pages Git 集成。无 Secrets 依赖；每日 UTC 00:40 自动更新数据；push 到 main 即自动部署
 
 ## 许可
 
