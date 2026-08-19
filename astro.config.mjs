@@ -6,17 +6,20 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  site: 'https://abundantics.pages.dev',
+  site: 'https://abundantics.org',
   integrations: [
     react(),
     tailwind({ applyBaseStyles: false }),
     sitemap(),
   ],
   i18n: {
-    defaultLocale: 'zh',
+    defaultLocale: 'en',
     locales: ['zh', 'en'],
     routing: {
       prefixDefaultLocale: true,
+      // Keep the hand-written /index.astro (browser-language split with /en/ fallback).
+      // Without this, Astro replaces it with a static redirect to /en/ only.
+      redirectToDefaultLocale: false,
     },
   },
   markdown: {

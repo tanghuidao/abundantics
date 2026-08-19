@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://abundantics.pages.dev/sitemap-index.xml
+Sitemap: https://abundantics.org/sitemap-index.xml

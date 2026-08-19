@@ -46,9 +46,30 @@ function formatFloat(n, decimals = 3) {
 
 // --- Core logic ---
 
+async function fetchText(url) {
+  try {
+    const res = await fetch(url);
+    if (res.ok) return await res.text();
+    throw new Error(`HTTP ${res.status}`);
+  } catch (err) {
+    // Fallback to curl. Helps in sandboxed/local environments where Node's
+    // DNS resolution is blocked but system tooling can still reach the network.
+    // On GitHub Actions the primary fetch path is used and this rarely triggers.
+    const { execFileSync } = await import('node:child_process');
+    const out = execFileSync('curl', ['-sS', '--max-time', '30', '-L', url], {
+      encoding: 'utf-8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    if (!out) throw new Error(`curl returned empty body (${err.message})`);
+    return out;
+  }
+}
+
 async function fetchRemoteCSV() {
   // Try multiple possible CSV paths in the token-parity repo
+  // parity_series.csv is the canonical main series (verified 2026-08-19)
   const possiblePaths = [
+    'parity_series.csv',
     'history.csv',
     'data/history.csv',
     'output/history.csv',
@@ -60,12 +81,9 @@ async function fetchRemoteCSV() {
     const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${csvPath}`;
     try {
       console.log(`[fetch_data] Trying ${url}...`);
-      const res = await fetch(url);
-      if (res.ok) {
-        const text = await res.text();
-        console.log(`[fetch_data] Successfully fetched ${text.split('\n').length} lines from ${csvPath}`);
-        return text;
-      }
+      const text = await fetchText(url);
+      console.log(`[fetch_data] Successfully fetched ${text.split('\n').length} lines from ${csvPath}`);
+      return text;
     } catch (err) {
       console.log(`[fetch_data] Failed to fetch from ${csvPath}: ${err.message}`);
     }

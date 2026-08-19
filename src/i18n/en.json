@@ -56,7 +56,9 @@
     "readMore": "Read more",
     "noTranslation": "Not yet available in English",
     "publishedOn": "Published on",
-    "back": "Back to article list"
+    "back": "Back to article list",
+    "langZh": "中文",
+    "langEn": "English"
   },
   "data": {
     "title": "Data & Open Source",
@@ -78,7 +80,7 @@
     "copy": "Copy",
     "copied": "Copied",
     "contact": "Contact",
-    "contactPlaceholder": "[TBD]",
+    "contactPlaceholder": "tanghuidao01@gmail.com",
     "description": "Abundantics is a theoretical framework for post-scarcity social science, proposed by Tang Huidao in 2026. This site is its official research portal, publishing core literature, the TEPI index, and research articles."
   },
   "propositions": {

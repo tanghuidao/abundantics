@@ -56,7 +56,9 @@
     "readMore": "阅读全文",
     "noTranslation": "此文暂无英文版",
     "publishedOn": "发布于",
-    "back": "返回文章列表"
+    "back": "返回文章列表",
+    "langZh": "中文",
+    "langEn": "English"
   },
   "data": {
     "title": "数据·开源",
@@ -78,7 +80,7 @@
     "copy": "复制",
     "copied": "已复制",
     "contact": "联系方式",
-    "contactPlaceholder": "[待定]",
+    "contactPlaceholder": "tanghuidao01@gmail.com",
     "description": "丰裕学（Abundantics）是研究后稀缺社会科学的理论框架，由汤汇道于 2026 年提出。本站是其官方研究门户，发布核心文献、TEPI 指数与研究文章。"
   },
   "propositions": {

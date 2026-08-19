@@ -15,8 +15,9 @@ TEPI (Token Energy Parity Index) is a daily-updated index measuring the energy-t
 
 All data is available as static JSON/CSV — no authentication, no rate limits.
 
-- Latest index: `https://abundantics.pages.dev/api/parity/latest.json`
-- Full history: `https://abundantics.pages.dev/api/parity/history.csv`
+- Latest index: `https://abundantics.org/api/parity/latest.json`
+- Full history: `https://abundantics.org/api/parity/history.csv`
+- Methodology: https://abundantics.org/en/index/methodology/
 
 ### latest.json schema
 

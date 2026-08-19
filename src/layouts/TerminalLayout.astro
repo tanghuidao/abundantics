@@ -24,6 +24,10 @@ const t = getTranslations(locale);
 const otherLocale = getOppositeLocale(locale);
 const otherLocalePath = getOppositeLocalePath(Astro.url.pathname, locale);
 const pageTitle = title ?? `${t.site.name} · ${t.site.nameEn}`;
+const siteOrigin = (Astro.site?.toString() ?? 'https://abundantics.org').replace(/\/$/, '');
+const canonical = new URL(Astro.url.pathname, siteOrigin).toString();
+const thisLocaleUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const altLocaleUrl = new URL(otherLocalePath, siteOrigin).toString();
 ---
 
 <!DOCTYPE html>
@@ -33,8 +37,9 @@ const pageTitle = title ?? `${t.site.name} · ${t.site.nameEn}`;
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{pageTitle}</title>
   {description && <meta name="description" content={description} />}
-  <link rel="alternate" hreflang={locale} href={Astro.url.pathname} />
-  {hasAlternate && <link rel="alternate" hreflang={otherLocale} href={otherLocalePath} />}
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang={locale} href={thisLocaleUrl} />
+  {hasAlternate && <link rel="alternate" hreflang={otherLocale} href={altLocaleUrl} />}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </head>
 <body class="bg-term-bg text-term-fg font-sans min-h-screen flex flex-col">

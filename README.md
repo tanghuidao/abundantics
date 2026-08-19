@@ -3,8 +3,8 @@
 基于 Astro 的中英双语静态网站。以每日更新的 Token 能量平价指数（TEPI）实时大屏为门面，以丰裕学核心文献和研究文章为内核。
 
 - **技术栈**：Astro + React (Recharts) + Tailwind CSS
-- **托管**：Cloudflare Pages（pages.dev 子域，域名后续绑定）
-- **数据**：跨仓库只读拉取 [tanghuidao/token-parity](https://github.com/tanghuidao/token-parity) 的 CSV
+- **正式域名**：https://abundantics.org（Cloudflare Pages 托管，pages.dev 子域仅作预览）
+- **数据**：跨仓库只读拉取 [tanghuidao/token-parity](https://github.com/tanghuidao/token-parity) 的 CSV（`parity_series.csv`）
 - **CI/CD**：GitHub Actions，每日 UTC 00:40 自动拉数 + 构建 + 部署
 
 ## 快速开始
@@ -93,6 +93,31 @@ translation: slug-name  # 对应译文的文章 slug（可选，设置后隐藏"
 GitHub Actions 需配置以下 Secrets：
 - `CLOUDFLARE_API_TOKEN` — Cloudflare API 令牌
 - `CLOUDFLARE_ACCOUNT_ID` — Cloudflare 账户 ID
+
+## 域名绑定与地址统一（v1.3，2026-08-19）
+
+正式域名 abundantics.org 已注册于 Cloudflare Registrar，DNS 托管在 Cloudflare。代码侧已完成：
+
+- `astro.config.mjs` 中 `site` 改为 `https://abundantics.org`（sitemap / RSS / canonical / hreflang 自动生成绝对地址）
+- 布局层（`TerminalLayout` / `ProseLayout`）每页输出 `<link rel="canonical">` 与绝对地址 hreflang 互链
+- `llms.txt`、`robots.txt`、RSS 兜底、About / 方法论页 BibTeX 引用地址全部统一为 abundantics.org
+- 语言识别失败时默认落地 `/en/`（国际站定位，英文兜底）
+- 全站已无 pages.dev / github.io / 127.0.0.1 硬编码残留（站点输出范围）
+
+Cloudflare 面板待办（需在 Dashboard 手动执行，已列入交付说明）：
+
+1. Cloudflare Pages 项目 → Custom domains → 添加 `abundantics.org`（apex 为主域名）
+2. 同时添加 `www.abundantics.org`，用 Redirect Rules 配 301 → 根域
+3. SSL/TLS 模式确认为 Full (Strict)，等待证书签发
+4. pages.dev 子域保留作预览，不对外宣传
+
+## 自主决策清单（v1.3）
+
+1. **hreflang/canonical 实现位置**：在布局层用 `Astro.site` 拼接绝对地址，所有页面自动获得，无需逐页维护
+2. **研究列表页跨语言显示**：`/en/research/` 与 `/zh/research/` 列表均显示全部语言文章并带语言徽标（修复英文列表在无英文文章时的空页问题；文章链接仍指向自身语言路由）
+3. **数据拉取脚本**：候选路径新增 `parity_series.csv`（token-parity 主序列，已验证）；当 Node `fetch` 因本地 DNS 受限失败时自动回退 `curl`（GitHub Actions 上仍走 fetch 主路径）
+4. **`defaultLocale` 改为 `en` 并关闭 Astro 自动根重定向**：`i18n.routing.redirectToDefaultLocale: false`，保留手写 `src/pages/index.astro` 的浏览器语言分流（中文 → `/zh/`，其余 → `/en/`）。否则 Astro 会把根路径替换成仅指向 `/en/` 的静态重定向，中文用户将无法到达中文版
+5. **TEPI 数据已替换为真实序列**：`latest.json` 取自 token-parity `parity_series.csv`（截至 2026-08-19），MOCK 标记已移除
 
 ## 许可
 

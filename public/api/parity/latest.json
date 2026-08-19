@@ -2,32 +2,31 @@
   "schema_version": "1.0",
   "method_version": "0.1",
   "date": "2026-08-19",
-  "generated_at": "2026-08-19T01:19:33Z",
+  "generated_at": "2026-08-19T06:25:10Z",
   "indices": {
     "R_M": {
-      "value": 0.0647,
+      "value": 0.0643,
+      "unit": "USD/kWh",
+      "change_1d": -0.0006
+    },
+    "R_A": {
+      "value": 16.19,
       "unit": "USD/kWh",
       "change_1d": 0
     },
-    "R_A": {
-      "value": 15.95,
-      "unit": "USD/kWh",
-      "change_1d": 0.07
-    },
     "Lambda": {
-      "value": 225.5,
+      "value": 251.6,
       "unit": "dimensionless",
-      "change_1d": 0.2
+      "change_1d": 2.27
     },
     "Omega": {
-      "value": 5.32,
+      "value": 5.76,
       "unit": "dimensionless",
-      "change_1d": -0.02
+      "change_1d": 0.009
     }
   },
   "sources": [
     "tanghuidao/token-parity"
   ],
-  "license": "CC-BY-4.0",
-  "mock": true
+  "license": "CC-BY-4.0"
 }

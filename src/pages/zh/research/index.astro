@@ -8,7 +8,6 @@ const t = getTranslations(locale);
 
 const allPosts = await getCollection('research', ({ data }) => !data.draft);
 const posts = allPosts
-  .filter((p) => p.slug.startsWith('zh/'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
@@ -21,14 +20,19 @@ const posts = allPosts
 
     <div class="space-y-8">
       {posts.map((post) => (
-        <a href={`/${locale}/research/${post.slug.replace('zh/', '')}/`} class="block group border-b border-prose-border pb-6 hover:border-accent-red/50 transition-colors">
+        <a href={`/${post.data.lang}/research/${post.slug.replace(/^(zh|en)\//, '')}/`} class="block group border-b border-prose-border pb-6 hover:border-accent-red/50 transition-colors">
           <div class="flex items-baseline justify-between gap-4 mb-2">
             <h2 class="font-serif text-xl font-bold text-prose-fg group-hover:text-accent-red transition-colors">
               {post.data.title}
             </h2>
-            <time class="font-mono text-xs text-prose-muted whitespace-nowrap">
-              {post.data.date.toISOString().slice(0, 10)}
-            </time>
+            <span class="flex items-center gap-2 whitespace-nowrap">
+              <span class="font-mono text-[10px] px-1.5 py-0.5 border border-prose-border rounded text-prose-muted">
+                {post.data.lang === 'zh' ? t.research.langZh : t.research.langEn}
+              </span>
+              <time class="font-mono text-xs text-prose-muted">
+                {post.data.date.toISOString().slice(0, 10)}
+              </time>
+            </span>
           </div>
           {post.data.description && (
             <p class="text-prose-fg/70 text-sm leading-relaxed">{post.data.description}</p>

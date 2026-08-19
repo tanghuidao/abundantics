@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'Abundantics · 丰裕学',
     description: 'Post-Scarcity Social Science: Theory, Models, and Evidence. TEPI index and research articles.',
-    site: context.site ?? 'https://abundantics.pages.dev',
+    site: context.site ?? 'https://abundantics.org',
     items: sorted.map((post) => ({
       title: post.data.title,
       description: post.data.description ?? '',
