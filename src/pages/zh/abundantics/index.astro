@@ -1,0 +1,50 @@
+---
+import ProseLayout from '../../../layouts/ProseLayout.astro';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+
+const locale: Locale = 'zh';
+const t = getTranslations(locale);
+---
+
+<ProseLayout locale={locale} title={t.abundantics.title} wide={true}>
+  <article>
+    <header class="mb-10">
+      <h1 class="font-serif text-3xl md:text-4xl font-bold text-prose-fg mb-2">{t.abundantics.title}</h1>
+      <p class="text-prose-muted text-sm">{t.abundantics.subtitle}</p>
+    </header>
+
+    <div class="space-y-6 text-prose-fg leading-relaxed">
+      <p class="text-lg">{t.abundantics.structureIntro}</p>
+
+      <p>
+        丰裕学以五条可证伪的核心命题为基石，构建从本体论到政治经济学的完整理论体系。这五条命题分别是：稀缺迁移（本体论）、价值锚转移（价值论）、配置先于交换（机制论）、多账本（测量论）、制度内生（政治经济学）。每条命题附有明确的证伪条件与可检验推论。
+      </p>
+
+      <p>
+        在该框架中，经济学不被废除，而被收编为剩余稀缺领域的有效特例——当稀缺高度集中于可交换品、价格为主导配置机制、单一货币账本近似有效时，五条核心命题退化为标准经济学的隐含前提。
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href={`/${locale}/abundantics/propositions/`} class="inline-flex items-center gap-2 px-5 py-3 bg-accent-red text-white rounded font-sans text-sm font-medium hover:bg-accent-red/90 transition-colors">
+        {t.abundantics.propositions} →
+      </a>
+    </div>
+
+    <!-- Preprint download -->
+    <div class="mt-12 p-6 border border-prose-border rounded-lg bg-white/50">
+      <h2 class="font-serif text-xl font-bold mb-3">{t.abundantics.preprintVersion}</h2>
+      <p class="text-sm text-prose-muted mb-4">《丰裕学：后稀缺社会科学的理论、模型与实证》</p>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="/files/丰裕学预印本_v1_6.pdf" class="inline-flex items-center gap-2 px-4 py-2 border border-accent-red text-accent-red rounded font-sans text-sm hover:bg-accent-red/5 transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          {t.abundantics.downloadPreprint}
+        </a>
+        <a href="https://doi.org/10.5281/zenodo.21989658" target="_blank" rel="noopener" class="inline-flex items-center gap-2">
+          <img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21989658-C8402A" alt="DOI Badge" class="rounded" />
+        </a>
+      </div>
+    </div>
+  </article>
+</ProseLayout>

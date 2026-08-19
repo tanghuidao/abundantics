@@ -1,0 +1,40 @@
+---
+import ProseLayout from '../../../layouts/ProseLayout.astro';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+import { getCollection } from 'astro:content';
+
+const locale: Locale = 'zh';
+const t = getTranslations(locale);
+
+const allPosts = await getCollection('research', ({ data }) => !data.draft);
+const posts = allPosts
+  .filter((p) => p.slug.startsWith('zh/'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<ProseLayout locale={locale} title={t.research.title}>
+  <article>
+    <header class="mb-10">
+      <h1 class="font-serif text-3xl md:text-4xl font-bold text-prose-fg">{t.research.title}</h1>
+      <p class="text-prose-muted text-sm mt-2">{t.research.subtitle}</p>
+    </header>
+
+    <div class="space-y-8">
+      {posts.map((post) => (
+        <a href={`/${locale}/research/${post.slug.replace('zh/', '')}/`} class="block group border-b border-prose-border pb-6 hover:border-accent-red/50 transition-colors">
+          <div class="flex items-baseline justify-between gap-4 mb-2">
+            <h2 class="font-serif text-xl font-bold text-prose-fg group-hover:text-accent-red transition-colors">
+              {post.data.title}
+            </h2>
+            <time class="font-mono text-xs text-prose-muted whitespace-nowrap">
+              {post.data.date.toISOString().slice(0, 10)}
+            </time>
+          </div>
+          {post.data.description && (
+            <p class="text-prose-fg/70 text-sm leading-relaxed">{post.data.description}</p>
+          )}
+        </a>
+      ))}
+    </div>
+  </article>
+</ProseLayout>

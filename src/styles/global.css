@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* KaTeX styling */
+.katex-display {
+  margin: 1.5em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5em 0;
+}
+
+/* Scrollbar for dark theme */
+.term-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.term-scroll::-webkit-scrollbar-track {
+  background: #0A0A0B;
+}
+.term-scroll::-webkit-scrollbar-thumb {
+  background: #2A2A2E;
+  border-radius: 3px;
+}
+
+/* Smooth transition for nav links */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.2s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}

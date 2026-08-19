@@ -1,0 +1,54 @@
+---
+import ProseLayout from '../../../layouts/ProseLayout.astro';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+
+const locale: Locale = 'en';
+const t = getTranslations(locale);
+---
+
+<ProseLayout locale={locale} title={t.abundantics.title} wide={true}>
+  <article>
+    <header class="mb-10">
+      <h1 class="font-sans text-3xl md:text-4xl font-bold text-prose-fg mb-2">{t.abundantics.title}</h1>
+      <p class="text-prose-muted text-sm">{t.abundantics.subtitle}</p>
+    </header>
+
+    <div class="space-y-6 text-prose-fg leading-relaxed">
+      <p class="text-lg">{t.abundantics.structureIntro}</p>
+
+      <p>
+        Abundantics is built on five falsifiable core propositions spanning from ontology to political economy: Scarcity Migration (ontology), Value-Anchor Shift (axiology), Allocation Precedes Exchange (mechanism theory), Multi-Ledger (measurement theory), and Institutional Endogeneity (political economy). Each proposition comes with explicit falsification conditions and testable corollaries.
+      </p>
+
+      <p>
+        Within this framework, economics is not abolished but incorporated as the valid special case in domains of residual scarcity — when scarcity is highly concentrated in exchangeable goods, prices are the dominant allocation mechanism, and a single monetary ledger is approximately effective, the five core propositions reduce to the implicit premises of standard economics.
+      </p>
+
+      <p class="text-prose-muted text-sm italic">
+        [Full English translation of the preprint — to be published]
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href={`/${locale}/abundantics/propositions/`} class="inline-flex items-center gap-2 px-5 py-3 bg-accent-red text-white rounded font-sans text-sm font-medium hover:bg-accent-red/90 transition-colors">
+        {t.abundantics.propositions} →
+      </a>
+    </div>
+
+    <!-- Preprint download -->
+    <div class="mt-12 p-6 border border-prose-border rounded-lg bg-white/50">
+      <h2 class="font-sans text-xl font-bold mb-3">{t.abundantics.preprintVersion}</h2>
+      <p class="text-sm text-prose-muted mb-4">Abundantics: Theory, Models, and Evidence for a Post-Scarcity Social Science (in Chinese)</p>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="/files/丰裕学预印本_v1_6.pdf" class="inline-flex items-center gap-2 px-4 py-2 border border-accent-red text-accent-red rounded font-sans text-sm hover:bg-accent-red/5 transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          {t.abundantics.downloadPreprint}
+        </a>
+        <a href="https://doi.org/10.5281/zenodo.21989658" target="_blank" rel="noopener" class="inline-flex items-center gap-2">
+          <img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21989658-C8402A" alt="DOI Badge" class="rounded" />
+        </a>
+      </div>
+    </div>
+  </article>
+</ProseLayout>

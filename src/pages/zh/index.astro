@@ -1,0 +1,87 @@
+---
+import TerminalLayout from '../../layouts/TerminalLayout.astro';
+import IndexCard from '../../components/IndexCard.tsx';
+import Sparkline from '../../components/Sparkline.tsx';
+import { getTranslations, type Locale } from '../../i18n/utils';
+import { loadIndexData, loadSparklineData } from '../../lib/data';
+
+const locale: Locale = 'zh';
+const t = getTranslations(locale);
+const data = loadIndexData();
+const sparklineData = loadSparklineData(90);
+const { indices } = data;
+---
+
+<TerminalLayout locale={locale} title={t.home.title} description={t.site.tagline}>
+  <div class="px-6 md:px-12 py-8 md:py-12 max-w-7xl mx-auto w-full flex-1 flex flex-col">
+    {data.mock && (
+      <div class="mb-6 px-4 py-2 border border-accent-red/40 bg-accent-red/10 rounded text-xs font-mono text-accent-red">
+        ⚠ {t.home.mockWarning}
+      </div>
+    )}
+
+    <!-- Header -->
+    <div class="mb-8 md:mb-10">
+      <h1 class="font-mono text-xl md:text-2xl text-term-fg font-medium tracking-tight">
+        {t.home.title}
+      </h1>
+      <p class="font-mono text-sm text-term-muted mt-1">{t.home.subtitle}</p>
+    </div>
+
+    <!-- Index Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-8 md:mb-10">
+      <IndexCard
+        label="R_M"
+        symbol="R_M"
+        value={indices.R_M.value}
+        unit={indices.R_M.unit}
+        change1d={indices.R_M.change_1d}
+        comingSoonText={t.home.comingSoon}
+        changeLabelText={t.home.change1d}
+      />
+      <IndexCard
+        label="R_A"
+        symbol="R_A"
+        value={indices.R_A.value}
+        unit={indices.R_A.unit}
+        change1d={indices.R_A.change_1d}
+        comingSoonText={t.home.comingSoon}
+        changeLabelText={t.home.change1d}
+      />
+      <IndexCard
+        label="Λ"
+        symbol="Λ"
+        value={indices.Lambda.value}
+        unit={indices.Lambda.unit}
+        change1d={indices.Lambda.change_1d}
+        comingSoonText={t.home.comingSoon}
+        changeLabelText={t.home.change1d}
+      />
+      <IndexCard
+        label="Ω"
+        symbol="Ω"
+        value={indices.Omega.value}
+        unit={indices.Omega.unit}
+        change1d={indices.Omega.change_1d}
+        comingSoonText={t.home.comingSoon}
+        changeLabelText={t.home.change1d}
+      />
+    </div>
+
+    <!-- Sparkline -->
+    <div class="bg-term-card border border-term-border rounded-lg p-5 md:p-6">
+      <div class="flex items-baseline justify-between mb-3">
+        <h2 class="font-mono text-sm text-term-muted">{t.home.sparklineTitle}</h2>
+        <span class="font-mono text-xs text-term-muted">Λ</span>
+      </div>
+      <Sparkline client:load data={sparklineData} />
+    </div>
+
+    <!-- Data update time -->
+    <div class="mt-auto pt-8">
+      <p class="font-mono text-xs text-term-muted">
+        {t.home.updateTime}: {data.generated_at} (UTC) · {t.home.dataLicense} · {t.home.methodVersion}
+      </p>
+    </div>
+  </div>
+</TerminalLayout>

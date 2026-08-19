@@ -1,0 +1,111 @@
+{
+  "site": {
+    "name": "Abundantics",
+    "nameEn": "Abundantics",
+    "tagline": "Theory, Models, and Evidence for a Post-Scarcity Social Science"
+  },
+  "nav": {
+    "home": "Home",
+    "index": "Index",
+    "abundantics": "Abundantics",
+    "research": "Research",
+    "data": "Data·OSS",
+    "about": "About",
+    "methodology": "Methodology",
+    "propositions": "Propositions",
+    "langSwitch": "中文",
+    "langSwitchHref": "/zh/"
+  },
+  "home": {
+    "title": "Token Energy Parity Index",
+    "subtitle": "TEPI · Token Energy Parity Index",
+    "updateTime": "Data updated",
+    "dataLicense": "Data: CC-BY 4.0",
+    "methodVersion": "Method v0.1",
+    "change1d": "vs. yesterday",
+    "comingSoon": "coming soon",
+    "sparklineTitle": "Λ 90-day trend",
+    "mockWarning": "MOCK data · replace before launch"
+  },
+  "index": {
+    "title": "TEPI Index Detail",
+    "history": "History",
+    "methodology": "Methodology",
+    "downloadData": "Download Data",
+    "chartTitle": "Λ Historical Trend",
+    "latestData": "Latest Index",
+    "historyCsv": "Full History CSV",
+    "apiEndpoint": "API Endpoint"
+  },
+  "abundantics": {
+    "title": "Abundantics Framework",
+    "subtitle": "Abundantics: A Post-Scarcity Social Science",
+    "overview": "Overview",
+    "propositions": "Five Core Propositions",
+    "downloadPreprint": "Download Preprint PDF",
+    "doiBadge": "DOI Badge",
+    "preprintVersion": "Preprint v1.6",
+    "structureIntro": "Abundantics is a discipline framework for studying post-scarcity social science. As compute and intelligence approach zero marginal cost, scarcity does not disappear—it migrates. Abundantics builds a complete theoretical system from ontology to political economy on five falsifiable core propositions.",
+    "propositionsIntro": "The following five core propositions form the propositional foundation of Abundantics, each with falsification conditions and testable corollaries. Excerpted from Preprint v1.6, Part II.",
+    "falsification": "Falsification condition",
+    "corollary": "Testable corollary"
+  },
+  "research": {
+    "title": "Research Articles",
+    "subtitle": "Research",
+    "readMore": "Read more",
+    "noTranslation": "Not yet available in English",
+    "publishedOn": "Published on",
+    "back": "Back to article list"
+  },
+  "data": {
+    "title": "Data & Open Source",
+    "subtitle": "Data & Open Source",
+    "apiDocs": "API Documentation",
+    "apiDescription": "This site provides a static JSON API for AI agents and researchers to fetch data directly. All data is licensed under CC-BY 4.0.",
+    "githubLink": "GitHub Repository",
+    "license": "License",
+    "licenseText": "All data on this site is licensed under the Creative Commons Attribution 4.0 International License.",
+    "latestJson": "Latest Index JSON",
+    "historyCsv": "Full History CSV",
+    "schema": "Schema"
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "About",
+    "citeThis": "Cite this",
+    "bibtex": "BibTeX",
+    "copy": "Copy",
+    "copied": "Copied",
+    "contact": "Contact",
+    "contactPlaceholder": "[TBD]",
+    "description": "Abundantics is a theoretical framework for post-scarcity social science, proposed by Tang Huidao in 2026. This site is its official research portal, publishing core literature, the TEPI index, and research articles."
+  },
+  "propositions": {
+    "p1": {
+      "name": "Scarcity Migration",
+      "subtitle": "Ontology",
+      "statement": "Technological progress does not eliminate total scarcity, only changes its distribution; the dominant institutions of any era organize around the dominant scarcity of that era."
+    },
+    "p2": {
+      "name": "Value-Anchor Shift",
+      "subtitle": "Axiology",
+      "statement": "When the exchange value of some category of output approaches zero, the center of gravity of social valuation migrates to non-reproducible attributes: relationship, meaning, authenticity, provenance."
+    },
+    "p3": {
+      "name": "Allocation Precedes Exchange",
+      "subtitle": "Mechanism Theory",
+      "statement": "Exchange is a special case of allocation, not the whole; prices, queues, lotteries, reputation, algorithmic matching, and gift-giving form a family of allocation mechanisms, whose applicable domain is determined by category attributes and social values."
+    },
+    "p4": {
+      "name": "Multi-Ledger",
+      "subtitle": "Measurement Theory",
+      "statement": "No single scalar can losslessly aggregate social well-being; once any single indicator becomes a governance target, its information content decays with strategic behavior."
+    },
+    "p5": {
+      "name": "Institutional Endogeneity",
+      "subtitle": "Political Economy",
+      "statement": "Given technological capability, the distributional form of abundance is determined by institutions; technology determines the possibility frontier, institutions determine the landing point within it."
+    }
+  }
+}

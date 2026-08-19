@@ -1,0 +1,111 @@
+{
+  "site": {
+    "name": "丰裕学",
+    "nameEn": "Abundantics",
+    "tagline": "后稀缺社会科学的理论、模型与实证"
+  },
+  "nav": {
+    "home": "首页",
+    "index": "指数",
+    "abundantics": "丰裕学",
+    "research": "研究",
+    "data": "数据·开源",
+    "about": "关于",
+    "methodology": "方法论",
+    "propositions": "核心命题",
+    "langSwitch": "English",
+    "langSwitchHref": "/en/"
+  },
+  "home": {
+    "title": "Token 能量平价指数",
+    "subtitle": "TEPI · Token Energy Parity Index",
+    "updateTime": "数据更新时间",
+    "dataLicense": "Data: CC-BY 4.0",
+    "methodVersion": "Method v0.1",
+    "change1d": "较昨日",
+    "comingSoon": "coming soon",
+    "sparklineTitle": "Λ 90 天走势",
+    "mockWarning": "MOCK 数据 · 上线前替换"
+  },
+  "index": {
+    "title": "TEPI 指数详情",
+    "history": "历史数据",
+    "methodology": "方法论",
+    "downloadData": "下载数据",
+    "chartTitle": "Λ 历史走势",
+    "latestData": "最新指数",
+    "historyCsv": "全量历史 CSV",
+    "apiEndpoint": "API 端点"
+  },
+  "abundantics": {
+    "title": "丰裕学框架",
+    "subtitle": "Abundantics: A Post-Scarcity Social Science",
+    "overview": "框架总览",
+    "propositions": "五条核心命题",
+    "downloadPreprint": "下载预印本 PDF",
+    "doiBadge": "DOI 徽章",
+    "preprintVersion": "预印本 v1.6",
+    "structureIntro": "丰裕学是研究后稀缺社会科学的学科框架。当算力与智能趋近零边际成本，稀缺并未消失，只是迁移。丰裕学以五条可证伪的核心命题为基石，构建从本体论到政治经济学的完整理论体系。",
+    "propositionsIntro": "以下五条核心命题构成丰裕学的命题化基础，每条附证伪条件与可检验推论。摘录自预印本 v1.6 第二编。",
+    "falsification": "证伪条件",
+    "corollary": "可检验推论"
+  },
+  "research": {
+    "title": "研究文章",
+    "subtitle": "Research",
+    "readMore": "阅读全文",
+    "noTranslation": "此文暂无英文版",
+    "publishedOn": "发布于",
+    "back": "返回文章列表"
+  },
+  "data": {
+    "title": "数据·开源",
+    "subtitle": "Data & Open Source",
+    "apiDocs": "API 说明",
+    "apiDescription": "本站提供静态 JSON API，供 AI agent 和研究者直接取数。所有数据采用 CC-BY 4.0 许可。",
+    "githubLink": "GitHub 仓库",
+    "license": "许可声明",
+    "licenseText": "本站所有数据采用 Creative Commons Attribution 4.0 International License。",
+    "latestJson": "最新指数 JSON",
+    "historyCsv": "全量历史 CSV",
+    "schema": "Schema"
+  },
+  "about": {
+    "title": "关于",
+    "subtitle": "About",
+    "citeThis": "引用本文",
+    "bibtex": "BibTeX",
+    "copy": "复制",
+    "copied": "已复制",
+    "contact": "联系方式",
+    "contactPlaceholder": "[待定]",
+    "description": "丰裕学（Abundantics）是研究后稀缺社会科学的理论框架，由汤汇道于 2026 年提出。本站是其官方研究门户，发布核心文献、TEPI 指数与研究文章。"
+  },
+  "propositions": {
+    "p1": {
+      "name": "稀缺迁移",
+      "subtitle": "本体论",
+      "statement": "技术进步不消灭稀缺总量，只改变稀缺的分布；任一时代的主导制度围绕当时的主导稀缺组织。"
+    },
+    "p2": {
+      "name": "价值锚转移",
+      "subtitle": "价值论",
+      "statement": "当某类产出的交换价值趋零，社会赋值的重心向不可复制的属性迁移：关系、意义、真实性、出处。"
+    },
+    "p3": {
+      "name": "配置先于交换",
+      "subtitle": "机制论",
+      "statement": "交换是配置的特例而非全部；价格、排队、抽签、声誉、算法匹配与赠予构成配置机制家族，适用域由品类属性与社会价值共同决定。"
+    },
+    "p4": {
+      "name": "多账本",
+      "subtitle": "测量论",
+      "statement": "不存在单一标量可无损汇总社会福祉；任何单一指标一旦成为治理目标，其信息含量随博弈行为衰减。"
+    },
+    "p5": {
+      "name": "制度内生",
+      "subtitle": "政治经济学",
+      "statement": "给定技术能力，丰裕的分配形态由制度决定；技术决定可能性边界，制度决定在边界内的落点。"
+    }
+  }
+}

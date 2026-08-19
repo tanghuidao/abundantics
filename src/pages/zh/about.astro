@@ -1,0 +1,67 @@
+---
+import ProseLayout from '../../layouts/ProseLayout.astro';
+import BibTeXBlock from '../../components/BibTeXBlock.astro';
+import { getTranslations, type Locale } from '../../i18n/utils';
+
+const locale: Locale = 'zh';
+const t = getTranslations(locale);
+
+const bibtexPreprint = `@misc{tang2026abundantics,
+  author = {Tang, Huidao},
+  title  = {丰裕学：后稀缺社会科学的理论、模型与实证 (Abundantics:
+            Theory, Models, and Evidence for a Post-Scarcity
+            Social Science)},
+  year   = {2026},
+  doi    = {10.5281/zenodo.21989658},
+  url    = {https://doi.org/10.5281/zenodo.21989658},
+  note   = {Preprint collection v1.6}
+}`;
+
+const bibtexTepi = `@misc{tepi_methodology,
+  author = {Tang, Huidao},
+  title  = {TEPI --- Token Energy Parity Index: Index Methodology v0.1},
+  year   = {2026},
+  url    = {https://tanghuidao.github.io/token-parity/},
+  note   = {Abundantics Empirical Module 01. Method v0.1,
+            accessed YYYY-MM-DD}
+}`;
+---
+
+<ProseLayout locale={locale} title={t.about.title}>
+  <article>
+    <header class="mb-10">
+      <h1 class="font-serif text-3xl md:text-4xl font-bold text-prose-fg">{t.about.title}</h1>
+    </header>
+
+    <div class="space-y-6 text-prose-fg leading-relaxed mb-12">
+      <p class="text-lg">{t.about.description}</p>
+      <p>
+        本站由 <a href="https://github.com/tanghuidao" target="_blank" rel="noopener" class="text-accent-red hover:underline">汤汇道（Tang Huidao）</a>维护。
+        预印本已存缴 Zenodo（<a href="https://doi.org/10.5281/zenodo.21989658" target="_blank" rel="noopener" class="text-accent-red hover:underline">DOI: 10.5281/zenodo.21989658</a>）。
+      </p>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="font-serif text-xl font-bold mb-4">{t.about.citeThis}</h2>
+      <BibTeXBlock
+        id="preprint"
+        code={bibtexPreprint}
+        title="预印本合订本 v1.6"
+        copyLabel={t.about.copy}
+        copiedLabel={t.about.copied}
+      />
+      <BibTeXBlock
+        id="tepi"
+        code={bibtexTepi}
+        title="TEPI 方法论 v0.1"
+        copyLabel={t.about.copy}
+        copiedLabel={t.about.copied}
+      />
+    </section>
+
+    <section>
+      <h2 class="font-serif text-xl font-bold mb-4">{t.about.contact}</h2>
+      <p class="text-prose-muted">{t.about.contactPlaceholder}</p>
+    </section>
+  </article>
+</ProseLayout>

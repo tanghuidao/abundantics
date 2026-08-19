@@ -1,0 +1,48 @@
+---
+import ProseLayout from '../../../layouts/ProseLayout.astro';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+import { getCollection } from 'astro:content';
+
+const locale: Locale = 'zh';
+const t = getTranslations(locale);
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('research', ({ data }) => !data.draft);
+  const posts = allPosts.filter((p) => p.slug.startsWith('zh/'));
+  return posts.map((p) => ({
+    params: { slug: p.slug.replace('zh/', '') },
+    props: { post: p },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const hasTranslation = !!post.data.translation;
+---
+
+<ProseLayout locale={locale} title={post.data.title} hasAlternate={hasTranslation} langSwitchHref={hasTranslation ? undefined : '/en/research/'}>
+  <article>
+    {!hasTranslation && (
+      <div class="mb-8 px-4 py-3 bg-prose-border/30 border border-prose-border rounded text-sm text-prose-muted">
+        {t.research.noTranslation} / Not yet available in English
+      </div>
+    )}
+
+    <header class="mb-10">
+      <h1 class="font-serif text-3xl md:text-4xl font-bold text-prose-fg leading-tight">{post.data.title}</h1>
+      <div class="mt-3 flex items-center gap-3 text-sm text-prose-muted">
+        <time class="font-mono text-xs">{post.data.date.toISOString().slice(0, 10)}</time>
+        <span>·</span>
+        <span>丰裕学研究</span>
+      </div>
+    </header>
+
+    <div class="font-serif text-prose-fg leading-relaxed text-[1.05rem] prose-headings:font-serif">
+      <Content />
+    </div>
+
+    <footer class="mt-12 pt-6 border-t border-prose-border">
+      <a href={`/${locale}/research/`} class="text-accent-red text-sm hover:underline">← {t.research.back}</a>
+    </footer>
+  </article>
+</ProseLayout>

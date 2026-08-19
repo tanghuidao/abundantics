@@ -1,0 +1,91 @@
+---
+import ProseLayout from '../../../layouts/ProseLayout.astro';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+
+const locale: Locale = 'zh';
+const t = getTranslations(locale);
+
+const propositions = [
+  {
+    num: '一',
+    name: t.propositions.p1.name,
+    subtitle: t.propositions.p1.subtitle,
+    statement: t.propositions.p1.statement,
+    falsification: '若出现某项技术使社会总体的配置冲突密度持续下降而非转移，核心命题一被证伪。',
+    corollary: '价格结构将向剩余稀缺集中——可自动化品相对价格持续下降，位置性与关系性品相对价格持续上升。',
+  },
+  {
+    num: '二',
+    name: t.propositions.p2.name,
+    subtitle: t.propositions.p2.subtitle,
+    statement: t.propositions.p2.statement,
+    falsification: '若某品类在边际成本归零后，其真实性溢价与现场性溢价同步归零，核心命题二被证伪。',
+    corollary: '真实性认证（出处证明、人类创作标记、现场凭证）将成为增速最快的产业门类之一，其市场规模增速在 AGI 普及期将系统性高于内容生产本身。',
+  },
+  {
+    num: '三',
+    name: t.propositions.p3.name,
+    subtitle: t.propositions.p3.subtitle,
+    statement: t.propositions.p3.statement,
+    falsification: '若在丰裕层扩大的过程中，非价格配置机制的覆盖范围持续收缩而非扩张，核心命题三的预测力存疑。',
+    corollary: '随人均丰裕水平上升，各经济体内非价格配置品类的清单单调扩张（今天的义务教育与公立医疗是早期样本点）。',
+  },
+  {
+    num: '四',
+    name: t.propositions.p4.name,
+    subtitle: t.propositions.p4.subtitle,
+    statement: t.propositions.p4.statement,
+    falsification: '若某单一福祉指数在成为硬治理目标后十年以上仍保持与独立福祉测量的高相关，核心命题四的后半句被削弱。',
+    corollary: '凡采用单一幸福/发展指数考核的辖区，其指数与独立测量的背离度将随考核强度上升。',
+  },
+  {
+    num: '五',
+    name: t.propositions.p5.name,
+    subtitle: t.propositions.p5.subtitle,
+    statement: t.propositions.p5.statement,
+    falsification: '若在制度迥异的经济体中，同等 AGI 渗透度下的分配结果系统性趋同，核心命题五被证伪。',
+    corollary: '未来二十年是一场天然的跨国准实验——AGI 技术几乎同步可得，而各国分配制度差异巨大；核心命题五预测分配结果将随制度变量发散。',
+  },
+];
+---
+
+<ProseLayout locale={locale} title={t.abundantics.propositions} wide={true}>
+  <article>
+    <header class="mb-10">
+      <h1 class="font-serif text-3xl md:text-4xl font-bold text-prose-fg mb-2">{t.abundantics.propositions}</h1>
+      <p class="text-prose-muted text-sm">{t.abundantics.propositionsIntro}</p>
+    </header>
+
+    <div class="space-y-8">
+      {propositions.map((p, i) => (
+        <section class="p-6 border border-prose-border rounded-lg bg-white/50">
+          <div class="flex items-baseline gap-3 mb-4">
+            <span class="font-mono text-accent-red text-lg font-bold">{String(i + 1).padStart(2, '0')}</span>
+            <h2 class="font-serif text-xl font-bold text-prose-fg">{p.name}</h2>
+            <span class="text-prose-muted text-sm">（{p.subtitle}）</span>
+          </div>
+
+          <p class="text-prose-fg leading-relaxed mb-4 border-l-2 border-accent-red pl-4 py-1">
+            <strong>表述：</strong>{p.statement}
+          </p>
+
+          <div class="space-y-3 text-sm">
+            <p class="text-prose-fg/80">
+              <span class="font-mono text-xs text-accent-red uppercase tracking-wide">{t.abundantics.falsification}：</span><br />
+              {p.falsification}
+            </p>
+            <p class="text-prose-fg/80">
+              <span class="font-mono text-xs text-accent-red uppercase tracking-wide">{t.abundantics.corollary}：</span><br />
+              {p.corollary}
+            </p>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href={`/${locale}/abundantics/`} class="text-accent-red text-sm hover:underline">← {t.abundantics.title}</a>
+      <a href="/files/丰裕学预印本_v1_6.pdf" class="text-accent-red text-sm hover:underline">↓ {t.abundantics.downloadPreprint}</a>
+    </div>
+  </article>
+</ProseLayout>

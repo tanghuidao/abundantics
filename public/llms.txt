@@ -1,0 +1,74 @@
+# Abundantics
+
+> Abundantics is a post-scarcity social science research framework. This website is its official research portal.
+
+## What is TEPI?
+
+TEPI (Token Energy Parity Index) is a daily-updated index measuring the energy-token parity in AI compute economics. It consists of four sub-indices:
+
+- **R_M**: Mining energy cost per kWh (USD/kWh)
+- **R_A**: AI inference energy cost per kWh (USD/kWh)
+- **Lambda (Λ)**: Energy-parity ratio (dimensionless) — the core index
+- **Omega (Ω)**: Abundance multiplier (dimensionless)
+
+## JSON API
+
+All data is available as static JSON/CSV — no authentication, no rate limits.
+
+- Latest index: `https://abundantics.pages.dev/api/parity/latest.json`
+- Full history: `https://abundantics.pages.dev/api/parity/history.csv`
+
+### latest.json schema
+
+```json
+{
+  "schema_version": "1.0",
+  "method_version": "0.1",
+  "date": "2026-08-19",
+  "generated_at": "2026-08-19T00:40:00Z",
+  "indices": {
+    "R_M":    { "value": 0.066, "unit": "USD/kWh",       "change_1d": 0.002 },
+    "R_A":    { "value": 15.41, "unit": "USD/kWh",       "change_1d": null },
+    "Lambda": { "value": 233.9, "unit": "dimensionless", "change_1d": -0.4 },
+    "Omega":  { "value": 5.74,  "unit": "dimensionless", "change_1d": 0.1 }
+  },
+  "sources": ["tanghuidao/token-parity"],
+  "license": "CC-BY-4.0"
+}
+```
+
+### history.csv columns
+
+`date, R_M, R_A, Lambda, Omega, Lambda_chained, method_version`
+
+## Data License
+
+All data is licensed under CC-BY 4.0 (Creative Commons Attribution 4.0 International).
+
+## Preprint DOI
+
+The Abundantics preprint is archived on Zenodo:
+- DOI: https://doi.org/10.5281/zenodo.21989658
+- Version: v1.6 (2026-08-18)
+
+## Citing
+
+```bibtex
+@misc{tang2026abundantics,
+  author = {Tang, Huidao},
+  title  = {丰裕学：后稀缺社会科学的理论、模型与实证},
+  year   = {2026},
+  doi    = {10.5281/zenodo.21989658},
+  url    = {https://doi.org/10.5281/zenodo.21989658},
+  note   = {Preprint collection v1.6}
+}
+```
+
+## Contact
+
+[TBD]
+
+## Source Code
+
+- Website: https://github.com/tanghuidao/abundantics
+- Data pipeline: https://github.com/tanghuidao/token-parity

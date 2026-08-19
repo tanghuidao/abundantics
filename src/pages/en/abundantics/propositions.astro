@@ -1,0 +1,86 @@
+---
+import ProseLayout from '../../../layouts/ProseLayout.astro';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+
+const locale: Locale = 'en';
+const t = getTranslations(locale);
+
+const propositions = [
+  {
+    name: t.propositions.p1.name,
+    subtitle: t.propositions.p1.subtitle,
+    statement: t.propositions.p1.statement,
+    falsification: 'If some technology causes the overall density of allocation conflict in society to persistently decline rather than migrate, Proposition 1 is falsified.',
+    corollary: 'Price structures will concentrate on residual scarcity — relative prices of automatable goods will persistently decline while relative prices of positional and relational goods persistently rise.',
+  },
+  {
+    name: t.propositions.p2.name,
+    subtitle: t.propositions.p2.subtitle,
+    statement: t.propositions.p2.statement,
+    falsification: 'If some category\'s authenticity premium and presence premium both go to zero after marginal cost reaches zero, Proposition 2 is falsified.',
+    corollary: 'Authenticity certification (provenance proof, human-creation marks, presence credentials) will become one of the fastest-growing industry categories.',
+  },
+  {
+    name: t.propositions.p3.name,
+    subtitle: t.propositions.p3.subtitle,
+    statement: t.propositions.p3.statement,
+    falsification: 'If the coverage of non-price allocation mechanisms persistently shrinks rather than expands as the abundance layer grows, Proposition 3\'s predictive power is in doubt.',
+    corollary: 'As per-capita abundance rises, the list of non-price allocated categories within each economy monotonically expands.',
+  },
+  {
+    name: t.propositions.p4.name,
+    subtitle: t.propositions.p4.subtitle,
+    statement: t.propositions.p4.statement,
+    falsification: 'If some single well-being index maintains high correlation with independent well-being measures for over a decade after becoming a hard governance target, the second half of Proposition 4 is weakened.',
+    corollary: 'For jurisdictions using a single happiness/development index for evaluation, the divergence between the index and independent measurements will increase with evaluation intensity.',
+  },
+  {
+    name: t.propositions.p5.name,
+    subtitle: t.propositions.p5.subtitle,
+    statement: t.propositions.p5.statement,
+    falsification: 'If distributional outcomes systematically converge across economies with drastically different institutions at the same AGI penetration level, Proposition 5 is falsified.',
+    corollary: 'The next twenty years are a natural cross-country quasi-experiment — AGI technology is nearly simultaneously available while distributional institutions differ greatly; Proposition 5 predicts outcomes will diverge along institutional variables.',
+  },
+];
+---
+
+<ProseLayout locale={locale} title={t.abundantics.propositions} wide={true}>
+  <article>
+    <header class="mb-10">
+      <h1 class="font-sans text-3xl md:text-4xl font-bold text-prose-fg mb-2">{t.abundantics.propositions}</h1>
+      <p class="text-prose-muted text-sm">{t.abundantics.propositionsIntro}</p>
+    </header>
+
+    <div class="space-y-8">
+      {propositions.map((p, i) => (
+        <section class="p-6 border border-prose-border rounded-lg bg-white/50">
+          <div class="flex items-baseline gap-3 mb-4">
+            <span class="font-mono text-accent-red text-lg font-bold">{String(i + 1).padStart(2, '0')}</span>
+            <h2 class="font-sans text-xl font-bold text-prose-fg">{p.name}</h2>
+            <span class="text-prose-muted text-sm">({p.subtitle})</span>
+          </div>
+
+          <p class="text-prose-fg leading-relaxed mb-4 border-l-2 border-accent-red pl-4 py-1">
+            <strong>Statement:</strong> {p.statement}
+          </p>
+
+          <div class="space-y-3 text-sm">
+            <p class="text-prose-fg/80">
+              <span class="font-mono text-xs text-accent-red uppercase tracking-wide">{t.abundantics.falsification}:</span><br />
+              {p.falsification}
+            </p>
+            <p class="text-prose-fg/80">
+              <span class="font-mono text-xs text-accent-red uppercase tracking-wide">{t.abundantics.corollary}:</span><br />
+              {p.corollary}
+            </p>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href={`/${locale}/abundantics/`} class="text-accent-red text-sm hover:underline">← {t.abundantics.title}</a>
+      <a href="/files/丰裕学预印本_v1_6.pdf" class="text-accent-red text-sm hover:underline">↓ {t.abundantics.downloadPreprint}</a>
+    </div>
+  </article>
+</ProseLayout>

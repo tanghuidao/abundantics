@@ -1,0 +1,44 @@
+---
+interface Props {
+  id: string;
+  code: string;
+  title: string;
+  copyLabel: string;
+  copiedLabel: string;
+}
+
+const { id, code, title, copyLabel, copiedLabel } = Astro.props;
+---
+
+<div class="mb-8">
+  <div class="flex items-center justify-between mb-2">
+    <h3 class="font-mono text-sm text-prose-muted">{title}</h3>
+    <button
+      class="bibtex-copy-btn font-mono text-xs px-3 py-1 border border-prose-border rounded hover:border-accent-red hover:text-accent-red transition-colors"
+      data-target={`bibtex-${id}`}
+      data-copy-label={copyLabel}
+      data-copied-label={copiedLabel}
+    >
+      {copyLabel}
+    </button>
+  </div>
+  <pre id={`bibtex-${id}`} class="p-4 bg-prose-fg text-prose-bg rounded-lg text-xs overflow-x-auto font-mono leading-relaxed">{code}</pre>
+</div>
+
+<script>
+  document.querySelectorAll('.bibtex-copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const target = document.getElementById(btn.getAttribute('data-target') || '');
+      if (!target) return;
+      try {
+        await navigator.clipboard.writeText(target.textContent || '');
+        const original = btn.getAttribute('data-copy-label');
+        const copied = btn.getAttribute('data-copied-label');
+        btn.textContent = copied;
+        setTimeout(() => { btn.textContent = original; }, 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+</script>

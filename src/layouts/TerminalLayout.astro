@@ -1,0 +1,52 @@
+---
+import { getTranslations, getOppositeLocale, getOppositeLocalePath, type Locale } from '../i18n/utils';
+import Nav from '../components/Nav.astro';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '@fontsource/jetbrains-mono/700.css';
+import '@fontsource/noto-serif-sc/400.css';
+import '@fontsource/noto-serif-sc/700.css';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  hasAlternate?: boolean;
+}
+
+const { locale, title, description, hasAlternate = true } = Astro.props;
+const t = getTranslations(locale);
+const otherLocale = getOppositeLocale(locale);
+const otherLocalePath = getOppositeLocalePath(Astro.url.pathname, locale);
+const pageTitle = title ?? `${t.site.name} · ${t.site.nameEn}`;
+---
+
+<!DOCTYPE html>
+<html lang={locale === 'zh' ? 'zh-CN' : 'en'}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="alternate" hreflang={locale} href={Astro.url.pathname} />
+  {hasAlternate && <link rel="alternate" hreflang={otherLocale} href={otherLocalePath} />}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body class="bg-term-bg text-term-fg font-sans min-h-screen flex flex-col">
+  <Nav locale={locale} theme="terminal" />
+  <main class="flex-1 flex flex-col">
+    <slot />
+  </main>
+  <footer class="px-6 py-4 md:px-12 border-t border-term-border">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-xs font-mono text-term-muted">
+      <span>{t.home.dataLicense} · {t.home.methodVersion}</span>
+      <span>{t.site.nameEn} · {t.site.tagline}</span>
+    </div>
+  </footer>
+</body>
+</html>

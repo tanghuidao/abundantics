@@ -1,0 +1,397 @@
+---
+import TerminalLayout from '../../../layouts/TerminalLayout.astro';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+import { loadIndexData } from '../../../lib/data';
+
+const locale: Locale = 'en';
+const t = getTranslations(locale);
+const data = loadIndexData();
+const mv = data.method_version || '0.1';
+const bibtex = `@misc{tang2026tepi,
+  title = {TEPI --- Token Energy Parity Index: Index Methodology v0.1},
+  author = {Tang, Huidao},
+  year = {2026},
+  url = {https://tanghuidao.github.io/token-parity/},
+  note = {Abundantics Empirical Module 01. Method v0.1, accessed YYYY-MM-DD}
+}`;
+---
+
+<TerminalLayout locale={locale} title={`TEPI ${t.index.methodology} v${mv}`}>
+  <div class="px-6 md:px-12 py-8 md:py-12 max-w-4xl mx-auto w-full">
+    <div class="mb-8">
+      <h1 class="font-mono text-2xl text-term-fg font-medium tracking-tight">
+        TEPI — Token Energy Parity Index · Methodology
+      </h1>
+      <p class="font-mono text-sm text-term-muted mt-2">
+        Version {mv} (draft for review) · 16 August 2026 · Abundantics Research Project · Empirical Module 01
+      </p>
+      <p class="font-mono text-xs text-term-muted mt-1">
+        Data & methodology: CC-BY 4.0 · Code: open source · Not investment advice
+      </p>
+    </div>
+
+    <div class="mb-8 p-4 border border-term-border rounded-lg bg-term-bg/50">
+      <p class="font-mono text-xs text-term-muted leading-relaxed">
+        Status: internal draft. Formulas and worked examples are verified against the reference implementation and the published series of 2026-08-16. Items marked [to be verified] are working assumptions pending independent sourcing. This document has not yet undergone external review.
+      </p>
+    </div>
+
+    <div class="space-y-8 font-mono text-sm text-term-fg leading-relaxed">
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">1. Purpose and Scope</h2>
+        <p class="text-term-fg/80">
+          The Token Energy Parity Index (TEPI) is a daily index family that places two token-producing uses of electrical energy on a single physical common denominator — gross revenue per kilowatt-hour — and tracks the ratio between them: (i) proof-of-work cryptocurrency mining (currently Bitcoin), interpreted within the Abundantics research programme as defensive dissipation (energy spent to secure claims), and (ii) large-language-model inference, interpreted as productive dissipation (energy spent to produce cognitive output). The interpretive labels are a research lens, not a normative verdict; Section 9 states their intellectual lineage and limits.
+        </p>
+        <p class="text-term-fg/80 mt-3">
+          TEPI answers a narrow, measurable question: at today's market prices, how much gross revenue does one kilowatt-hour earn in each use, and how large is the gap after adjusting for measured model quality? It does not measure profitability, welfare, or energy consumption shares, and it is not investment advice.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">2. The Index Family</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">Symbol</th>
+                <th class="text-left py-2 pr-4 text-term-muted">Name</th>
+                <th class="text-left py-2 pr-4 text-term-muted">Unit</th>
+                <th class="text-left py-2 text-term-muted">Definition</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4 text-accent-red">R_M</td><td class="py-2 pr-4">Mining revenue per kWh</td><td class="py-2 pr-4">USD/kWh</td><td class="py-2">Gross mining revenue earned by one kWh at fleet-average efficiency</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4 text-accent-red">R_A</td><td class="py-2 pr-4">Inference revenue per kWh</td><td class="py-2 pr-4">USD/kWh</td><td class="py-2">Usage-weighted gross inference revenue earned by one kWh across a model basket</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4 text-accent-red">Λ</td><td class="py-2 pr-4">Energy arbitrage ratio</td><td class="py-2 pr-4">dimensionless</td><td class="py-2">R_A / R_M (published as a chain-linked series)</td></tr>
+              <tr><td class="py-2 pr-4 text-accent-red">Ω</td><td class="py-2 pr-4">Parity deviation index</td><td class="py-2 pr-4">dimensionless (log)</td><td class="py-2">ln of quality-adjusted joule-parity exchange rate over market-implied exchange rate</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">Auxiliary published quantities: ε<sub>BTC</sub> (embodied energy per mined BTC, GWh), ρ<sub>parity</sub> and ρ<sub>market</sub> (the two token/BTC exchange rates entering Ω), basket summary statistics, and the chain-linking metadata of Section 6.</p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">3. Notation</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">Symbol</th>
+                <th class="text-left py-2 pr-4 text-term-muted">Meaning</th>
+                <th class="text-left py-2 text-term-muted">Unit</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">P<sub>BTC</sub></td><td class="py-2 pr-4">Bitcoin spot price</td><td class="py-2">USD</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">H</td><td class="py-2 pr-4">Network hashrate</td><td class="py-2">PH/s</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">B</td><td class="py-2 pr-4">Total block rewards over trailing 144 blocks (subsidy + fees)</td><td class="py-2">BTC/day</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">η</td><td class="py-2 pr-4">Fleet-average mining efficiency (manual parameter)</td><td class="py-2">J/TH</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">p<sub>i</sub></td><td class="py-2 pr-4">Output-token list price of basket model i (OpenRouter default endpoint)</td><td class="py-2">USD/token</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">j<sub>i</sub></td><td class="py-2 pr-4">Working full-stack energy per output token of model i, incl. PUE [to be verified]</td><td class="py-2">J/token</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">w̃<sub>i</sub></td><td class="py-2 pr-4">Normalized usage weight of model i (Σ w̃<sub>i</sub> = 1)</td><td class="py-2">—</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">s<sub>i</sub></td><td class="py-2 pr-4">External quality score of model i (AA Intelligence Index v4.1.1)</td><td class="py-2">points</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">q<sub>i</sub></td><td class="py-2 pr-4">Quality weight, s<sub>i</sub> / s<sub>ref</sub> (ref = designated reference model)</td><td class="py-2">—</td></tr>
+              <tr><td class="py-2 pr-4">k</td><td class="py-2 pr-4">Joules per kilowatt-hour, 3.6 × 10⁶</td><td class="py-2">J/kWh</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">4. Data Sources and Sampling</h2>
+        <p class="text-term-fg/80">
+          All inputs are free, public, and keyless. The index is computed once per day by an automated pipeline (GitHub Actions, 00:10 UTC) and appended to a public CSV; the pipeline, site generator, and full series are open source.
+        </p>
+        <div class="overflow-x-auto mt-4">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">Input</th>
+                <th class="text-left py-2 pr-4 text-term-muted">Source</th>
+                <th class="text-left py-2 text-term-muted">Cadence / policy</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Bitcoin spot price</td><td class="py-2 pr-4">CoinGecko simple-price API</td><td class="py-2">Daily snapshot at run time</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Network hashrate</td><td class="py-2 pr-4">mempool.space, 3-day window</td><td class="py-2">Daily snapshot</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Block rewards</td><td class="py-2 pr-4">mempool.space, trailing 144 blocks</td><td class="py-2">Daily snapshot</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Model list prices</td><td class="py-2 pr-4">OpenRouter /api/v1/models (default endpoints)</td><td class="py-2">Daily snapshot</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Fleet efficiency η</td><td class="py-2 pr-4">Manual; anchored to CBECI fleet estimates and ASIC specifications</td><td class="py-2">Quarterly review; every change logged</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Quality scores s<sub>i</sub></td><td class="py-2 pr-4">Artificial Analysis Intelligence Index (v4.1.1 at adoption)</td><td class="py-2">Quarterly review; every change logged</td></tr>
+              <tr><td class="py-2 pr-4">Energy per token j<sub>i</sub></td><td class="py-2 pr-4">Working assumptions [to be verified against published measurements]</td><td class="py-2">Reviewed with basket changes; logged</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">
+          Two parameters are judgmental and are therefore governed by an explicit review-and-log policy rather than presented as data: η (currently 20.0 J/TH) and the per-model j<sub>i</sub> values. Section 7 quantifies the sensitivity of each index to both.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">5. Computation</h2>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.1 Mining side</h3>
+        <p class="text-term-fg/80">
+          Hashprice (gross mining revenue per PH/s per day) and the daily electricity drawn by one PH/s at fleet-average efficiency give revenue per kWh directly:
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-center text-term-fg">
+          R<sub>M</sub> = hashprice / E<sub>PH</sub>, where E<sub>PH</sub> = η × 10³ × 86400 / (3.6 × 10⁶) kWh
+        </div>
+        <p class="text-term-fg/80">
+          Embodied energy per coin is total network energy over coins issued. A useful identity follows by substitution: R<sub>M</sub> = k · P<sub>BTC</sub> / ε<sub>BTC</sub>. Mining revenue per kWh is fully determined by the coin price and the energy embodied in a marginal coin; the difficulty adjustment is the mechanism that keeps this quantity tethered to electricity prices (Section 9.1).
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.2 Inference side</h3>
+        <p class="text-term-fg/80">
+          For each basket model, gross revenue per kWh is its output-token price times the tokens one kWh can produce at that model's energy intensity; the index aggregates with normalized usage weights:
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-center text-term-fg">
+          R<sub>A</sub> = k · Σ(w̃<sub>i</sub> · p<sub>i</sub> / j<sub>i</sub>)
+        </div>
+        <p class="text-term-fg/80">
+          If a basket model is missing from the price source on a given day it is dropped and weights are renormalized (missing_model_policy = skip); the event is visible in the run log. Prices are list prices of OpenRouter default endpoints for output tokens; input-token revenue and energy are excluded (limitation L2, Section 7).
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.3 Quality adjustment and standard tokens</h3>
+        <p class="text-term-fg/80">
+          Tokens from different models are not homogeneous. TEPI converts raw tokens into standard-token equivalents using quality weights from an external benchmark that is independent of price: q<sub>i</sub> = s<sub>i</sub> / s<sub>ref</sub>, where s<sub>i</sub> is the model's Artificial Analysis Intelligence Index score and the reference model defines q = 1. One raw token of model i counts as q<sub>i</sub> standard tokens; the quality adjustment therefore acts on the quantity side, not the price side. Standard tokens per joule for model i are t<sub>i</sub> = q<sub>i</sub> / j<sub>i</sub>, and for the basket T = Σ w̃<sub>i</sub> t<sub>i</sub>.
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.4 Cross-market parity and Ω</h3>
+        <p class="text-term-fg/80">
+          Two exchange rates between the two token worlds are compared. The joule-parity rate asks what the energy embodied in one BTC would yield if redirected to quality-adjusted inference; the market-implied rate asks how many standard tokens one BTC buys at market prices:
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-center text-term-fg">
+          Ω = ln(ρ<sub>parity</sub> / ρ<sub>market</sub>)
+        </div>
+        <p class="text-term-fg/80">
+          Interpretation: Ω is the log of a gross-revenue opportunity ratio. Ω = 5.74 (16 Aug 2026, verification run) states that the energy embodied in one bitcoin, if redirected to inference at current quality-adjusted prices, would gross e<sup>5.74</sup> ≈ 311 times the bitcoin's market price. The gross-revenue caveats of Section 7 apply to the level; the informative object is the series.
+        </p>
+        <p class="text-term-fg/80 mt-3">
+          A decomposition identity, used throughout for verification, separates Ω into the raw ratio and a pure quality term:
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-center text-term-fg">
+          Ω = ln Λ + (Ω − ln Λ), where (Ω − ln Λ) is the pure quality term
+        </div>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.5 Why price-based quality weights are inadmissible (degeneracy result)</h3>
+        <p class="text-term-fg/80">
+          <strong>Proposition.</strong> If quality weights are defined from prices, q<sub>i</sub> = p<sub>i</sub> / p<sub>ref</sub>, then Ω ≡ ln Λ identically, for every configuration and every day.
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          <strong>Proof.</strong> Substituting q<sub>i</sub> = p<sub>i</sub>/p<sub>ref</sub> into T gives T = Σ w̃<sub>i</sub> p<sub>i</sub> / (p<sub>ref</sub> · j<sub>i</sub>). Then ρ<sub>parity</sub>/ρ<sub>market</sub> = ε<sub>BTC</sub> · T · p<sub>ref</sub> / P<sub>BTC</sub> = ε<sub>BTC</sub> · Σ w̃<sub>i</sub> p<sub>i</sub>/j<sub>i</sub> / P<sub>BTC</sub>. Meanwhile Λ = R<sub>A</sub>/R<sub>M</sub> = (k Σ w̃<sub>i</sub> p<sub>i</sub>/j<sub>i</sub>) / (k P<sub>BTC</sub>/ε<sub>BTC</sub>) = ε<sub>BTC</sub> · Σ w̃<sub>i</sub> p<sub>i</sub>/j<sub>i</sub> / P<sub>BTC</sub> — the same expression. Hence Ω = ln Λ. ∎
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          Version 0 of this index used price-based weights and exhibited exactly this degeneracy (observed: Ω = 5.457 = ln 234.4 on the launch snapshot). Measuring quality with price and then asking whether price deviates from quality-adjusted parity uses the measured object as its own measuring rod. The v0.1 methodology therefore requires quality scores from a source independent of price; if any basket model lacks a current score, Ω is published as missing rather than computed under the degenerate fallback.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">6. Basket Construction and Maintenance</h2>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.1 Selection principles</h3>
+        <ul class="space-y-1 text-term-fg/80 list-disc list-inside">
+          <li><strong>Coverage:</strong> one high-usage (workhorse, not flagship) model from each major provider family, so that R<sub>A</sub> reflects revenue at prices the market actually transacts in volume.</li>
+          <li><strong>Priceability:</strong> the model must be listed on the price source with a default endpoint.</li>
+          <li><strong>Scoreability:</strong> the model must carry a current external quality score (Section 6.4); otherwise Ω is suspended, not approximated.</li>
+          <li><strong>Parsimony:</strong> the basket is deliberately small (currently four models); representativeness is pursued through weights, reviewed against public usage rankings.</li>
+        </ul>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.2 Current basket (version v1, effective 2026-08-16)</h3>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">Model (OpenRouter id)</th>
+                <th class="text-left py-2 pr-4 text-term-muted">Weight</th>
+                <th class="text-left py-2 pr-4 text-term-muted">j<sub>i</sub> (J/tok)</th>
+                <th class="text-left py-2 pr-4 text-term-muted">Score s<sub>i</sub></th>
+                <th class="text-left py-2 text-term-muted">Scored variant</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">anthropic/claude-sonnet-5 (reference)</td><td class="py-2 pr-4">0.30</td><td class="py-2 pr-4">3.0</td><td class="py-2 pr-4">55</td><td class="py-2">Adaptive Reasoning, Max</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">openai/gpt-5.5</td><td class="py-2 pr-4">0.25</td><td class="py-2 pr-4">3.0</td><td class="py-2 pr-4">56</td><td class="py-2">xhigh</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">google/gemini-3.7-flash</td><td class="py-2 pr-4">0.25</td><td class="py-2 pr-4">1.0</td><td class="py-2 pr-4">56</td><td class="py-2">high</td></tr>
+              <tr><td class="py-2 pr-4">deepseek/deepseek-v4-pro</td><td class="py-2 pr-4">0.20</td><td class="py-2 pr-4">1.5</td><td class="py-2 pr-4">53</td><td class="py-2">0813, Reasoning Max</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">
+          Score convention: for each model, the highest effort tier scored by the benchmark provider at review date ('highest-scored tier'). Scores recorded from Artificial Analysis Intelligence Index v4.1.1, retrieved 2026-08-16. The reference model's score (55) lies within the basket's score range (53–56), avoiding a reference at an extreme.
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.3 Chain-linking of Λ</h3>
+        <p class="text-term-fg/80">
+          The level of Λ is sensitive to basket composition; model turnover is expected to be frequent. Following consumer-price-index practice (chain-linking; ILO et al. 2020), the published series Λ<sub>chained</sub> measures change, not basket level. Each basket configuration carries a version tag (v1, v2, …). A registry file chain_factors.json maps each version to a cumulative linking factor; v1 ≡ 1.0.
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          On a basket change, old and new configurations are computed side-by-side on the same day (dry run). The new version's factor is set so that Λ<sub>chained</sub> is continuous across the splice: factor<sub>new</sub> = Λ<sub>chained</sub>(old) / Λ<sub>raw</sub>(new). Both Λ (raw, current basket) and Λ<sub>chained</sub> (spliced) are published; charts and analysis use Λ<sub>chained</sub>. Every splice is logged in the changelog with date, models in/out, and the factor.
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          Ω is not chain-linked in v0.1: its quality-ratio structure removes the first-order basket-level sensitivity, and splice events will be assessed empirically as they occur (open issue O5).
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.4 Quality-score governance</h3>
+        <p class="text-term-fg/80">
+          Scores are reviewed quarterly and whenever the basket changes; every adopted change is a changelog line (date, old → new score, benchmark version). Published history is never revised retroactively. The benchmark itself is versioned by its provider (v4.1.1 at adoption) and re-weights over time; the benchmark version in force is part of the record. A benchmark change is treated like a basket splice for documentation purposes.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">7. Accounting Boundary and Known Limitations</h2>
+        <p class="text-term-fg/80 mb-3">TEPI is a gross-revenue-per-unit-energy index under an explicitly declared boundary. The declared choices, each with its rationale and direction of bias:</p>
+        <ul class="space-y-3 text-term-fg/80">
+          <li><strong class="text-accent-red">L1 — Gross revenue, not profit.</strong> Electricity is the dominant marginal cost in mining but a minor cost share in inference. The level of Λ therefore cannot be read as a profit arbitrage; economically meaningful objects are the trend, the ratio's response to events, and cross-side comparisons of change. A net-margin variant Λ′ is roadmap item O2.</li>
+          <li><strong class="text-accent-red">L2 — Output tokens only.</strong> Inference revenue and energy are computed on output tokens at output prices; input-token revenue and prefill energy are excluded. This understates inference revenue per kWh to the extent input pricing exceeds prefill energy cost. Correcting this requires input/output mix data not publicly available at daily cadence [to be verified].</li>
+          <li><strong class="text-accent-red">L3 — Full-utilization convention.</strong> R<sub>A</sub> prices every kWh at list-price token output, i.e., assumes 100% billable utilization. Realized fleet utilization is below this, so R<sub>A</sub> is an upper bound on realized revenue per kWh; R<sub>M</sub> has no comparable wedge. Λ is correspondingly an upper bound.</li>
+          <li><strong class="text-accent-red">L4 — Fleet-average, manually set η.</strong> R<sub>M</sub> and ε<sub>BTC</sub> scale linearly (inversely) in η. η = 20 J/TH is anchored to public fleet estimates and current-generation ASIC specifications, reviewed quarterly. Sensitivity: ±25% in η moves R<sub>M</sub> and ln-level of Λ by ∓25% and ±ln(1.25) ≈ ±0.22 respectively.</li>
+          <li><strong class="text-accent-red">L5 — Working j<sub>i</sub> values.</strong> Per-token full-stack energy (including PUE) is the weakest input: public measurements are scarce, model-specific values are provider-confidential, and the configured values (1.0–3.0 J per output token) are order-of-magnitude working assumptions [to be verified]. A dedicated sensitivity table and sourcing appendix is roadmap item O3.</li>
+          <li><strong class="text-accent-red">L6 — Single chain, single price source.</strong> The mining side is Bitcoin only; the inference side prices via one aggregator's default endpoints. Both choices favour reproducibility over completeness and are stated rather than hidden.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">8. Data Quality Controls</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">Check</th>
+                <th class="text-left py-2 pr-4 text-term-muted">Bound / rule</th>
+                <th class="text-left py-2 text-term-muted">Action on breach</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">R<sub>M</sub> plausibility</td><td class="py-2 pr-4">0.005 – 0.5 USD/kWh</td><td class="py-2">Warning in run log; value still written</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">R<sub>A</sub> plausibility</td><td class="py-2 pr-4">0.5 – 200 USD/kWh</td><td class="py-2">Warning; value still written</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Λ day-on-day move</td><td class="py-2 pr-4">within ±50%</td><td class="py-2">Warning; value still written</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Duplicate date</td><td class="py-2 pr-4">date ≠ last CSV row</td><td class="py-2">Row skipped; warning</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Missing basket price</td><td class="py-2 pr-4">policy = skip</td><td class="py-2">Model dropped, weights renormalized, logged</td></tr>
+              <tr><td class="py-2 pr-4">Missing quality score</td><td class="py-2 pr-4">all-or-nothing</td><td class="py-2">Ω and ρ<sub>parity</sub> published as missing</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">
+          The sentinel warns but never halts the pipeline; a failed upstream fetch leaves the previous day's published files in place. Each row carries a provenance flag (source = live; backfill reserved for roadmap item O1).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">9. Interpretation Guidance</h2>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">9.1 The mining side is an already-closed arbitrage</h3>
+        <p class="text-term-fg/80">
+          Bitcoin's difficulty adjustment forces marginal mining revenue per kWh toward the marginal cost of electricity: excess margin attracts hashrate, which dilutes hashprice. The observed launch value R<sub>M</sub> ≈ 0.066 USD/kWh — of the order of common industrial electricity tariffs — is consistent with this mechanism operating as designed. TEPI treats this as its calibration anchor: one side of the ratio is pinned to the energy market by an automatic mechanism.
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">9.2 Λ as a commoditization distance</h3>
+        <p class="text-term-fg/80">
+          On the inference side no such mechanism yet binds: the scarce factors are accelerators, models, and quality premia, not electricity. Λ ≫ 1 therefore measures, in gross-revenue terms, how far inference remains from being priced as an energy commodity. A secular decline of Λ<sub>chained</sub> toward unity would indicate inference converging to energy-cost pricing; the capital reallocation channel that would drive such convergence is already observable in the conversion of mining facilities to AI datacentres.
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">9.3 Productive vs. defensive dissipation</h3>
+        <p class="text-term-fg/80">
+          The programme's framing descends from Baumol's (1990) allocation of entrepreneurship between productive and unproductive uses: identical inputs (here, joules) divided between creating claims-worthy output and securing existing claims. The parity apparatus itself is a purchasing-power-parity construction in the sense of Balassa (1964) and Samuelson (1964), with energy as the common currency. These are interpretive commitments of the Abundantics programme; every number in this document is defined and computable without them.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">10. Versioning, Revision Policy, Licensing, Citation</h2>
+        <p class="text-term-fg/80">
+          Methodology versions are semantic: parameter updates within policy (η, s<sub>i</sub>, j<sub>i</sub>, basket splices) increment the changelog, not the version; changes to formulas or conventions increment the version. This document is v0.1 (draft); v1.0 will follow external review. Published rows are never retroactively revised. Corrections, if ever required, append a corrected row and a changelog entry.
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          Series start: 2026-08-16 (basket v1, quality scores adopted same day; Ω enters the published series from 2026-08-17). Data and this methodology: CC-BY 4.0. Reference implementation: open source. A DOI-versioned dataset deposit is roadmap item O4.
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          The Abundantics preprint collection to which this index belongs (v1.6, 18 August 2026) is deposited on Zenodo: DOI 10.5281/zenodo.21989658.
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-xs text-term-fg/80 overflow-x-auto">
+          <pre class="whitespace-pre">{bibtex}</pre>
+        </div>
+        <p class="text-term-muted mt-2 text-xs">
+          Revision note: 2026-08-19 — mathematical typesetting normalized, authorship finalized, and the preprint DOI cross-link added; no change whatsoever to content or computational conventions, version remains v0.1.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">11. Open Issues and Roadmap</h2>
+        <ul class="space-y-2 text-term-fg/80">
+          <li><strong class="text-accent-red">O1 — Backfill.</strong> Reconstruct R<sub>M</sub> weekly/monthly to the 2010s from public chain and hardware-efficiency data, and R<sub>A</sub> to late 2022 from archived price schedules; publish under source = backfill with its own methodology note.</li>
+          <li><strong class="text-accent-red">O2 — Λ′ net-margin variant.</strong> Calibrated to public miner and inference-operator financials.</li>
+          <li><strong class="text-accent-red">O3 — j<sub>i</sub> sourcing appendix.</strong> Full sensitivity tables for η and j<sub>i</sub>.</li>
+          <li><strong class="text-accent-red">O4 — DOI deposit.</strong> A standalone Zenodo record for TEPI (versioned dataset + this methodology, both language editions), targeted for the 30-day mark of the series.</li>
+          <li><strong class="text-accent-red">O5 — Ω splice behaviour.</strong> Assessed on first basket-change occurrence; hedonic refinement of the quality adjustment beyond a single composite score.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">Appendix A. Worked Example — 16 August 2026</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">Quantity</th>
+                <th class="text-left py-2 pr-4 text-term-muted">Value</th>
+                <th class="text-left py-2 text-term-muted">Check</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">P<sub>BTC</sub> (USD)</td><td class="py-2 pr-4">63,006</td><td class="py-2">input</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">hashprice (USD/PH/s/day)</td><td class="py-2 pr-4">31.6177</td><td class="py-2">input</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">η (J/TH)</td><td class="py-2 pr-4">20.0</td><td class="py-2">parameter</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">E<sub>PH</sub> (kWh)</td><td class="py-2 pr-4">480.0</td><td class="py-2 text-term-muted">= 480.0 ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">R<sub>M</sub> = 31.6177 / 480.0</td><td class="py-2 pr-4">0.065870</td><td class="py-2 text-term-muted">matches row ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">ε<sub>BTC</sub> (GWh)</td><td class="py-2 pr-4">0.9565</td><td class="py-2 text-term-muted">matches row ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Identity k·P<sub>BTC</sub>/ε<sub>BTC</sub></td><td class="py-2 pr-4">0.0659</td><td class="py-2 text-term-muted">= R<sub>M</sub> ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Basket mean price (USD/Mtok)</td><td class="py-2 pr-4">11.4360</td><td class="py-2 text-term-muted">matches row ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Basket mean j (J/tok)</td><td class="py-2 pr-4">2.200</td><td class="py-2 text-term-muted">= Σw̃·j ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">R<sub>A</sub> (USD/kWh)</td><td class="py-2 pr-4">15.4088</td><td class="py-2 text-term-muted">matches row ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Λ = 15.4088 / 0.065870</td><td class="py-2 pr-4">233.93</td><td class="py-2 text-term-muted">matches row ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Λ<sub>chained</sub> = Λ × 1.0 (v1)</td><td class="py-2 pr-4">233.93</td><td class="py-2 text-term-muted">matches row ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">ln Λ</td><td class="py-2 pr-4">5.455</td><td class="py-2 text-term-muted">—</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Ω (verification run)</td><td class="py-2 pr-4">5.738</td><td class="py-2 text-term-muted">—</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Quality term Ω − ln Λ</td><td class="py-2 pr-4">0.283</td><td class="py-2 text-term-muted">decomposition ✓</td></tr>
+              <tr><td class="py-2 pr-4">Implied quality-premium factor e<sup>0.283</sup></td><td class="py-2 pr-4">≈ 1.33</td><td class="py-2 text-term-muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">
+          Reading of the final line: after quality adjustment the measured gap widens by ≈ 33% rather than narrowing — at adoption-date scores the four basket models are nearly quality-equivalent (weights 0.96–1.02) while their prices span a 7.5× range, so the market premium on the reference-side models exceeds what the benchmark attributes to measured capability. This is an observation about one day's cross-section, recorded here as the index's first substantive datapoint, not a stylized fact.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">Appendix B. Published CSV Schema (16 columns, in order)</h2>
+        <div class="my-2 p-3 bg-term-bg/50 border border-term-border rounded text-xs text-term-fg/80 overflow-x-auto">
+          <pre class="whitespace-pre">date, btc_price_usd, hashprice_usd_per_ph_day, fleet_efficiency_j_per_th,
+epsilon_btc_gwh, basket_price_usd_per_mtok, basket_j_per_token,
+R_M, R_A, Lambda, Omega, rho_parity_tok_per_btc, rho_market_tok_per_btc,
+source, basket_version, Lambda_chained</pre>
+        </div>
+        <p class="text-term-muted text-xs">
+          Columns are append-only: existing columns are never renamed, removed, or reordered; extensions add columns at the end. Empty string denotes 'not computable under policy' (e.g., Ω before quality-score adoption), never zero.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">References</h2>
+        <ul class="space-y-2 text-term-fg/80 text-xs">
+          <li>Balassa, B. (1964). The Purchasing-Power Parity Doctrine: A Reappraisal. <em>Journal of Political Economy</em>, 72(6), 584–596.</li>
+          <li>Baumol, W. J. (1990). Entrepreneurship: Productive, Unproductive, and Destructive. <em>Journal of Political Economy</em>, 98(5), 893–921.</li>
+          <li>Cambridge Centre for Alternative Finance. Cambridge Blockchain Network Sustainability Index (CBECI). <a href="https://ccaf.io" class="text-accent-red underline">ccaf.io</a> — fleet-efficiency anchor for η.</li>
+          <li>ILO, IMF, OECD, Eurostat, UNECE, World Bank (2020). <em>Consumer Price Index Manual: Concepts and Methods.</em> — chain-linking practice.</li>
+          <li>Samuelson, P. A. (1964). Theoretical Notes on Trade Problems. <em>Review of Economics and Statistics</em>, 46(2), 145–154.</li>
+          <li>Artificial Analysis. Intelligence Index, v4.1.1. <a href="https://artificialanalysis.ai" class="text-accent-red underline">artificialanalysis.ai</a> — retrieved 2026-08-16.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-term-border">
+      <a href={`/${locale}/index/`} class="font-mono text-sm text-accent-red nav-link">← {t.research.back.replace('文章列表', 'Index Detail')}</a>
+    </div>
+  </div>
+</TerminalLayout>

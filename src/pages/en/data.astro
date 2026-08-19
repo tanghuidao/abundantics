@@ -1,0 +1,80 @@
+---
+import ProseLayout from '../../layouts/ProseLayout.astro';
+import { getTranslations, type Locale } from '../../i18n/utils';
+
+const locale: Locale = 'en';
+const t = getTranslations(locale);
+
+const schemaJson = `{
+  "schema_version": "1.0",
+  "method_version": "0.1",
+  "date": "2026-08-19",
+  "generated_at": "2026-08-19T00:40:00Z",
+  "indices": {
+    "R_M":    { "value": 0.066, "unit": "USD/kWh",       "change_1d": 0.002 },
+    "R_A":    { "value": 15.41, "unit": "USD/kWh",       "change_1d": null },
+    "Lambda": { "value": 233.9, "unit": "dimensionless", "change_1d": -0.4 },
+    "Omega":  { "value": 5.74,  "unit": "dimensionless", "change_1d": 0.1 }
+  },
+  "sources": ["tanghuidao/token-parity"],
+  "license": "CC-BY-4.0"
+}`;
+---
+
+<ProseLayout locale={locale} title={t.data.title} wide={true}>
+  <article>
+    <header class="mb-10">
+      <h1 class="font-sans text-3xl md:text-4xl font-bold text-prose-fg">{t.data.title}</h1>
+      <p class="text-prose-muted text-sm mt-2">{t.data.subtitle}</p>
+    </header>
+
+    <section class="mb-10">
+      <h2 class="font-sans text-xl font-bold mb-4">{t.data.apiDocs}</h2>
+      <p class="text-prose-fg/80 mb-4 leading-relaxed">{t.data.apiDescription}</p>
+
+      <div class="space-y-3">
+        <div class="p-4 border border-prose-border rounded-lg bg-white/50">
+          <div class="font-mono text-xs text-prose-muted mb-1">GET</div>
+          <code class="font-mono text-sm text-accent-red">/api/parity/latest.json</code>
+          <p class="text-xs text-prose-muted mt-2">{t.data.latestJson}</p>
+        </div>
+        <div class="p-4 border border-prose-border rounded-lg bg-white/50">
+          <div class="font-mono text-xs text-prose-muted mb-1">GET</div>
+          <code class="font-mono text-sm text-accent-red">/api/parity/history.csv</code>
+          <p class="text-xs text-prose-muted mt-2">{t.data.historyCsv} · Columns: date, R_M, R_A, Lambda, Omega, Lambda_chained, method_version</p>
+        </div>
+      </div>
+
+      <details class="mt-4">
+        <summary class="font-mono text-sm text-accent-red cursor-pointer">{t.data.schema}</summary>
+        <pre class="mt-3 p-4 bg-prose-fg text-prose-bg rounded-lg text-xs overflow-x-auto font-mono">{schemaJson}</pre>
+      </details>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="font-sans text-xl font-bold mb-4">GitHub</h2>
+      <ul class="space-y-2">
+        <li>
+          <a href="https://github.com/tanghuidao/abundantics" target="_blank" rel="noopener" class="text-accent-red hover:underline font-mono text-sm">
+            tanghuidao/abundantics
+          </a>
+          <span class="text-prose-muted text-sm ml-2">— Website source & preprint</span>
+        </li>
+        <li>
+          <a href="https://github.com/tanghuidao/token-parity" target="_blank" rel="noopener" class="text-accent-red hover:underline font-mono text-sm">
+            tanghuidao/token-parity
+          </a>
+          <span class="text-prose-muted text-sm ml-2">— TEPI data pipeline (Python, daily auto-update)</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="font-sans text-xl font-bold mb-4">{t.data.license}</h2>
+      <p class="text-prose-fg/80 leading-relaxed mb-3">{t.data.licenseText}</p>
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" class="inline-block">
+        <img src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey" alt="CC-BY 4.0" class="rounded" />
+      </a>
+    </section>
+  </article>
+</ProseLayout>

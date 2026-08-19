@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "method_version": "0.1",
+  "date": "2026-08-19",
+  "generated_at": "2026-08-19T01:19:33Z",
+  "indices": {
+    "R_M": {
+      "value": 0.0647,
+      "unit": "USD/kWh",
+      "change_1d": 0
+    },
+    "R_A": {
+      "value": 15.95,
+      "unit": "USD/kWh",
+      "change_1d": 0.07
+    },
+    "Lambda": {
+      "value": 225.5,
+      "unit": "dimensionless",
+      "change_1d": 0.2
+    },
+    "Omega": {
+      "value": 5.32,
+      "unit": "dimensionless",
+      "change_1d": -0.02
+    }
+  },
+  "sources": [
+    "tanghuidao/token-parity"
+  ],
+  "license": "CC-BY-4.0",
+  "mock": true
+}

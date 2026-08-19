@@ -1,0 +1,400 @@
+---
+import TerminalLayout from '../../../layouts/TerminalLayout.astro';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+import { loadIndexData } from '../../../lib/data';
+
+const locale: Locale = 'zh';
+const t = getTranslations(locale);
+const data = loadIndexData();
+const mv = data.method_version || '0.1';
+const bibtex = `@misc{tang2026tepi,
+  title = {TEPI --- Token Energy Parity Index: Index Methodology v0.1},
+  author = {Tang, Huidao},
+  year = {2026},
+  url = {https://tanghuidao.github.io/token-parity/},
+  note = {Abundantics Empirical Module 01. Method v0.1, accessed YYYY-MM-DD}
+}`;
+---
+
+<TerminalLayout locale={locale} title={`TEPI ${t.index.methodology} v${mv}`}>
+  <div class="px-6 md:px-12 py-8 md:py-12 max-w-4xl mx-auto w-full">
+    <div class="mb-8">
+      <h1 class="font-mono text-2xl text-term-fg font-medium tracking-tight">
+        TEPI — Token 能量平价指数 · 指数方法论
+      </h1>
+      <p class="font-mono text-sm text-term-muted mt-2">
+        版本 {mv}（审阅稿）· 2026 年 8 月 16 日 · 丰裕学研究项目 · 实证模块 01
+      </p>
+      <p class="font-mono text-xs text-term-muted mt-1">
+        数据与方法论：CC-BY 4.0 · 代码开源 · 非投资建议
+      </p>
+    </div>
+
+    <div class="mb-8 p-4 border border-term-border rounded-lg bg-term-bg/50">
+      <p class="font-mono text-xs text-term-muted leading-relaxed">
+        状态声明：内部审阅稿。公式与验算示例均已对照参考实现及 2026-08-16 已发布序列核验。标注 [待核验] 之处为尚待独立溯源的工作假设。本文档尚未经过外部评审。
+      </p>
+      <p class="font-mono text-xs text-term-muted leading-relaxed mt-2">
+        本中文版为译本，由英文原本（English original）派生；两版本如有出入，以英文原本为准。
+      </p>
+    </div>
+
+    <div class="space-y-8 font-mono text-sm text-term-fg leading-relaxed">
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">1. 目的与范围</h2>
+        <p class="text-term-fg/80">
+          Token 能量平价指数（TEPI）是一个日频指数族：它把电能的两种 token 生产用途放到同一个物理公分母——每千瓦时毛收入——之上，并追踪二者的比值。其一为工作量证明加密货币挖矿（当前为比特币），在丰裕学研究纲领中被解读为防御性耗散（为保卫既有权利主张而消耗的能量）；其二为大语言模型推理，被解读为生产性耗散（为产出认知性成果而消耗的能量）。这组解读性标签是一种研究透镜，而非规范性裁决；第 9 节交代其学术血统与适用限度。
+        </p>
+        <p class="text-term-fg/80 mt-3">
+          TEPI 回答一个狭窄而可测量的问题：按今天的市场价格，一度电在两种用途中各挣多少毛收入？经测得的模型质量调整之后，缺口有多大？ 它不度量利润率、福祉或能耗份额，也不构成投资建议。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">2. 指数族</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">量</th>
+                <th class="text-left py-2 pr-4 text-term-muted">名称</th>
+                <th class="text-left py-2 pr-4 text-term-muted">单位</th>
+                <th class="text-left py-2 text-term-muted">定义</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4 text-accent-red">R_M</td><td class="py-2 pr-4">挖矿每度电毛收入</td><td class="py-2 pr-4">USD/kWh</td><td class="py-2">全网加权能效下一度电的挖矿毛收入</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4 text-accent-red">R_A</td><td class="py-2 pr-4">推理每度电毛收入</td><td class="py-2 pr-4">USD/kWh</td><td class="py-2">按用量权重加权的模型篮子一度电推理毛收入</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4 text-accent-red">Λ</td><td class="py-2 pr-4">能量套利比率</td><td class="py-2 pr-4">无量纲</td><td class="py-2">R_A / R_M（以链式接续序列发布）</td></tr>
+              <tr><td class="py-2 pr-4 text-accent-red">Ω</td><td class="py-2 pr-4">平价偏离指数</td><td class="py-2 pr-4">无量纲（对数）</td><td class="py-2">质量调整后焦耳平价汇率与市场隐含汇率之比的对数</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">同时发布的辅助量：ε<sub>BTC</sub>（每枚 BTC 的内含能量，GWh）、进入 Ω 的两个汇率 ρ<sub>parity</sub> 与 ρ<sub>market</sub>、篮子概要统计量，以及第 6 节的链式接续元数据。</p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">3. 符号约定</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">符号</th>
+                <th class="text-left py-2 pr-4 text-term-muted">含义</th>
+                <th class="text-left py-2 text-term-muted">单位</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">P<sub>BTC</sub></td><td class="py-2 pr-4">比特币现货价格</td><td class="py-2">USD</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">H</td><td class="py-2 pr-4">全网算力</td><td class="py-2">PH/s</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">B</td><td class="py-2 pr-4">近 144 个区块的区块奖励合计（补贴 + 手续费）</td><td class="py-2">BTC/日</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">η</td><td class="py-2 pr-4">全网加权挖矿能效（人工参数）</td><td class="py-2">J/TH</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">p<sub>i</sub></td><td class="py-2 pr-4">篮子模型 i 的输出 token 挂牌价</td><td class="py-2">USD/token</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">j<sub>i</sub></td><td class="py-2 pr-4">模型 i 每输出 token 全栈能耗，含 PUE [待核验]</td><td class="py-2">J/token</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">w̃<sub>i</sub></td><td class="py-2 pr-4">模型 i 的归一化用量权重（Σ w̃<sub>i</sub> = 1）</td><td class="py-2">—</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">s<sub>i</sub></td><td class="py-2 pr-4">模型 i 的外部质量分（AA Intelligence Index v4.1.1）</td><td class="py-2">分</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">q<sub>i</sub></td><td class="py-2 pr-4">质量权重，s<sub>i</sub> / s<sub>ref</sub></td><td class="py-2">—</td></tr>
+              <tr><td class="py-2 pr-4">k</td><td class="py-2 pr-4">每千瓦时的焦耳数，3.6 × 10⁶</td><td class="py-2">J/kWh</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">4. 数据来源与采样</h2>
+        <p class="text-term-fg/80">
+          全部输入均为免费、公开、无需密钥的数据。指数由自动化管线（GitHub Actions，UTC 00:10）每日计算一次并追加至公开 CSV；管线、建站脚本与完整序列全部开源。
+        </p>
+        <div class="overflow-x-auto mt-4">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">输入</th>
+                <th class="text-left py-2 pr-4 text-term-muted">来源</th>
+                <th class="text-left py-2 text-term-muted">频率/政策</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">比特币现货价</td><td class="py-2 pr-4">CoinGecko simple-price API</td><td class="py-2">运行时每日快照</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">全网算力</td><td class="py-2 pr-4">mempool.space，3 日窗口</td><td class="py-2">每日快照</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">区块奖励</td><td class="py-2 pr-4">mempool.space，近 144 区块</td><td class="py-2">每日快照</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">模型挂牌价</td><td class="py-2 pr-4">OpenRouter /api/v1/models</td><td class="py-2">每日快照</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">全网能效 η</td><td class="py-2 pr-4">人工设定；锚定 CBECI 与矿机规格书</td><td class="py-2">季度复查；变更记入日志</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">质量分 s<sub>i</sub></td><td class="py-2 pr-4">Artificial Analysis Intelligence Index v4.1.1</td><td class="py-2">季度复查；变更记入日志</td></tr>
+              <tr><td class="py-2 pr-4">每 token 能耗 j<sub>i</sub></td><td class="py-2 pr-4">工作假设 [待核验]</td><td class="py-2">随篮子变更复查；记入日志</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">
+          有两个参数属于判断性输入，因此以显式的"复查并记录"政策治理，而非当作数据呈现：η（当前 20.0 J/TH）与各模型的 j<sub>i</sub>。二者对各指数的敏感性在第 7 节量化。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">5. 计算方法</h2>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.1 挖矿侧</h3>
+        <p class="text-term-fg/80">
+          Hashprice（每 PH/s 每日的挖矿毛收入）除以一个 PH/s 在全网加权能效下的日耗电量，直接得到每度电毛收入：
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-center text-term-fg">
+          R<sub>M</sub> = hashprice / E<sub>PH</sub>，其中 E<sub>PH</sub> = η × 10³ × 86400 / (3.6 × 10⁶) kWh
+        </div>
+        <p class="text-term-fg/80">
+          每枚币的内含能量为全网能耗除以当日产币量。代入可得恒等式：R<sub>M</sub> = k · P<sub>BTC</sub> / ε<sub>BTC</sub>。挖矿每度电毛收入完全由币价和边际一枚币的内含能量决定；难度调整正是把该量持续拴在电价附近的机制（见 9.1 节）。
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.2 推理侧</h3>
+        <p class="text-term-fg/80">
+          对篮子中的每个模型，每度电毛收入等于其输出 token 单价乘以一度电在该模型能耗强度下可产出的 token 数；指数按归一化用量权重加总：
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-center text-term-fg">
+          R<sub>A</sub> = k · Σ(w̃<sub>i</sub> · p<sub>i</sub> / j<sub>i</sub>)
+        </div>
+        <p class="text-term-fg/80">
+          某模型在价格源当日缺失时予以剔除并对权重重新归一化（missing_model_policy = skip），该事件在运行日志中可见。价格为 OpenRouter 默认端点输出 token 的挂牌价；输入 token 的收入与能耗不计入（局限 L2，见第 7 节）。
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.3 质量调整与标准 token</h3>
+        <p class="text-term-fg/80">
+          不同模型的 token 并非同质。TEPI 用一个独立于价格的外部基准，把原始 token 折算为标准 token 当量：质量权重 q<sub>i</sub> = s<sub>i</sub> / s<sub>ref</sub>，其中 s<sub>i</sub> 为该模型的 Artificial Analysis Intelligence Index 分数，基准模型定义 q = 1。模型 i 的一个原始 token 计为 q<sub>i</sub> 个标准 token；质量调整因此作用于数量侧而非价格侧。模型 i 每焦耳的标准 token 数为 t<sub>i</sub> = q<sub>i</sub> / j<sub>i</sub>，篮子合计 T = Σ w̃<sub>i</sub> t<sub>i</sub>。
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.4 跨市场平价与 Ω</h3>
+        <p class="text-term-fg/80">
+          在两个 token 世界之间比较两个汇率：焦耳平价汇率问"一枚 BTC 的内含能量若改投质量调整后的推理，能产出多少标准 token"；市场隐含汇率问"按市场价格，一枚 BTC 能买到多少标准 token"：
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-center text-term-fg">
+          Ω = ln(ρ<sub>parity</sub> / ρ<sub>market</sub>)
+        </div>
+        <p class="text-term-fg/80">
+          解读：Ω 是一个毛收入机会比的对数。Ω = 5.74（2026 年 8 月 16 日，验证运行）的含义是：一枚比特币所内含的能量，若按当前质量调整后的价格改投推理，可获得约 e<sup>5.74</sup> ≈ 311 倍于该比特币市价的毛收入。第 7 节的毛收入口径限定适用于其水平值；真正有信息量的对象是序列本身。
+        </p>
+        <p class="text-term-fg/80 mt-3">
+          以下分解恒等式贯穿全程用于验证，把 Ω 分离为原始比值与纯质量项：
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-center text-term-fg">
+          Ω = ln Λ + (Ω − ln Λ)，其中 (Ω − ln Λ) 为纯质量项
+        </div>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">5.5 价格型质量权重为何不可采用（退化结果）</h3>
+        <p class="text-term-fg/80">
+          <strong>命题：</strong>若质量权重由价格定义，即 q<sub>i</sub> = p<sub>i</sub> / p<sub>ref</sub>，则对任意配置、任意日期，恒有 Ω ≡ ln Λ。
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          <strong>证明：</strong>将 q<sub>i</sub> = p<sub>i</sub>/p<sub>ref</sub> 代入 T，得 T = Σ w̃<sub>i</sub> p<sub>i</sub> / (p<sub>ref</sub> · j<sub>i</sub>)。于是 ρ<sub>parity</sub>/ρ<sub>market</sub> = ε<sub>BTC</sub> · T · p<sub>ref</sub> / P<sub>BTC</sub> = ε<sub>BTC</sub> · Σ w̃<sub>i</sub> p<sub>i</sub>/j<sub>i</sub> / P<sub>BTC</sub>。而 Λ = R<sub>A</sub>/R<sub>M</sub> = (k Σ w̃<sub>i</sub> p<sub>i</sub>/j<sub>i</sub>) / (k P<sub>BTC</sub>/ε<sub>BTC</sub>) = ε<sub>BTC</sub> · Σ w̃<sub>i</sub> p<sub>i</sub>/j<sub>i</sub> / P<sub>BTC</sub>——两式相同，故 Ω = ln Λ。∎
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          本指数第 0 版即采用价格型权重，并确实呈现了该退化（发布快照实测：Ω = 5.457 = ln 234.4）。用价格度量质量、再回头追问价格是否偏离质量调整后的平价，等于以被测对象充当自身的量尺。v0.1 方法论因此要求质量分必须来自独立于价格的来源；若任一篮子模型缺少现行分数，Ω 按缺失发布，而不在退化口径下勉强计算。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">6. 篮子构建与维护</h2>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.1 入选原则</h3>
+        <ul class="space-y-1 text-term-fg/80 list-disc list-inside">
+          <li><strong>覆盖性：</strong>各主要厂商系列各取一个高用量（走量而非旗舰）模型，使 R<sub>A</sub> 反映市场实际成交量所在价格水平上的收入。</li>
+          <li><strong>可定价性：</strong>模型须在价格源上有默认端点挂牌。</li>
+          <li><strong>可评分性：</strong>模型须有现行外部质量分（见 6.4 节）；否则 Ω 暂停发布，而非近似凑数。</li>
+          <li><strong>简约性：</strong>篮子刻意保持小规模（当前四个模型）；代表性通过权重实现，权重对照公开用量排行复查。</li>
+        </ul>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.2 现行篮子（版本 v1，2026-08-16 生效）</h3>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">模型（OpenRouter id）</th>
+                <th class="text-left py-2 pr-4 text-term-muted">权重</th>
+                <th class="text-left py-2 pr-4 text-term-muted">j<sub>i</sub> (J/tok)</th>
+                <th class="text-left py-2 pr-4 text-term-muted">分数 s<sub>i</sub></th>
+                <th class="text-left py-2 text-term-muted">取分变体</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">anthropic/claude-sonnet-5（基准）</td><td class="py-2 pr-4">0.30</td><td class="py-2 pr-4">3.0</td><td class="py-2 pr-4">55</td><td class="py-2">Adaptive Reasoning, Max</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">openai/gpt-5.5</td><td class="py-2 pr-4">0.25</td><td class="py-2 pr-4">3.0</td><td class="py-2 pr-4">56</td><td class="py-2">xhigh</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">google/gemini-3.7-flash</td><td class="py-2 pr-4">0.25</td><td class="py-2 pr-4">1.0</td><td class="py-2 pr-4">56</td><td class="py-2">high</td></tr>
+              <tr><td class="py-2 pr-4">deepseek/deepseek-v4-pro</td><td class="py-2 pr-4">0.20</td><td class="py-2 pr-4">1.5</td><td class="py-2 pr-4">53</td><td class="py-2">0813, Reasoning Max</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">
+          取分口径：对每个模型，取基准机构在复查日已评分的最高推理档位（"最高已评档"）。分数取自 Artificial Analysis Intelligence Index v4.1.1，查询于 2026-08-16。基准模型的分数（55）位于篮子分数区间（53–56）之内，避免了基准落在极端值上。
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.3 Λ 的链式接续</h3>
+        <p class="text-term-fg/80">
+          Λ 的水平值对篮子构成高度敏感，而模型更替预期将会频繁。参照消费者价格指数的链式接续做法（ILO 等，2020），发布序列 Λ<sub>chained</sub> 度量的是变动，而非篮子水平。每套篮子配置带有版本标签（v1、v2、……）。登记文件 chain_factors.json 把每个版本映射到累计接续系数；v1 ≡ 1.0。
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          换篮当日，新旧两套配置就同一天并行计算（试运行）。新版本的系数按接续点连续的要求设定：factor<sub>new</sub> = Λ<sub>chained</sub>(旧) / Λ<sub>raw</sub>(新)。Λ（原始值，当期篮子）与 Λ<sub>chained</sub>（接续值）同时发布；图表与分析使用 Λ<sub>chained</sub>。每次接续在 changelog 中记录日期、进出模型与系数。
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          v0.1 中 Ω 不做链式接续：其质量比值结构已消除对篮子水平的一阶敏感性；接续事件的实际影响将在首次发生时实证评估（开放问题 O5）。
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.4 质量分治理</h3>
+        <p class="text-term-fg/80">
+          分数每季度复查一次，篮子变更时同步复查；每次采纳的变更在 changelog 记一行（日期、旧分 → 新分、基准版本）。已发布历史永不回溯修改。基准本身由其发布机构版本化（采纳时为 v4.1.1）并会随时间调整权重；现行基准版本属于记录的一部分。基准改版在文档处理上视同一次篮子接续。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">7. 核算边界与已知局限</h2>
+        <p class="text-term-fg/80 mb-3">TEPI 是一个在显式声明边界下的"每单位能量毛收入"指数。各项边界选择、理由与偏差方向如下：</p>
+        <ul class="space-y-3 text-term-fg/80">
+          <li><strong class="text-accent-red">L1 — 毛收入而非利润。</strong>电力是挖矿的主导边际成本，却只占推理成本的次要份额。因此 Λ 的水平值不能读作利润套利；有经济含义的对象是趋势、比值对事件的响应，以及两侧变动的相互比较。净利率变体 Λ′ 列为路线图 O2。</li>
+          <li><strong class="text-accent-red">L2 — 仅计输出 token。</strong>推理收入与能耗按输出 token 及输出价计算；输入 token 收入与 prefill 能耗未计入。若输入定价高于 prefill 能耗成本，则本口径低估推理侧每度电收入。修正需要日频的输入/输出配比数据，目前无公开来源 [待核验]。</li>
+          <li><strong class="text-accent-red">L3 — 满负荷惯例。</strong>R<sub>A</sub> 把每一度电都按挂牌价的 token 产出计价，即假设 100% 可计费利用率。实际集群利用率低于此，故 R<sub>A</sub> 是已实现每度电收入的上界；R<sub>M</sub> 无可比楔子。Λ 相应地也是上界。</li>
+          <li><strong class="text-accent-red">L4 — 全网平均、人工设定的 η。</strong>R<sub>M</sub> 与 ε<sub>BTC</sub> 随 η 线性（反向）缩放。η = 20 J/TH 锚定于公开的全网估计与现役矿机规格，季度复查。敏感性：η 变动 ±25% 使 R<sub>M</sub> 反向变动 25%，使 Λ 的对数水平变动 ±ln(1.25) ≈ ±0.22。</li>
+          <li><strong class="text-accent-red">L5 — 工作假设性质的 j<sub>i</sub>。</strong>每输出 token 的全栈能耗（含 PUE）是最薄弱的输入：公开测量稀缺、各模型真实值属厂商机密，现配置值（每输出 token 1.0–3.0 焦耳）为数量级工作假设 [待核验]。专门的敏感性表与溯源附录列为路线图 O3。</li>
+          <li><strong class="text-accent-red">L6 — 单链、单一价格源。</strong>挖矿侧仅比特币；推理侧经由单一聚合商的默认端点定价。两项选择均以可复现性优先于完备性，如实声明而不加掩饰。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">8. 数据质量控制</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">检查项</th>
+                <th class="text-left py-2 pr-4 text-term-muted">界限/规则</th>
+                <th class="text-left py-2 text-term-muted">越界动作</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">R<sub>M</sub> 合理性</td><td class="py-2 pr-4">0.005 – 0.5 USD/kWh</td><td class="py-2">日志警告；照常写入</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">R<sub>A</sub> 合理性</td><td class="py-2 pr-4">0.5 – 200 USD/kWh</td><td class="py-2">警告；照常写入</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Λ 日环比变动</td><td class="py-2 pr-4">±50% 以内</td><td class="py-2">警告；照常写入</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">日期重复</td><td class="py-2 pr-4">日期 ≠ CSV 末行</td><td class="py-2">跳过写入；警告</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">篮子价格缺失</td><td class="py-2 pr-4">政策 = skip</td><td class="py-2">剔除该模型、权重重归一化、记日志</td></tr>
+              <tr><td class="py-2 pr-4">质量分缺失</td><td class="py-2 pr-4">全有或全无</td><td class="py-2">Ω 与 ρ<sub>parity</sub> 按缺失发布</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">
+          哨兵只警告、永不中断管线；上游抓取失败时保留前一日已发布文件。每行带有来源标记（source = live；backfill 预留给路线图 O1）。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">9. 解读指引</h2>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">9.1 挖矿侧是一个已经闭合的套利</h3>
+        <p class="text-term-fg/80">
+          比特币的难度调整机制迫使边际挖矿每度电收入向边际电价收敛：超额利润吸引算力涌入，进而摊薄 hashprice。发布首日实测 R<sub>M</sub> ≈ 0.066 美元/kWh——与常见工业电价同一量级——与该机制按设计运转的判断相一致。TEPI 将此作为自身的校准锚点：比值的一侧已被一个自动机制拴在能源市场上。
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">9.2 Λ 是一段商品化距离</h3>
+        <p class="text-term-fg/80">
+          推理侧尚无此类机制的约束：当前的稀缺要素是加速卡、模型与质量溢价，而非电力。因此 Λ ≫ 1 以毛收入口径度量的是：推理距离"按能源商品计价"还有多远。Λ<sub>chained</sub> 若出现向 1 收敛的长期趋势，即表明推理正在向能源成本定价收敛；驱动这种收敛的资本再配置通道——矿场成建制改造为 AI 数据中心——已在现实中可观测。
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">9.3 生产性耗散与防御性耗散</h3>
+        <p class="text-term-fg/80">
+          本纲领的分类框架承自 Baumol（1990）关于企业家才能在生产性与非生产性用途间配置的分析：同一种投入（此处为焦耳），在"创造可主张的产出"与"保卫既有主张"之间分配。平价装置本身则是 Balassa（1964）与 Samuelson（1964）意义上的购买力平价构造，以能量为共同货币。这些是丰裕学纲领的解释性承诺；本文档中的每一个数字，其定义与计算均不依赖这些承诺。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">10. 版本、修订政策、许可与引用</h2>
+        <p class="text-term-fg/80">
+          方法论版本采用语义化规则：政策内的参数更新（η、s<sub>i</sub>、j<sub>i</sub>、篮子接续）只进 changelog，不改版本号；公式或口径的变更才升版本号。本文档为 v0.1（审阅稿）；v1.0 待外部评审后发布。已发布数据行永不回溯修改。若确需更正，以追加更正行加 changelog 记录的方式进行。
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          序列起点：2026-08-16（篮子 v1，质量分同日采纳；Ω 自 2026-08-17 起进入发布序列）。数据与本方法论：CC-BY 4.0。参考实现：开源。带 DOI 的版本化数据集存缴列为路线图 O4。
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          丰裕学研究纲领预印本合订本（v1.6，2026 年 8 月 18 日）已存缴 Zenodo：DOI 10.5281/zenodo.21989658。
+        </p>
+        <div class="my-3 p-3 bg-term-bg/50 border border-term-border rounded text-xs text-term-fg/80 overflow-x-auto">
+          <pre class="whitespace-pre">{bibtex}</pre>
+        </div>
+        <p class="text-term-muted mt-2 text-xs">
+          修订记录：2026-08-19，公式排版规范化，并落实署名与预印本 DOI 互链；内容与计算口径无任何变更，版本号维持 v0.1。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">11. 开放问题与路线图</h2>
+        <ul class="space-y-2 text-term-fg/80">
+          <li><strong class="text-accent-red">O1 — 回填。</strong>从公开链上与硬件能效数据重建 R<sub>M</sub> 至 2010 年代的周/月序列，R<sub>A</sub> 至 2022 年底；以 source = backfill 发布并附独立方法论说明。</li>
+          <li><strong class="text-accent-red">O2 — Λ′ 净利率变体。</strong>校准至公开矿企与推理运营商财务数据。</li>
+          <li><strong class="text-accent-red">O3 — j<sub>i</sub> 溯源附录。</strong>η 与 j<sub>i</sub> 的完整敏感性表。</li>
+          <li><strong class="text-accent-red">O4 — DOI 存缴。</strong>为 TEPI 建立独立 Zenodo 记录（版本化数据集 + 本方法论，两语版本），目标为序列 30 日标记处。</li>
+          <li><strong class="text-accent-red">O5 — Ω 接续行为。</strong>篮子变更时 Ω 的接续行为，于首次发生时实证评估；质量调整的享乐精炼。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">附录 A. 验算示例 — 2026 年 8 月 16 日</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-term-border">
+                <th class="text-left py-2 pr-4 text-term-muted">量</th>
+                <th class="text-left py-2 pr-4 text-term-muted">数值</th>
+                <th class="text-left py-2 text-term-muted">核对</th>
+              </tr>
+            </thead>
+            <tbody class="text-term-fg/80">
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">P<sub>BTC</sub>（美元）</td><td class="py-2 pr-4">63,006</td><td class="py-2">输入</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">hashprice（美元/PH/s/日）</td><td class="py-2 pr-4">31.6177</td><td class="py-2">输入</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">η（J/TH）</td><td class="py-2 pr-4">20.0</td><td class="py-2">参数</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">E<sub>PH</sub>（kWh）</td><td class="py-2 pr-4">480.0</td><td class="py-2 text-term-muted">= 480.0 ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">R<sub>M</sub> = 31.6177 / 480.0</td><td class="py-2 pr-4">0.065870</td><td class="py-2 text-term-muted">与发布行一致 ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">ε<sub>BTC</sub>（GWh）</td><td class="py-2 pr-4">0.9565</td><td class="py-2 text-term-muted">与发布行一致 ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">恒等式 k·P<sub>BTC</sub>/ε<sub>BTC</sub></td><td class="py-2 pr-4">0.0659</td><td class="py-2 text-term-muted">= R<sub>M</sub> ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">篮子均价（美元/百万 token）</td><td class="py-2 pr-4">11.4360</td><td class="py-2 text-term-muted">与发布行一致 ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">篮子均能耗 j（J/tok）</td><td class="py-2 pr-4">2.200</td><td class="py-2 text-term-muted">= Σw̃·j ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">R<sub>A</sub>（美元/kWh）</td><td class="py-2 pr-4">15.4088</td><td class="py-2 text-term-muted">与发布行一致 ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Λ = 15.4088 / 0.065870</td><td class="py-2 pr-4">233.93</td><td class="py-2 text-term-muted">与发布行一致 ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Λ<sub>chained</sub> = Λ × 1.0（v1）</td><td class="py-2 pr-4">233.93</td><td class="py-2 text-term-muted">与发布行一致 ✓</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">ln Λ</td><td class="py-2 pr-4">5.455</td><td class="py-2 text-term-muted">—</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Ω（验证运行）</td><td class="py-2 pr-4">5.738</td><td class="py-2 text-term-muted">—</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">质量项 Ω − ln Λ</td><td class="py-2 pr-4">0.283</td><td class="py-2 text-term-muted">分解恒等式 ✓</td></tr>
+              <tr><td class="py-2 pr-4">隐含质量溢价因子 e<sup>0.283</sup></td><td class="py-2 pr-4">≈ 1.33</td><td class="py-2 text-term-muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-term-muted mt-3 text-xs">
+          解读末行：质量调整后，测得的缺口不是收窄而是放大约 33%——在采纳日分数下，四个篮子模型质量近乎等价（权重 0.96–1.02），而价格跨越 7.5 倍区间，市场对基准侧模型的溢价超出基准所归因的能力差异。这是对某日截面的一个观测，记录为此指数的首个实质数据点，而非风格化事实。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">附录 B. 发布 CSV Schema（16 列，按序）</h2>
+        <div class="my-2 p-3 bg-term-bg/50 border border-term-border rounded text-xs text-term-fg/80 overflow-x-auto">
+          <pre class="whitespace-pre">date, btc_price_usd, hashprice_usd_per_ph_day, fleet_efficiency_j_per_th,
+epsilon_btc_gwh, basket_price_usd_per_mtok, basket_j_per_token,
+R_M, R_A, Lambda, Omega, rho_parity_tok_per_btc, rho_market_tok_per_btc,
+source, basket_version, Lambda_chained</pre>
+        </div>
+        <p class="text-term-muted text-xs">
+          列只追加、不重命名、不删除、不重排；扩展在末尾加列。空串表示"按政策不可计算"（如质量分采纳前的 Ω），绝非零。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-accent-red text-base font-medium mb-3">参考文献</h2>
+        <ul class="space-y-2 text-term-fg/80 text-xs">
+          <li>Balassa, B. (1964). The Purchasing-Power Parity Doctrine: A Reappraisal. <em>Journal of Political Economy</em>, 72(6), 584–596.</li>
+          <li>Baumol, W. J. (1990). Entrepreneurship: Productive, Unproductive, and Destructive. <em>Journal of Political Economy</em>, 98(5), 893–921.</li>
+          <li>Cambridge Centre for Alternative Finance. Cambridge Blockchain Network Sustainability Index (CBECI). <a href="https://ccaf.io" class="text-accent-red underline">ccaf.io</a> — η 的能效锚点。</li>
+          <li>ILO, IMF, OECD, Eurostat, UNECE, World Bank (2020). <em>Consumer Price Index Manual: Concepts and Methods.</em> — 链式接续做法。</li>
+          <li>Samuelson, P. A. (1964). Theoretical Notes on Trade Problems. <em>Review of Economics and Statistics</em>, 46(2), 145–154.</li>
+          <li>Artificial Analysis. Intelligence Index, v4.1.1. <a href="https://artificialanalysis.ai" class="text-accent-red underline">artificialanalysis.ai</a> — 查询于 2026-08-16。</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-term-border">
+      <a href={`/${locale}/index/`} class="font-mono text-sm text-accent-red nav-link">← {t.research.back.replace('文章列表', '指数详情')}</a>
+    </div>
+  </div>
+</TerminalLayout>

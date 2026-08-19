@@ -1,0 +1,77 @@
+---
+import { getTranslations, getOppositeLocale, getOppositeLocalePath, getNavItems, isActive, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  theme?: 'terminal' | 'prose';
+  langSwitchHref?: string;
+}
+
+const { locale, theme = 'prose', langSwitchHref } = Astro.props;
+const t = getTranslations(locale);
+const otherLocale = getOppositeLocale(locale);
+const otherLocalePath = langSwitchHref ?? getOppositeLocalePath(Astro.url.pathname, locale);
+const navItems = getNavItems(locale);
+const currentPath = Astro.url.pathname;
+
+const isTerminal = theme === 'terminal';
+---
+
+<nav class={`flex items-center justify-between px-6 py-4 md:px-12 ${isTerminal ? 'border-b border-term-border' : 'border-b border-prose-border'}`}>
+  <a
+    href={`/${locale}/`}
+    class={`nav-link font-mono text-sm font-bold tracking-tight ${isTerminal ? 'text-term-fg' : 'text-prose-fg'}`}
+  >
+    {t.site.nameEn} <span class="font-sans font-normal opacity-60">/ {t.site.name}</span>
+  </a>
+
+  <div class={`hidden md:flex items-center gap-6 text-sm ${isTerminal ? 'text-term-fg' : 'text-prose-fg'}`}>
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class={`nav-link ${isActive(currentPath, item.href) ? 'active font-medium' : 'opacity-60 hover:opacity-100'}`}
+      >
+        {item.label}
+      </a>
+    ))}
+  </div>
+
+  <div class="flex items-center gap-4">
+    <a
+      href={otherLocalePath}
+      class={`nav-link text-sm font-mono ${isTerminal ? 'text-accent-red' : 'text-accent-red'}`}
+    >
+      {t.nav.langSwitch}
+    </a>
+    <!-- Mobile menu toggle -->
+    <button
+      id="mobile-menu-toggle"
+      class={`md:hidden ${isTerminal ? 'text-term-fg' : 'text-prose-fg'}`}
+      aria-label="Menu"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class={`hidden md:hidden flex-col gap-3 px-6 py-4 ${isTerminal ? 'bg-term-card text-term-fg' : 'bg-prose-bg text-prose-fg border-b border-prose-border'}`}>
+  {navItems.map((item) => (
+    <a href={item.href} class={`text-sm ${isActive(currentPath, item.href) ? 'font-medium' : 'opacity-60'}`}>
+      {item.label}
+    </a>
+  ))}
+</div>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+    menu?.classList.toggle('flex');
+  });
+</script>

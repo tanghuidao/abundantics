@@ -1,1 +1,22 @@
 .workbuddy/
+node_modules/
+dist/
+.astro/
+*.log
+.DS_Store
+.env
+.env.production
+# Zenodo deposit working files (temporary, root-level dotfiles)
+/*_payload.json
+/*_result.json
+/.d1.json
+/.dlang.json
+/.fixrt.json
+/.final_get.json
+/.lang*.json
+/.r1.json
+/.step*.json
+/.zenodo_*.json
+/.zenodo_*.py
+/.publish*.json
+/.fixrt.json

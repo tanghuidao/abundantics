@@ -1,0 +1,67 @@
+---
+import TerminalLayout from '../../../layouts/TerminalLayout.astro';
+import LambdaChart from '../../../components/LambdaChart.tsx';
+import { getTranslations, type Locale } from '../../../i18n/utils';
+import { loadIndexData, loadLambdaHistory } from '../../../lib/data';
+
+const locale: Locale = 'en';
+const t = getTranslations(locale);
+const data = loadIndexData();
+const historyData = loadLambdaHistory();
+const { indices } = data;
+---
+
+<TerminalLayout locale={locale} title={t.index.title}>
+  <div class="px-6 md:px-12 py-8 md:py-12 max-w-5xl mx-auto w-full">
+    {data.mock && (
+      <div class="mb-6 px-4 py-2 border border-accent-red/40 bg-accent-red/10 rounded text-xs font-mono text-accent-red">
+        ⚠ {t.home.mockWarning}
+      </div>
+    )}
+
+    <div class="mb-8">
+      <h1 class="font-mono text-2xl text-term-fg font-medium tracking-tight">{t.index.title}</h1>
+      <p class="font-mono text-sm text-term-muted mt-2">{t.home.subtitle}</p>
+    </div>
+
+    <!-- Latest values table -->
+    <div class="bg-term-card border border-term-border rounded-lg p-5 md:p-6 mb-8">
+      <h2 class="font-mono text-sm text-term-muted mb-4">{t.index.latestData}</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {Object.entries(indices).map(([key, idx]) => (
+          <div>
+            <div class="font-mono text-xs text-term-muted uppercase">{key === 'Lambda' ? 'Λ' : key === 'Omega' ? 'Ω' : key}</div>
+            <div class="font-mono text-2xl text-term-fg mt-1 tabular-nums">
+              {idx.value !== null ? idx.value.toFixed(key === 'R_M' ? 4 : 2) : '—'}
+            </div>
+            <div class="font-mono text-xs text-term-muted">{idx.unit}</div>
+            {idx.change_1d !== null && (
+              <div class={`font-mono text-xs mt-1 ${idx.change_1d > 0 ? 'text-accent-red' : 'text-term-muted'}`}>
+                {idx.change_1d > 0 ? '+' : ''}{idx.change_1d.toFixed(3)}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Historical chart -->
+    <div class="bg-term-card border border-term-border rounded-lg p-5 md:p-6 mb-8">
+      <h2 class="font-mono text-sm text-term-muted mb-4">{t.index.chartTitle}</h2>
+      <LambdaChart client:load data={historyData} dark={true} />
+    </div>
+
+    <!-- Downloads -->
+    <div class="flex flex-wrap gap-4">
+      <a href="/api/parity/latest.json" class="font-mono text-sm text-accent-red nav-link border border-accent-red/40 px-4 py-2 rounded hover:bg-accent-red/10">
+        {t.index.latestData} JSON
+      </a>
+      <a href="/api/parity/history.csv" class="font-mono text-sm text-accent-red nav-link border border-accent-red/40 px-4 py-2 rounded hover:bg-accent-red/10">
+        {t.index.historyCsv}
+      </a>
+      <a href={`/${locale}/index/methodology/`} class="font-mono text-sm text-term-fg nav-link border border-term-border px-4 py-2 rounded hover:border-accent-red/40">
+        {t.index.methodology} →
+      </a>
+    </div>
+  </div>
+</TerminalLayout>
