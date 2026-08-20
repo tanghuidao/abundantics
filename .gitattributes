@@ -1,0 +1,14 @@
+# Treat all text files as text and normalize line endings to LF on checkout.
+# This prevents line-ending noise in `git status` across platforms.
+* text=auto eol=lf
+
+# Explicit binary declarations — git must not touch these.
+# Covers the binary types used in this repo and ones likely to be added later.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ico   binary
