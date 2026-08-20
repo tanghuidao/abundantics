@@ -20,3 +20,7 @@ dist/
 /.zenodo_*.py
 /.publish*.json
 /.fixrt.json
+# Zenodo verification artifacts (archived to private dir on 2026-08-20)
+/verify_output/
+/.verify_zenodo/
+/.zenodo_*
