@@ -1,0 +1,52 @@
+---
+export interface Props {
+  label: string;
+  symbol: string;
+  value: number | null;
+  unit: string;
+  change1d: number | null;
+  comingSoonText: string;
+  changeLabelText: string;
+}
+
+const { label, symbol, value, unit, change1d, comingSoonText, changeLabelText } = Astro.props;
+
+const isNull = value === null;
+const isUp = change1d !== null && change1d > 0;
+const decimals = value !== null && Math.abs(value) < 1 ? 4 : 2;
+const changeStr =
+  change1d !== null
+    ? `${isUp ? '+' : ''}${change1d.toFixed(Math.abs(change1d) < 1 ? 4 : 2)}`
+    : '—';
+---
+
+<div class="bg-term-card border border-term-border rounded-lg p-5 md:p-7 flex flex-col gap-2 transition-colors hover:border-accent-red/40">
+  <div class="flex items-baseline justify-between">
+    <span class="font-mono text-xs md:text-sm text-term-muted uppercase tracking-wider">{label}</span>
+    <span class="font-mono text-base md:text-lg text-accent-red">{symbol}</span>
+  </div>
+  {
+    isNull ? (
+      <div class="font-mono text-4xl md:text-5xl text-term-muted py-2">—</div>
+    ) : (
+      <div class="font-mono text-4xl md:text-5xl lg:text-6xl font-medium text-term-fg tabular-nums leading-none py-1">
+        {value.toFixed(decimals)}
+      </div>
+    )
+  }
+  <div class="flex items-baseline justify-between mt-auto">
+    <span class="font-mono text-xs text-term-muted">{unit}</span>
+    {
+      isNull ? (
+        <span class="font-mono text-xs text-term-muted italic">{comingSoonText}</span>
+      ) : (
+        <div class="flex flex-col items-end">
+          <span class={`font-mono text-sm ${isUp ? 'text-accent-red' : 'text-term-muted'}`}>
+            {changeStr}
+          </span>
+          <span class="font-mono text-[10px] text-term-muted">{changeLabelText}</span>
+        </div>
+      )
+    }
+  </div>
+</div>

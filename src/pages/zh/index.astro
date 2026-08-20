@@ -1,7 +1,7 @@
 ---
 import TerminalLayout from '../../layouts/TerminalLayout.astro';
-import IndexCard from '../../components/IndexCard.tsx';
-import Sparkline from '../../components/Sparkline.tsx';
+import IndexCard from '../../components/IndexCard.astro';
+import Sparkline from '../../components/Sparkline.astro';
 import { getTranslations, type Locale } from '../../i18n/utils';
 import { loadIndexData, loadSparklineData } from '../../lib/data';
 
@@ -74,7 +74,7 @@ const { indices } = data;
         <h2 class="font-mono text-sm text-term-muted">{t.home.sparklineTitle}</h2>
         <span class="font-mono text-xs text-term-muted">Λ</span>
       </div>
-      <Sparkline client:load data={sparklineData} />
+      <Sparkline data={sparklineData} />
     </div>
 
     <!-- Data update time -->

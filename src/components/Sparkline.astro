@@ -1,0 +1,37 @@
+---
+export interface Props {
+  data: { date: string; value: number }[];
+}
+
+const { data } = Astro.props;
+
+const width = 300;
+const height = 60;
+const padding = 4;
+
+let points = '';
+if (data && data.length > 0) {
+  const values = data.map((d) => d.value);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+  const xScale = (i: number) => padding + (i * (width - 2 * padding)) / (data.length - 1);
+  const yScale = (v: number) => height - padding - ((v - min) / range) * (height - 2 * padding);
+  points = data.map((d, i) => `${xScale(i).toFixed(2)},${yScale(d.value).toFixed(2)}`).join(' ');
+}
+---
+
+{
+  data && data.length > 0 ? (
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      class="w-full h-[60px]"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <polyline points={points} fill="none" stroke="#C8402A" stroke-width="1.5" />
+    </svg>
+  ) : (
+    <div class="h-[60px] flex items-center justify-center text-term-muted text-xs font-mono">—</div>
+  )
+}
