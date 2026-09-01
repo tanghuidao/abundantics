@@ -91,7 +91,7 @@ const bibtex = `@misc{tang2026tepi,
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">B</td><td class="py-2 pr-4">近 144 个区块的区块奖励合计（补贴 + 手续费）</td><td class="py-2">BTC/日</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">η</td><td class="py-2 pr-4">全网加权挖矿能效（人工参数）</td><td class="py-2">J/TH</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">p<sub>i</sub></td><td class="py-2 pr-4">篮子模型 i 的输出 token 挂牌价</td><td class="py-2">USD/token</td></tr>
-              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">j<sub>i</sub></td><td class="py-2 pr-4">模型 i 每输出 token 全栈能耗，含 PUE [待核验]</td><td class="py-2">J/token</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">j<sub>i</sub></td><td class="py-2 pr-4">模型 i 每输出 token 全栈能耗，含 PUE（D′ 口径，三档区间见 6.5 节）</td><td class="py-2">J/token</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">w̃<sub>i</sub></td><td class="py-2 pr-4">模型 i 的归一化用量权重（Σ w̃<sub>i</sub> = 1）</td><td class="py-2">—</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">s<sub>i</sub></td><td class="py-2 pr-4">模型 i 的外部质量分（AA Intelligence Index v4.1.1）</td><td class="py-2">分</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">q<sub>i</sub></td><td class="py-2 pr-4">质量权重，s<sub>i</sub> / s<sub>ref</sub></td><td class="py-2">—</td></tr>
@@ -119,15 +119,16 @@ const bibtex = `@misc{tang2026tepi,
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">比特币现货价</td><td class="py-2 pr-4">CoinGecko simple-price API</td><td class="py-2">运行时每日快照</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">全网算力</td><td class="py-2 pr-4">mempool.space，3 日窗口</td><td class="py-2">每日快照</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">区块奖励</td><td class="py-2 pr-4">mempool.space，近 144 区块</td><td class="py-2">每日快照</td></tr>
-              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">模型挂牌价</td><td class="py-2 pr-4">OpenRouter /api/v1/models</td><td class="py-2">每日快照</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">模型挂牌价</td><td class="py-2 pr-4">OpenRouter /api/v1/models（主源，市场价）</td><td class="py-2">每日快照</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">模型挂牌价（第二源）</td><td class="py-2 pr-4">LiteLLM 厂商直连牌价（对照列 Λ_alt）</td><td class="py-2">每日快照</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">全网能效 η</td><td class="py-2 pr-4">人工设定；锚定 CBECI 与矿机规格书</td><td class="py-2">季度复查；变更记入日志</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">质量分 s<sub>i</sub></td><td class="py-2 pr-4">Artificial Analysis Intelligence Index v4.1.1</td><td class="py-2">季度复查；变更记入日志</td></tr>
-              <tr><td class="py-2 pr-4">每 token 能耗 j<sub>i</sub></td><td class="py-2 pr-4">工作假设 [待核验]</td><td class="py-2">随篮子变更复查；记入日志</td></tr>
+              <tr><td class="py-2 pr-4">每 token 能耗 j<sub>i</sub></td><td class="py-2 pr-4">已溯源（D′ 口径）+ 三档敏感性区间</td><td class="py-2">随篮子变更复查；记入日志</td></tr>
             </tbody>
           </table>
         </div>
         <p class="text-term-muted mt-3 text-xs">
-          有两个参数属于判断性输入，因此以显式的"复查并记录"政策治理，而非当作数据呈现：η（当前 20.0 J/TH）与各模型的 j<sub>i</sub>。二者对各指数的敏感性在第 7 节量化。
+          有两个参数属于判断性输入，因此以显式的"复查并记录"政策治理，而非当作数据呈现：η（当前 20.0 J/TH）与各模型的 j<sub>i</sub>。j<sub>i</sub> 已从单一工作假设升级为低/中/高三档区间（主口径维持中档点值，见 6.5 节）；二者对各指数的敏感性在第 7 节量化。
         </p>
       </section>
 
@@ -240,18 +241,34 @@ const bibtex = `@misc{tang2026tepi,
         <p class="text-term-fg/80">
           分数每季度复查一次，篮子变更时同步复查；每次采纳的变更在 changelog 记一行（日期、旧分 → 新分、基准版本）。已发布历史永不回溯修改。基准本身由其发布机构版本化（采纳时为 v4.1.1）并会随时间调整权重；现行基准版本属于记录的一部分。基准改版在文档处理上视同一次篮子接续。
         </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.5 j<sub>i</sub> 溯源与 Λ 置信带</h3>
+        <p class="text-term-fg/80">
+          每输出 token 的全栈能耗 j<sub>i</sub> 曾是本指数最薄弱的输入（局限 L5）。2026-09-01 完成溯源定稿：j<sub>i</sub> 口径订正为 D′ —— 全栈能耗除以计费输出 token（含思考 token），依据四家厂商官方文档与 OpenRouter API 实测核验，确认 reasoning token 按输出 token 计价计费。逐项出处见仓库溯源附录（docs/ji_source.md）。
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          为缓解单一工作假设的不确定性，自 2026-09-01 起每个篮子模型配置低/中/高三档 j<sub>i</sub>（主口径维持中档点值，加权 j̄ = 2.2 J/token）。主序列由此新增 Λ 置信带四列：R_A_low / R_A_high / Lambda_low / Lambda_high —— 定义为逐模型把 j<sub>i</sub> 替换为低/高档后重新聚合（价格与权重不变），而非对加权均值整体缩放。主列（R_A / Lambda / Omega 等）口径与数值零影响，历史行留空不回填。
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.6 篮子代表性口径声明与国外对标</h3>
+        <p class="text-term-fg/80">
+          当前篮子（v1）为前沿 reasoning 模型篮子（加权均价约 $11.44/百万 token）。Λ 度量的是前沿推理口径的能量套利比，不代表全 AI 行业平均水平；产业界常引用的"20–25 倍"对应走量（commodity）模型口径（均价约 $1/百万 token），两口径各自自洽。
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          最接近的同赛道对标是 Compute Heat Rate（CHR，Hans Royal 提出、2026 年被 PJM 电网白皮书引用）：其混合口径 R_w ≈ $12.5/kWh 与 TEPI 的 R_A ≈ $15.4/kWh 同量级，构成独立方法的交叉验证；CHR 隐含的单 token 能耗 1.1–2.8 J/token 亦与 TEPI 篮子 j<sub>i</sub>（1.0–3.0）独立收敛。逐维度对比见仓库研究文档《CHR vs TEPI 逐条对比》。
+        </p>
       </section>
 
       <section>
         <h2 class="text-accent-red text-base font-medium mb-3">7. 核算边界与已知局限</h2>
         <p class="text-term-fg/80 mb-3">TEPI 是一个在显式声明边界下的"每单位能量毛收入"指数。各项边界选择、理由与偏差方向如下：</p>
         <ul class="space-y-3 text-term-fg/80">
-          <li><strong class="text-accent-red">L1 — 毛收入而非利润。</strong>电力是挖矿的主导边际成本，却只占推理成本的次要份额。因此 Λ 的水平值不能读作利润套利；有经济含义的对象是趋势、比值对事件的响应，以及两侧变动的相互比较。净利率变体 Λ′ 列为路线图 O2。</li>
+          <li><strong class="text-accent-red">L1 — 毛收入而非利润。</strong>电力是挖矿的主导边际成本，却只占推理成本的次要份额。因此 Λ 的水平值不能读作利润套利；有经济含义的对象是趋势、比值对事件的响应，以及两侧变动的相互比较。净利率变体 Λ′ 已阶段一试算（2026 Q2：现金口径 Λ′≈420、全成本口径双侧皆负），见 11 节 O2 与仓库试算稿 docs/lambda_prime.md。</li>
           <li><strong class="text-accent-red">L2 — 仅计输出 token。</strong>推理收入与能耗按输出 token 及输出价计算；输入 token 收入与 prefill 能耗未计入。若输入定价高于 prefill 能耗成本，则本口径低估推理侧每度电收入。修正需要日频的输入/输出配比数据，目前无公开来源 [待核验]。</li>
           <li><strong class="text-accent-red">L3 — 满负荷惯例。</strong>R<sub>A</sub> 把每一度电都按挂牌价的 token 产出计价，即假设 100% 可计费利用率。实际集群利用率低于此，故 R<sub>A</sub> 是已实现每度电收入的上界；R<sub>M</sub> 无可比楔子。Λ 相应地也是上界。</li>
           <li><strong class="text-accent-red">L4 — 全网平均、人工设定的 η。</strong>R<sub>M</sub> 与 ε<sub>BTC</sub> 随 η 线性（反向）缩放。η = 20 J/TH 锚定于公开的全网估计与现役矿机规格，季度复查。敏感性：η 变动 ±25% 使 R<sub>M</sub> 反向变动 25%，使 Λ 的对数水平变动 ±ln(1.25) ≈ ±0.22。</li>
-          <li><strong class="text-accent-red">L5 — 工作假设性质的 j<sub>i</sub>。</strong>每输出 token 的全栈能耗（含 PUE）是最薄弱的输入：公开测量稀缺、各模型真实值属厂商机密，现配置值（每输出 token 1.0–3.0 焦耳）为数量级工作假设 [待核验]。专门的敏感性表与溯源附录列为路线图 O3。</li>
-          <li><strong class="text-accent-red">L6 — 单链、单一价格源。</strong>挖矿侧仅比特币；推理侧经由单一聚合商的默认端点定价。两项选择均以可复现性优先于完备性，如实声明而不加掩饰。</li>
+          <li><strong class="text-accent-red">L5 — j<sub>i</sub> 的不确定性（已缓解）。</strong>每输出 token 的全栈能耗（含 PUE）曾是最薄弱的输入：公开测量稀缺、各模型真实值属厂商机密，配置值（每输出 token 1.0–3.0 焦耳）为数量级工作假设。2026-09-01 已通过溯源定稿（D′ 口径）与低/中/高三档置信带缓解——以区间而非单点值承载该不确定度（见 6.5 节）。</li>
+          <li><strong class="text-accent-red">L6 — 单链、单一价格源（已缓解）。</strong>挖矿侧仅比特币；推理侧主源经由单一聚合商（OpenRouter）的默认端点定价。自 2026-09-01 起引入 LiteLLM 厂商牌价第二源平行计算对照列 Λ_alt 与偏离度 alt_deviation（超 ±15% 触发哨兵），主列仍只用 OpenRouter 市场价、不自动切换源。两项选择均以可复现性优先于完备性，如实声明而不加掩饰。</li>
         </ul>
       </section>
 
@@ -315,17 +332,17 @@ const bibtex = `@misc{tang2026tepi,
           <pre class="whitespace-pre">{bibtex}</pre>
         </div>
         <p class="text-term-muted mt-2 text-xs">
-          修订记录：2026-08-19，公式排版规范化，并落实署名与预印本 DOI 互链；内容与计算口径无任何变更，版本号维持 v0.1。
+          修订记录：2026-08-19，公式排版规范化，并落实署名与预印本 DOI 互链；内容与计算口径无任何变更，版本号维持 v0.1。2026-09-01，同步 jᵢ 溯源（D′ 口径）与 Λ 置信带、第二价格源稳健性对照、篮子代表性口径声明与 CHR 对标、Λ′ 阶段一试算、RM 历史回填简介，并更新 CSV Schema 至 25 列；主列口径与数值无任何变更，版本号维持 v0.1。
         </p>
       </section>
 
       <section>
         <h2 class="text-accent-red text-base font-medium mb-3">11. 开放问题与路线图</h2>
         <ul class="space-y-2 text-term-fg/80">
-          <li><strong class="text-accent-red">O1 — 回填。</strong>从公开链上与硬件能效数据重建 R<sub>M</sub> 至 2010 年代的周/月序列，R<sub>A</sub> 至 2022 年底；以 source = backfill 发布并附独立方法论说明。</li>
-          <li><strong class="text-accent-red">O2 — Λ′ 净利率变体。</strong>校准至公开矿企与推理运营商财务数据。</li>
-          <li><strong class="text-accent-red">O3 — j<sub>i</sub> 溯源附录。</strong>η 与 j<sub>i</sub> 的完整敏感性表。</li>
-          <li><strong class="text-accent-red">O4 — DOI 存缴。</strong>为 TEPI 建立独立 Zenodo 记录（版本化数据集 + 本方法论，两语版本），目标为序列 30 日标记处。</li>
+          <li><strong class="text-accent-red">O1 — 回填。</strong>O1a（挖矿侧）已落地（2026-09-01）：R<sub>M</sub> 与 ε<sub>BTC</sub> 月频序列回填至 2010-07（docs/rm_history.csv，194 行，独立序列不进主序列；能效历史表初稿待溯源定稿）。O1b（推理侧历史前沿篮子）另立项。</li>
+          <li><strong class="text-accent-red">O2 — Λ′ 净利率变体。</strong>阶段一已试算（2026-09-01，2026 Q2 校准）：现金口径 Λ′≈420，全成本口径双侧皆负；代码化待口径稳定后另议。</li>
+          <li><strong class="text-accent-red">O3 — j<sub>i</sub> 溯源附录。</strong>已完成（2026-09-01）：溯源定稿 docs/ji_source.md + 三档置信带列上线。</li>
+          <li><strong class="text-accent-red">O4 — DOI 存缴。</strong>为 TEPI 建立独立 Zenodo 记录（版本化数据集 + 本方法论，两语版本），目标为序列 30 日标记处（≈2026-09-15）。</li>
           <li><strong class="text-accent-red">O5 — Ω 接续行为。</strong>篮子变更时 Ω 的接续行为，于首次发生时实证评估；质量调整的享乐精炼。</li>
         </ul>
       </section>
@@ -367,15 +384,18 @@ const bibtex = `@misc{tang2026tepi,
       </section>
 
       <section>
-        <h2 class="text-accent-red text-base font-medium mb-3">附录 B. 发布 CSV Schema（16 列，按序）</h2>
+        <h2 class="text-accent-red text-base font-medium mb-3">附录 B. 发布 CSV Schema（25 列，按序）</h2>
         <div class="my-2 p-3 bg-term-bg/50 border border-term-border rounded text-xs text-term-fg/80 overflow-x-auto">
           <pre class="whitespace-pre">date, btc_price_usd, hashprice_usd_per_ph_day, fleet_efficiency_j_per_th,
 epsilon_btc_gwh, basket_price_usd_per_mtok, basket_j_per_token,
+basket_price_alt_usd_per_mtok, alt_coverage,
 R_M, R_A, Lambda, Omega, rho_parity_tok_per_btc, rho_market_tok_per_btc,
-source, basket_version, Lambda_chained</pre>
+source, basket_version, Lambda_chained,
+R_A_low, R_A_high, Lambda_low, Lambda_high,
+R_A_alt, Lambda_alt, alt_deviation</pre>
         </div>
         <p class="text-term-muted text-xs">
-          列只追加、不重命名、不删除、不重排；扩展在末尾加列。空串表示"按政策不可计算"（如质量分采纳前的 Ω），绝非零。
+          列只追加、不重命名、不删除、不重排；扩展在末尾加列。空串表示"按政策不可计算"（如质量分采纳前的 Ω、置信带/对照列的历史行、第二源覆盖不完整），绝非零。最后七列（置信带四列 + 二源对照三列）自 2026-09-01 起新行有值，历史行留空。
         </p>
       </section>
 

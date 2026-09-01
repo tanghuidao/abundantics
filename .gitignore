@@ -24,3 +24,8 @@ dist/
 /verify_output/
 /.verify_zenodo/
 /.zenodo_*
+
+# 内部交接/临时文件（不进公开仓库）
+_tmp_tepi_full.txt
+TEPI_交接提示词_新窗口.md
+TEPI_交接提示词_新窗口_纯文本版.txt

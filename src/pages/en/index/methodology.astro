@@ -88,7 +88,7 @@ const bibtex = `@misc{tang2026tepi,
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">B</td><td class="py-2 pr-4">Total block rewards over trailing 144 blocks (subsidy + fees)</td><td class="py-2">BTC/day</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">η</td><td class="py-2 pr-4">Fleet-average mining efficiency (manual parameter)</td><td class="py-2">J/TH</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">p<sub>i</sub></td><td class="py-2 pr-4">Output-token list price of basket model i (OpenRouter default endpoint)</td><td class="py-2">USD/token</td></tr>
-              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">j<sub>i</sub></td><td class="py-2 pr-4">Working full-stack energy per output token of model i, incl. PUE [to be verified]</td><td class="py-2">J/token</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">j<sub>i</sub></td><td class="py-2 pr-4">Working full-stack energy per output token of model i, incl. PUE (D′ convention; three-tier band in §6.5)</td><td class="py-2">J/token</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">w̃<sub>i</sub></td><td class="py-2 pr-4">Normalized usage weight of model i (Σ w̃<sub>i</sub> = 1)</td><td class="py-2">—</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">s<sub>i</sub></td><td class="py-2 pr-4">External quality score of model i (AA Intelligence Index v4.1.1)</td><td class="py-2">points</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">q<sub>i</sub></td><td class="py-2 pr-4">Quality weight, s<sub>i</sub> / s<sub>ref</sub> (ref = designated reference model)</td><td class="py-2">—</td></tr>
@@ -116,15 +116,16 @@ const bibtex = `@misc{tang2026tepi,
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Bitcoin spot price</td><td class="py-2 pr-4">CoinGecko simple-price API</td><td class="py-2">Daily snapshot at run time</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Network hashrate</td><td class="py-2 pr-4">mempool.space, 3-day window</td><td class="py-2">Daily snapshot</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Block rewards</td><td class="py-2 pr-4">mempool.space, trailing 144 blocks</td><td class="py-2">Daily snapshot</td></tr>
-              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Model list prices</td><td class="py-2 pr-4">OpenRouter /api/v1/models (default endpoints)</td><td class="py-2">Daily snapshot</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Model list prices</td><td class="py-2 pr-4">OpenRouter /api/v1/models (primary source, market prices)</td><td class="py-2">Daily snapshot</td></tr>
+              <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Model list prices (secondary source)</td><td class="py-2 pr-4">LiteLLM provider-direct list prices (control column Λ_alt)</td><td class="py-2">Daily snapshot</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Fleet efficiency η</td><td class="py-2 pr-4">Manual; anchored to CBECI fleet estimates and ASIC specifications</td><td class="py-2">Quarterly review; every change logged</td></tr>
               <tr class="border-b border-term-border/50"><td class="py-2 pr-4">Quality scores s<sub>i</sub></td><td class="py-2 pr-4">Artificial Analysis Intelligence Index (v4.1.1 at adoption)</td><td class="py-2">Quarterly review; every change logged</td></tr>
-              <tr><td class="py-2 pr-4">Energy per token j<sub>i</sub></td><td class="py-2 pr-4">Working assumptions [to be verified against published measurements]</td><td class="py-2">Reviewed with basket changes; logged</td></tr>
+              <tr><td class="py-2 pr-4">Energy per token j<sub>i</sub></td><td class="py-2 pr-4">Sourced (D′ convention) + three-tier sensitivity band</td><td class="py-2">Reviewed with basket changes; logged</td></tr>
             </tbody>
           </table>
         </div>
         <p class="text-term-muted mt-3 text-xs">
-          Two parameters are judgmental and are therefore governed by an explicit review-and-log policy rather than presented as data: η (currently 20.0 J/TH) and the per-model j<sub>i</sub> values. Section 7 quantifies the sensitivity of each index to both.
+          Two parameters are judgmental and are therefore governed by an explicit review-and-log policy rather than presented as data: η (currently 20.0 J/TH) and the per-model j<sub>i</sub> values. The j<sub>i</sub> values have been upgraded from single working assumptions to low/mid/high three-tier bands (the primary series keeps the mid-tier point values, §6.5); Section 7 quantifies the sensitivity of each index to both.
         </p>
       </section>
 
@@ -237,18 +238,34 @@ const bibtex = `@misc{tang2026tepi,
         <p class="text-term-fg/80">
           Scores are reviewed quarterly and whenever the basket changes; every adopted change is a changelog line (date, old → new score, benchmark version). Published history is never revised retroactively. The benchmark itself is versioned by its provider (v4.1.1 at adoption) and re-weights over time; the benchmark version in force is part of the record. A benchmark change is treated like a basket splice for documentation purposes.
         </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.5 j<sub>i</sub> sourcing and the Λ confidence band</h3>
+        <p class="text-term-fg/80">
+          Per-token full-stack energy j<sub>i</sub> was once the index's weakest input (limitation L5). Sourcing was finalized on 2026-09-01: the j<sub>i</sub> convention is now D′ — full-stack energy divided by billed output tokens (including reasoning tokens) — verified against four providers' official documentation and OpenRouter API measurements, confirming that reasoning tokens are priced and billed as output tokens. Item-level citations are in the repository sourcing appendix (docs/ji_source.md).
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          To carry the residual uncertainty of a single working assumption, since 2026-09-01 each basket model carries a low/mid/high three-tier j<sub>i</sub> (the primary series keeps the mid-tier point values, weighted j̄ = 2.2 J/token). The primary series thereby gains four Λ confidence-band columns — R_A_low / R_A_high / Lambda_low / Lambda_high — defined by re-aggregating with each model's j<sub>i</sub> replaced by its low or high tier (prices and weights unchanged), not by scaling the weighted mean. The primary columns (R_A / Lambda / Omega, etc.) are untouched in convention and value; historical rows are left blank.
+        </p>
+
+        <h3 class="text-term-fg/90 font-medium mb-2 mt-4">6.6 Basket-representativeness statement and external benchmarking</h3>
+        <p class="text-term-fg/80">
+          The current basket (v1) is a frontier reasoning-model basket (usage-weighted mean price ≈ $11.44 per million tokens). Λ therefore measures the energy-arbitrage ratio at the frontier-inference convention, not the all-industry average; the "20–25×" figure often cited in industry corresponds to a commodity-model convention (mean price ≈ $1 per million tokens). The two conventions are each internally consistent.
+        </p>
+        <p class="text-term-fg/80 mt-2">
+          The closest peer benchmark is Compute Heat Rate (CHR), proposed by Hans Royal and cited in a 2026 PJM grid white paper: its blended convention R_w ≈ $12.5/kWh is the same order of magnitude as TEPI's R_A ≈ $15.4/kWh, providing cross-validation by an independent method; CHR's implied per-token energy of 1.1–2.8 J/token also converges independently with the TEPI basket j<sub>i</sub> (1.0–3.0). A dimension-by-dimension comparison is in the repository research note "CHR vs TEPI".
+        </p>
       </section>
 
       <section>
         <h2 class="text-accent-red text-base font-medium mb-3">7. Accounting Boundary and Known Limitations</h2>
         <p class="text-term-fg/80 mb-3">TEPI is a gross-revenue-per-unit-energy index under an explicitly declared boundary. The declared choices, each with its rationale and direction of bias:</p>
         <ul class="space-y-3 text-term-fg/80">
-          <li><strong class="text-accent-red">L1 — Gross revenue, not profit.</strong> Electricity is the dominant marginal cost in mining but a minor cost share in inference. The level of Λ therefore cannot be read as a profit arbitrage; economically meaningful objects are the trend, the ratio's response to events, and cross-side comparisons of change. A net-margin variant Λ′ is roadmap item O2.</li>
+          <li><strong class="text-accent-red">L1 — Gross revenue, not profit.</strong> Electricity is the dominant marginal cost in mining but a minor cost share in inference. The level of Λ therefore cannot be read as a profit arbitrage; economically meaningful objects are the trend, the ratio's response to events, and cross-side comparisons of change. A net-margin variant Λ′ has been trialled in Stage 1 (2026 Q2: cash convention Λ′≈420, full-cost convention negative on both sides); see O2 in Section 11 and the repository note docs/lambda_prime.md.</li>
           <li><strong class="text-accent-red">L2 — Output tokens only.</strong> Inference revenue and energy are computed on output tokens at output prices; input-token revenue and prefill energy are excluded. This understates inference revenue per kWh to the extent input pricing exceeds prefill energy cost. Correcting this requires input/output mix data not publicly available at daily cadence [to be verified].</li>
           <li><strong class="text-accent-red">L3 — Full-utilization convention.</strong> R<sub>A</sub> prices every kWh at list-price token output, i.e., assumes 100% billable utilization. Realized fleet utilization is below this, so R<sub>A</sub> is an upper bound on realized revenue per kWh; R<sub>M</sub> has no comparable wedge. Λ is correspondingly an upper bound.</li>
           <li><strong class="text-accent-red">L4 — Fleet-average, manually set η.</strong> R<sub>M</sub> and ε<sub>BTC</sub> scale linearly (inversely) in η. η = 20 J/TH is anchored to public fleet estimates and current-generation ASIC specifications, reviewed quarterly. Sensitivity: ±25% in η moves R<sub>M</sub> and ln-level of Λ by ∓25% and ±ln(1.25) ≈ ±0.22 respectively.</li>
-          <li><strong class="text-accent-red">L5 — Working j<sub>i</sub> values.</strong> Per-token full-stack energy (including PUE) is the weakest input: public measurements are scarce, model-specific values are provider-confidential, and the configured values (1.0–3.0 J per output token) are order-of-magnitude working assumptions [to be verified]. A dedicated sensitivity table and sourcing appendix is roadmap item O3.</li>
-          <li><strong class="text-accent-red">L6 — Single chain, single price source.</strong> The mining side is Bitcoin only; the inference side prices via one aggregator's default endpoints. Both choices favour reproducibility over completeness and are stated rather than hidden.</li>
+          <li><strong class="text-accent-red">L5 — Working j<sub>i</sub> values (mitigated).</strong> Per-token full-stack energy (including PUE) was the weakest input: public measurements are scarce, model-specific values are provider-confidential, and the configured values (1.0–3.0 J per output token) are order-of-magnitude working assumptions. On 2026-09-01 this was mitigated by finalized sourcing (D′ convention) plus a low/mid/high three-tier confidence band — the uncertainty is carried by an interval rather than a point value (§6.5).</li>
+          <li><strong class="text-accent-red">L6 — Single chain, single price source (mitigated).</strong> The mining side is Bitcoin only; the inference side's primary source prices via one aggregator's (OpenRouter) default endpoints. Since 2026-09-01 a secondary source — LiteLLM provider-direct list prices — computes a parallel control column Λ_alt with a deviation measure alt_deviation (±15% triggers a sentinel); the primary columns still use OpenRouter market prices only and never auto-switch source. Both choices favour reproducibility over completeness and are stated rather than hidden.</li>
         </ul>
       </section>
 
@@ -312,17 +329,17 @@ const bibtex = `@misc{tang2026tepi,
           <pre class="whitespace-pre">{bibtex}</pre>
         </div>
         <p class="text-term-muted mt-2 text-xs">
-          Revision note: 2026-08-19 — mathematical typesetting normalized, authorship finalized, and the preprint DOI cross-link added; no change whatsoever to content or computational conventions, version remains v0.1.
+          Revision note: 2026-08-19 — mathematical typesetting normalized, authorship finalized, and the preprint DOI cross-link added; no change whatsoever to content or computational conventions, version remains v0.1. 2026-09-01 — synchronized the j<sub>i</sub> sourcing (D′ convention) and the Λ confidence band, the secondary-price-source robustness control, the basket-representativeness statement and CHR benchmarking, the Λ′ Stage-1 trial, and the RM backfill note; updated the CSV Schema to 25 columns. No change whatsoever to primary-column conventions or values; version remains v0.1.
         </p>
       </section>
 
       <section>
         <h2 class="text-accent-red text-base font-medium mb-3">11. Open Issues and Roadmap</h2>
         <ul class="space-y-2 text-term-fg/80">
-          <li><strong class="text-accent-red">O1 — Backfill.</strong> Reconstruct R<sub>M</sub> weekly/monthly to the 2010s from public chain and hardware-efficiency data, and R<sub>A</sub> to late 2022 from archived price schedules; publish under source = backfill with its own methodology note.</li>
-          <li><strong class="text-accent-red">O2 — Λ′ net-margin variant.</strong> Calibrated to public miner and inference-operator financials.</li>
-          <li><strong class="text-accent-red">O3 — j<sub>i</sub> sourcing appendix.</strong> Full sensitivity tables for η and j<sub>i</sub>.</li>
-          <li><strong class="text-accent-red">O4 — DOI deposit.</strong> A standalone Zenodo record for TEPI (versioned dataset + this methodology, both language editions), targeted for the 30-day mark of the series.</li>
+          <li><strong class="text-accent-red">O1 — Backfill.</strong> O1a (mining side) landed 2026-09-01: R<sub>M</sub> and ε<sub>BTC</sub> reconstructed monthly to 2010-07 (docs/rm_history.csv, 194 rows, a standalone series outside the primary series; the efficiency-history table is an early draft pending sourcing finalization). O1b (inference-side historical frontier basket) is a separate item.</li>
+          <li><strong class="text-accent-red">O2 — Λ′ net-margin variant.</strong> Stage 1 trialled (2026-09-01, 2026 Q2 calibration): cash convention Λ′≈420, full-cost convention negative on both sides; code implementation deferred until conventions stabilize.</li>
+          <li><strong class="text-accent-red">O3 — j<sub>i</sub> sourcing appendix.</strong> Completed (2026-09-01): finalized sourcing docs/ji_source.md + three-tier confidence-band columns live.</li>
+          <li><strong class="text-accent-red">O4 — DOI deposit.</strong> A standalone Zenodo record for TEPI (versioned dataset + this methodology, both language editions), targeted for the 30-day mark of the series (≈2026-09-15).</li>
           <li><strong class="text-accent-red">O5 — Ω splice behaviour.</strong> Assessed on first basket-change occurrence; hedonic refinement of the quality adjustment beyond a single composite score.</li>
         </ul>
       </section>
@@ -364,15 +381,18 @@ const bibtex = `@misc{tang2026tepi,
       </section>
 
       <section>
-        <h2 class="text-accent-red text-base font-medium mb-3">Appendix B. Published CSV Schema (16 columns, in order)</h2>
+        <h2 class="text-accent-red text-base font-medium mb-3">Appendix B. Published CSV Schema (25 columns, in order)</h2>
         <div class="my-2 p-3 bg-term-bg/50 border border-term-border rounded text-xs text-term-fg/80 overflow-x-auto">
           <pre class="whitespace-pre">date, btc_price_usd, hashprice_usd_per_ph_day, fleet_efficiency_j_per_th,
 epsilon_btc_gwh, basket_price_usd_per_mtok, basket_j_per_token,
+basket_price_alt_usd_per_mtok, alt_coverage,
 R_M, R_A, Lambda, Omega, rho_parity_tok_per_btc, rho_market_tok_per_btc,
-source, basket_version, Lambda_chained</pre>
+source, basket_version, Lambda_chained,
+R_A_low, R_A_high, Lambda_low, Lambda_high,
+R_A_alt, Lambda_alt, alt_deviation</pre>
         </div>
         <p class="text-term-muted text-xs">
-          Columns are append-only: existing columns are never renamed, removed, or reordered; extensions add columns at the end. Empty string denotes 'not computable under policy' (e.g., Ω before quality-score adoption), never zero.
+          Columns are append-only: existing columns are never renamed, removed, or reordered; extensions add columns at the end. Empty string denotes 'not computable under policy' (e.g., Ω before quality-score adoption, historical rows of the confidence-band / control columns, or incomplete secondary-source coverage), never zero. The final seven columns (four confidence-band + three secondary-source control) carry values from 2026-09-01 onward; historical rows are blank.
         </p>
       </section>
 
