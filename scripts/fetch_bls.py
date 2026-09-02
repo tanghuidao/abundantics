@@ -9,9 +9,12 @@ fetch_bls.py
 - 序列清单从 category_mapping.csv 读取（单一信息源，不在此硬编码第二份清单）。
 - 数据窗口 1998 至今（世纪图表窗口；12 序列起始年份均早于 1998，见核验说明）。
 - BLS_API_KEY 从环境变量读取（GitHub Actions Secret）。
+- BLS 免费 key 单次请求有 20 年跨度限制，故按 ≤20 年分块拉取后合并（否则只返回
+  startyear 起的 20 年，最新年份会被截断）。
 - 原子写入：全部序列都拿到才写文件；任何序列缺失/请求失败则报错退出（非零），
   保留已有数据不动，让 workflow 变红（主数据不做静默降级）。
-- BLS CPI 月度发布 + 历史会 revision，故每日全量重拉（窗口内数据量小，自愈安全）。
+- BLS CPI 月度发布 + 历史会 revision，故每日全量重拉（数据量小，自愈安全）。
+- value 为 "-"（如 2025-10 因政府拨款中断未发布）时记为 null。
 
 用法：BLS_API_KEY=xxx python scripts/fetch_bls.py
 """
@@ -29,6 +32,7 @@ MAPPING_CSV = os.path.join(ROOT, "category_mapping.csv")
 OUTPUT_DIR = os.path.join(ROOT, "public", "api", "bls")
 BLS_API = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 START_YEAR = 1998
+CHUNK_YEARS = 20  # BLS 免费 key 单次请求最大跨度
 
 
 def load_mapping():
@@ -52,39 +56,62 @@ def load_mapping():
     return rows
 
 
-def fetch(series_ids, key, end_year):
+def fetch_chunk(series_ids, key, start_year, end_year):
+    """拉取一个时间块，返回 BLS series 列表。"""
     payload = {
         "seriesid": series_ids,
-        "startyear": str(START_YEAR),
+        "startyear": str(start_year),
         "endyear": str(end_year),
         "registrationkey": key,
     }
     resp = requests.post(BLS_API, json=payload, timeout=60)
     resp.raise_for_status()
-    return resp.json()
+    data = resp.json()
+    if data.get("status") != "REQUEST_SUCCEEDED":
+        raise RuntimeError(f"BLS status={data.get('status')} message={data.get('message')}")
+    return data.get("Results", {}).get("series", [])
 
 
-def parse(result, meta):
-    """把单个 series 的 BLS 返回解析为结构化时间序列（升序）。"""
-    sid = result["seriesID"]
-    data = []
-    for d in result.get("data", []):
-        raw = d.get("value")
-        try:
-            value = float(raw) if raw not in (None, "") else None
-        except (TypeError, ValueError):
-            value = None
-        period = d.get("period", "")
-        month = period.lstrip("M") if period else ""
-        date = f"{d.get('year', '')}-{month}" if d.get("year") and month else ""
-        footnotes = "".join(fn.get("code", "") for fn in (d.get("footnotes") or []))
-        data.append({
-            "date": date,
-            "value": value,
-            "period": period,
-            "periodName": d.get("periodName", ""),
-            "footnotes": footnotes,
-        })
+def fetch_all(series_ids, key, start_year, end_year):
+    """分块拉取并合并，返回 {series_id: {date_key: data_point}}。"""
+    merged = {sid: {} for sid in series_ids}
+    cur = start_year
+    while cur <= end_year:
+        chunk_end = min(cur + CHUNK_YEARS - 1, end_year)
+        print(f"[fetch_bls] fetching {cur}-{chunk_end}...", file=sys.stderr)
+        for r in fetch_chunk(series_ids, key, cur, chunk_end):
+            sid = r["seriesID"]
+            if sid not in merged:
+                continue
+            for d in r.get("data", []):
+                merged[sid][f"{d.get('year')}-{d.get('period')}"] = d
+        cur = chunk_end + 1
+    return merged
+
+
+def parse_point(d):
+    """把单个 data point 解析为结构化对象。"""
+    raw = d.get("value")
+    try:
+        value = float(raw) if raw not in (None, "", "-") else None
+    except (TypeError, ValueError):
+        value = None
+    period = d.get("period", "")
+    month = period.lstrip("M") if period else ""
+    date = f"{d.get('year', '')}-{month}" if d.get("year") and month else ""
+    footnotes = "".join(fn.get("code", "") for fn in (d.get("footnotes") or []))
+    return {
+        "date": date,
+        "value": value,
+        "period": period,
+        "periodName": d.get("periodName", ""),
+        "footnotes": footnotes,
+    }
+
+
+def build_series(sid, points, meta):
+    """把合并后的 points 组装成序列结构（升序）。"""
+    data = [parse_point(p) for p in points.values()]
     data.sort(key=lambda x: x["date"])
     return {
         "series_id": sid,
@@ -113,22 +140,12 @@ def main():
     end_year = datetime.now().year
 
     try:
-        payload = fetch(series_ids, key, end_year)
+        merged = fetch_all(series_ids, key, START_YEAR, end_year)
     except Exception as e:
         print(f"[fetch_bls] ERROR: BLS request failed: {e}", file=sys.stderr)
         return 1
 
-    if payload.get("status") != "REQUEST_SUCCEEDED":
-        print(
-            f"[fetch_bls] ERROR: BLS status={payload.get('status')} "
-            f"message={payload.get('message')}",
-            file=sys.stderr,
-        )
-        return 1
-
-    results = payload.get("Results", {}).get("series", [])
-    got_ids = {r["seriesID"] for r in results}
-    missing = [sid for sid in series_ids if sid not in got_ids]
+    missing = [sid for sid in series_ids if not merged.get(sid)]
     if missing:
         print(
             f"[fetch_bls] ERROR: BLS response missing series {missing}; "
@@ -137,7 +154,7 @@ def main():
         )
         return 1
 
-    series_out = [parse(r, meta_by_id.get(r["seriesID"], {})) for r in results]
+    series_out = [build_series(sid, merged[sid], meta_by_id.get(sid, {})) for sid in series_ids]
 
     output = {
         "schema_version": "1.0",
@@ -167,7 +184,8 @@ def main():
                     d["footnotes"],
                 ])
 
-    print(f"[fetch_bls] OK: wrote {len(series_out)} series to {OUTPUT_DIR}")
+    total_points = sum(len(s["data"]) for s in series_out)
+    print(f"[fetch_bls] OK: wrote {len(series_out)} series ({total_points} points) to {OUTPUT_DIR}")
     return 0
 
 
