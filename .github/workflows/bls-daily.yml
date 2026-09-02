@@ -42,10 +42,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- public/api/bls/; then
+          # 先暂存再判断：git diff --quiet 检测不到未跟踪的新文件（首次运行的 public/api/bls/ 全是新文件）
+          git add public/api/bls/
+          if git diff --cached --quiet; then
             echo "No data changes, nothing to commit."
           else
-            git add public/api/bls/
             git commit -m "chore(data): update BLS CPI series ($(date -u +%Y-%m-%d))"
             git pull --rebase origin main
             git push origin main
