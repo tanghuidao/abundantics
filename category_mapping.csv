@@ -1,0 +1,13 @@
+﻿中文品类名,BLS_item_title,series_id,层级,状态,数据起始年份,备注
+医院服务,Hospital services,CUUR0000SEMD01,细项(level 3),已核实,1996,
+大学学费,College tuition and fees,CUUR0000SEEB01,细项(level 3),已核实,1977,
+医疗护理服务,Medical care services,CUUR0000SAM2,子类聚合(level 1),已核实,1935,聚合层；更细可拆 SEMC01医生服务/SEMC02牙科
+托儿照护,Day care and preschool,CUUR0000SEEB03,细项(level 3),已核实,1990,
+住房（位置性）,Owners' equivalent rent of primary residence,CUUR0000SEHC01,细项(level 3),已核实,1982,OER口径；若原表用Housing整体口径则改用 CUUR0000SAH
+食品饮料,Food and beverages,CUUR0000SAF,大类(level 0),已核实,1967,
+手机通信服务,Wireless telephone services,CUUR0000SEED03,细项(level 3),已核实,1997,
+电脑软件,Computer software and accessories,CUUR0000SEEE02,细项(level 3),已核实,1997,
+玩具,Toys,CUUR0000SERE01,细项(level 3),已核实,1977,
+电视机,Televisions,CUUR0000SERA01,细项(level 3),已核实,1950,
+CPI总指数,All items,CUUR0000SA0,总指数(level 0),已核实,1913,
+大学教科书,Educational books and supplies（SEEA聚合）,CUUR0000SEEA,商品组聚合(level 2),降级,1967,降级说明：BLS不单独发布college textbooks子项；候选CUUR0000SEEA01/CUUR0000SSEA011/CUUR0000SSEA01/CUUR0000SEEA02在cu.series中均不存在。退用聚合层SEEA（含文具、宽于大学教科书）。注意：实际1967起算非2001、覆盖1998窗口无缺口。2001-01→2026-07累计约+168.5%、与"约150%"同量级。
