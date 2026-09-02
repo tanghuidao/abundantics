@@ -1,0 +1,52 @@
+name: Update BLS CPI data (fetch & push only)
+
+# 只负责「拉取世纪图表（H1）12 个 CPI-U 序列 → 有变化则提交并推送」。
+# 构建与部署由 Cloudflare Pages 的 Git 集成自动完成（push 到 main 即触发）。
+#
+# BLS CPI 数据月度发布、且历史会 revision，因此每日全量重拉窗口（1998 至今）：
+# - 及时捕捉每月中旬发布的新月度数据；
+# - 数据量小（12 序列 × ~340 月），每日 1 次 API 请求，远低于免费 key 500 次/天上限。
+# 数据落地 public/api/bls/（与 public/api/parity/ 对称，前端可直接 fetch）。
+
+on:
+  schedule:
+    - cron: '30 0 * * *'  # UTC 00:30 daily (Beijing 08:30)，错开 update-data 00:40 与 token-parity 00:10/00:20
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch BLS CPI series
+        env:
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
+        run: python scripts/fetch_bls.py
+
+      - name: Commit and push data updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- public/api/bls/; then
+            echo "No data changes, nothing to commit."
+          else
+            git add public/api/bls/
+            git commit -m "chore(data): update BLS CPI series ($(date -u +%Y-%m-%d))"
+            git pull --rebase origin main
+            git push origin main
+          fi

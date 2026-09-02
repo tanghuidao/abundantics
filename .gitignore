@@ -4,6 +4,7 @@ dist/
 .astro/
 *.log
 .DS_Store
+__pycache__/
 .env
 .env.production
 # Zenodo deposit working files (temporary, root-level dotfiles)
