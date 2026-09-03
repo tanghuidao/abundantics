@@ -1,0 +1,42 @@
+name: h1-cpi-archive
+
+# 丰裕学 H1「世纪图表」假说 —— CPI 逐月归档（从 token-parity 迁入，2026-09-03）
+# 属于 abundantics（丰裕学）仓库，与 token-parity（TEPI）无关。
+# 数据落 research/h1-cpi/raw_h1_cpi/YYYY-MM-DD.json，供 analyze 层消费。
+
+on:
+  schedule:
+    # 月度低频：UTC 05:30 = 北京时间 13:30，每月 16 号
+    # BLS 通常每月中旬发布上月 CPI，16 号之后跑确保能拿到上月数据
+    - cron: "30 5 16 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch H1 CPI monthly archive
+        working-directory: research/h1-cpi
+        env:
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
+        run: python h1_cpi_archive.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add research/h1-cpi/raw_h1_cpi/
+          git commit -m "chore(data): h1 cpi archive $(date -u +%F)" || echo "no changes to commit"
+          git push

@@ -1,0 +1,46 @@
+name: h1-verify-series
+
+# 丰裕学 H1 品类映射 seriesID 核验（从 token-parity 迁入，2026-09-03）
+# 一次性手动触发：核验 research/h1-cpi/category_mapping.csv 中「待核实」的 seriesID。
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Verify series IDs against BLS v2 API
+        id: verify
+        working-directory: research/h1-cpi
+        run: python h1_verify_series.py
+        env:
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
+        continue-on-error: true        # 有未通过项时仍要提交报告，不中断
+
+      - name: Commit and push verification result
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add research/h1-cpi/category_mapping.csv research/h1-cpi/docs/h1_series_verification.md
+          git commit -m "chore(data): h1 series verify $(date -u +%F)" || echo "no changes to commit"
+          git push
+
+      - name: Flag verification gaps
+        if: steps.verify.outcome == 'failure'
+        run: |
+          echo "::error::存在未通过核验的 seriesID，详见 research/h1-cpi/docs/h1_series_verification.md"
+          exit 1

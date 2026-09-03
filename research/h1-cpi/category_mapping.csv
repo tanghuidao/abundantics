@@ -1,0 +1,183 @@
+﻿中文品类名,BLS_item_title,series_id,层级,状态,数据起始年份,数据起始年份_口径,备注,H1分组
+医院服务,Hospital services,CUUR0000SEMD01,细项(level 3),已核实,1996,真实begin_year,,N
+大学学费,College tuition and fees,CUUR0000SEEB01,细项(level 3),已核实,1977,真实begin_year,,N
+医疗护理服务,Medical care services,CUUR0000SAM2,子类聚合(level 1),已核实,1935,真实begin_year,聚合层；更细可拆 SEMC01医生服务/SEMC02牙科,N
+托儿照护,Day care and preschool,CUUR0000SEEB03,细项(level 3),已核实,1990,真实begin_year,,N
+住房（位置性）,Owners' equivalent rent of primary residence,CUUR0000SEHC01,细项(level 3),已核实,1982,真实begin_year,OER口径；若原表用Housing整体口径则改用 CUUR0000SAH,N
+食品饮料,Food and beverages,CUUR0000SAF,大类(level 0),已核实,1967,真实begin_year,,中性
+手机通信服务,Wireless telephone services,CUUR0000SEED03,细项(level 3),已核实,1997,真实begin_year,,R
+电脑软件,Computer software and accessories,CUUR0000SEEE02,细项(level 3),已核实,1997,真实begin_year,,R
+玩具,Toys,CUUR0000SERE01,细项(level 3),已核实,1977,真实begin_year,,R
+电视机,Televisions,CUUR0000SERA01,细项(level 3),已核实,1950,真实begin_year,,R
+CPI总指数,All items,CUUR0000SA0,总指数(level 0),已核实,1913,真实begin_year,,基准
+大学教科书,Educational books and supplies（SEEA聚合）,CUUR0000SEEA,商品组聚合(level 2),降级,1967,真实begin_year,"降级说明：BLS不单独发布college textbooks子项；候选CUUR0000SEEA01/CUUR0000SSEA011/CUUR0000SSEA01/CUUR0000SEEA02在cu.series中均不存在。退用聚合层SEEA（含文具、宽于大学教科书）。注意：实际1967起算非2001、覆盖1998窗口无缺口。2001-01→2026-07累计约+168.5%、与""约150%""同量级。",排除
+住房（整体）,Housing,CUUR0000SAH,大类(level 0),已核实,≤1998,窗口最早观测年份,大类聚合，不入检验,排除
+医疗保健（整体）,Medical care,CUUR0000SAM,大类(level 0),已核实,≤1998,窗口最早观测年份,大类聚合，不入检验,排除
+娱乐（整体）,Recreation,CUUR0000SAR,大类(level 0),已核实,≤1998,窗口最早观测年份,大类聚合，不入检验,排除
+服装（整体）,Apparel,CUUR0000SAA,大类(level 0),已核实,≤1998,窗口最早观测年份,大类聚合，不入检验,排除
+交通（整体）,Transportation,CUUR0000SAT,大类(level 0),已核实,≤1998,窗口最早观测年份,大类聚合，不入检验,排除
+教育与通信（整体）,Education and communication,CUUR0000SAE,大类(level 0),已核实,≤1998,窗口最早观测年份,大类聚合，不入检验,排除
+其他商品与服务（整体）,Other goods and services,CUUR0000SAG,大类(level 0),已核实,≤1998,窗口最早观测年份,大类聚合，不入检验,排除
+能源,Energy,CUUR0000SA0E,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+总指数（除食品）,All items less food,CUUR0000SA0L1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+总指数（除食品与住房）,All items less food and shelter,CUUR0000SA0L12,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+总指数（除食品住房能源）,All items less food shelter and energy,CUUR0000SA0L12E,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+总指数（除食品住房能源二手车）,All items less food shelter energy and used cars and trucks,CUUR0000SA0L12E4,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+总指数（除食品与能源）,All items less food and energy,CUUR0000SA0L1E,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+总指数（除住房）,All items less shelter,CUUR0000SA0L2,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+总指数（除医疗）,All items less medical care,CUUR0000SA0L5,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+总指数（除能源）,All items less energy,CUUR0000SA0LE,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+服装（除鞋类）,Apparel less footwear,CUUR0000SA311,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+男装及童男装,Men's and boys' apparel,CUUR0000SAA1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+女装及童女装,Women's and girls' apparel,CUUR0000SAA2,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+商品（整体）,Commodities,CUUR0000SAC,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+能源商品,Energy commodities,CUUR0000SACE,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+商品（除食品）,Commodities less food,CUUR0000SACL1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+商品（除食品饮料）,Commodities less food and beverages,CUUR0000SACL11,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+商品（除食品能源）,Commodities less food and energy commodities,CUUR0000SACL1E,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+商品（除食品能源二手车）,Commodities less food energy and used cars and trucks,CUUR0000SACL1E4,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+耐用消费品,Durables,CUUR0000SAD,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+教育,Education,CUUR0000SAE1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+通信,Communication,CUUR0000SAE2,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+教育与通信商品,Education and communication commodities,CUUR0000SAEC,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+教育与通信服务,Education and communication services,CUUR0000SAES,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+食品,Food,CUUR0000SAF1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+个人护理,Personal care,CUUR0000SAG1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+其他商品,Other goods,CUUR0000SAGC,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+其他个人服务,Other personal services,CUUR0000SAGS,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+住所 Shelter,Shelter,CUUR0000SAH1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+燃料与公用事业,Fuels and utilities,CUUR0000SAH2,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+家居陈设与运营,Household furnishings and operations,CUUR0000SAH3,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+家居陈设与用品,Household furnishings and supplies,CUUR0000SAH31,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+医疗保健商品,Medical care commodities,CUUR0000SAM1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+非耐用消费品,Nondurables,CUUR0000SAN,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+国产农产食品,Domestically produced farm food,CUUR0000SAN1D,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+非耐用消费品（除食品）,Nondurables less food,CUUR0000SANL1,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+非耐用消费品（除食品饮料）,Nondurables less food and beverages,CUUR0000SANL11,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+非耐用消费品（除食品饮料服装）,Nondurables less food beverages and apparel,CUUR0000SANL113,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+非耐用消费品（除食品服装）,Nondurables less food and apparel,CUUR0000SANL13,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+娱乐商品,Recreation commodities,CUUR0000SARC,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+娱乐服务,Recreation services,CUUR0000SARS,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+服务（整体）,Services,CUUR0000SAS,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+公用事业与公共交通,Utilities and public transportation,CUUR0000SAS24,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+住房租金（rent of shelter）,Rent of shelter,CUUR0000SAS2RS,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+其他服务,Other services,CUUR0000SAS367,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+交通服务,Transportation services,CUUR0000SAS4,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+服务（除住房租金）,Services less rent of shelter,CUUR0000SASL2RS,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+服务（除医疗服务）,Services less medical care services,CUUR0000SASL5,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+服务（除能源服务）,Services less energy services,CUUR0000SASLE,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,交叉集合，不入检验,排除
+私人交通,Private transportation,CUUR0000SAT1,子类聚合(level 1),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+交通商品（除汽车燃油）,Transportation commodities less motor fuel,CUUR0000SATCLTB,商品组聚合(level 2),已核实,2009,窗口最早观测年份,交叉集合，不入检验,排除
+鞋类,Footwear,CUUR0000SEAE,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEAE01/02/03，不入检验,排除
+婴幼儿服装,Infants' and toddlers' apparel,CUUR0000SEAF,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+珠宝与手表,Jewelry and watches,CUUR0000SEAG,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEAG01/02，不入检验,排除
+信息技术商品,Information technology commodities,CUUR0000SEEEC,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层；含子项，不入检验,排除
+烟草及吸烟用品,Tobacco and smoking products,CUUR0000SEGA,细项(level 3),已核实,≤1998,窗口最早观测年份,税驱动，外生；不定向,中性
+影音（整体）,Video and audio,CUUR0000SERA,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SERA01-06，不入检验,排除
+影音产品,Video and audio products,CUUR0000SERAC,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+影音服务,Video and audio services,CUUR0000SERAS,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层，不入检验,排除
+宠物及相关（整体）,Pets pet products and services,CUUR0000SERB,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SERB01/02，不入检验,排除
+体育用品（整体）,Sporting goods,CUUR0000SERC,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SERC01/02，不入检验,排除
+摄影（整体）,Photography,CUUR0000SERD,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SERD01/02，不入检验,排除
+其他娱乐商品（整体）,Other recreational goods,CUUR0000SERE,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SERE01/02/03，不入检验,排除
+其他娱乐服务（整体）,Other recreation services,CUUR0000SERF,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SERF01/02/03，不入检验,排除
+娱乐读物（整体）,Recreational reading materials,CUUR0000SERG,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SERG01/02，不入检验,排除
+公共交通,Public transportation,CUUR0000SETG,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SETG01/02/03，不入检验,排除
+信息与信息处理,Information and information processing,CUUR0000SAE21,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+居家食品,Food at home,CUUR0000SAF11,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+酒精饮料,Alcoholic beverages,CUUR0000SAF116,细项(level 3),已核实,≤1998,窗口最早观测年份,税驱动；⚠️ item_code 待 Action 核验 cu.item（可能为 Other food at home）,中性
+家庭能源,Household energy,CUUR0000SAH21,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层，不入检验,排除
+男装,Men's apparel,CUUR0000SEAA,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEAA01-04，不入检验,排除
+童男装,Boys' apparel,CUUR0000SEAB,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+女装,Women's apparel,CUUR0000SEAC,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEAC01-04，不入检验,排除
+童女装,Girls' apparel,CUUR0000SEAD,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+男鞋,Men's footwear,CUUR0000SEAE01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（鞋类）,R
+童鞋,Boys' and girls' footwear,CUUR0000SEAE02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（鞋类）,R
+女鞋,Women's footwear,CUUR0000SEAE03,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（鞋类）,R
+手表,Watches,CUUR0000SEAG01,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 可贸易制成品 vs 奢侈品位置性冲突，不定向,中性
+珠宝,Jewelry,CUUR0000SEAG02,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 可贸易 vs 奢侈品位置性冲突，不定向,中性
+学费/其他学杂费/托儿,Tuition other school fees and childcare,CUUR0000SEEB,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEEB01/02/03，不入检验,排除
+邮政与快递服务,Postage and delivery services,CUUR0000SEEC,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEEC01邮政/SEEC02快递，不入检验,排除
+信息技术硬件与服务,Information technology hardware and services,CUUR0000SEEE,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEEE01/02/03，不入检验,排除
+外食,Food away from home,CUUR0000SEFV,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEFV01-04（堂食/快餐等），不入检验,排除
+个人护理用品,Personal care products,CUUR0000SEGB,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品但品牌驱动、自动化降价信号弱，不定向,中性
+个人护理服务,Personal care services,CUUR0000SEGC,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEGC01（理发），不入检验；下钻 SEGC01 入组,排除
+杂项个人服务,Miscellaneous personal services,CUUR0000SEGD,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEGD01-05（法律/殡葬/洗衣/服装服务/金融），不入检验,排除
+杂项个人商品,Miscellaneous personal goods,CUUR0000SEGE,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 文具/箱包等混合，不定向,中性
+主要住所租金,Rent of primary residence,CUUR0000SEHA,细项(level 3),已核实,≤1998,窗口最早观测年份,住房服务（租户侧），位置性；OER SEHC01 的姊妹口径,N
+外出住宿,Lodging away from home,CUUR0000SEHB,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEHB01/02，不入检验,排除
+自有住房等价租金（整体）,Owners' equivalent rent of residences,CUUR0000SEHC,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEHC01/02，不入检验,排除
+租户与家庭保险,Tenants' and household insurance,CUUR0000SEHD,细项(level 3),已核实,≤1998,窗口最早观测年份,保险服务；⚠️ 叶子待 cu.item 核验,N
+水、排污与垃圾处理服务,Water and sewer and trash collection services,CUUR0000SEHG,细项(level 3),已核实,≤1998,窗口最早观测年份,受管制公用事业，外生定价,中性
+窗饰与地面覆盖物,Window and floor coverings and other linens,CUUR0000SEHH,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEHH01-03，不入检验,排除
+家具与寝具,Furniture and bedding,CUUR0000SEHJ,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEHJ01-03，不入检验,排除
+家电,Appliances,CUUR0000SEHK,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEHK01-02，不入检验,排除
+其他家用设备与陈设,Other household equipment and furnishings,CUUR0000SEHL,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEHL01-04，不入检验,排除
+工具/五金/户外装备,Tools hardware outdoor equipment and supplies,CUUR0000SEHM,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEHM01-02，不入检验,排除
+家居清洁用品,Housekeeping supplies,CUUR0000SEHN,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易但属消费必需品、弱信号，不定向,中性
+家庭运营服务,Household operations,CUUR0000SEHP,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项，不入检验,排除
+专业医疗服务,Professional services,CUUR0000SEMC,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEMC01医生/SEMC02牙科，不入检验；诊断序列归档,排除
+医院及相关服务,Hospital and related services,CUUR0000SEMD,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SEMD01，不入检验；诊断序列归档,排除
+健康保险,Health insurance,CUUR0000SEME,商品组聚合(level 2),已核实,2005,窗口最早观测年份,聚合层（或含 SEME01）；诊断序列归档，供 ex-HI 口径,排除
+药品,Medicinal drugs,CUUR0000SEMF,商品组聚合(level 2),已核实,2009,窗口最早观测年份,聚合层；含子项 SEMF01处方/SEMF02非处方，不入检验,排除
+医疗设备与耗材,Medical equipment and supplies,CUUR0000SEMG,细项(level 3),已核实,2009,窗口最早观测年份,⚠️ 可贸易制成品 vs 专利稀缺冲突，不定向,中性
+有线/卫星/流媒体电视服务,Cable satellite and live streaming television service,CUUR0000SERA02,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 数字分发（偏R）但垄断定价、价格长期上行（偏N），不定向,中性
+其他视频设备,Other video equipment,CUUR0000SERA03,细项(level 3),已核实,≤1998,窗口最早观测年份,电子硬件，可贸易,R
+视频购买/订阅/租赁,Purchase subscription and rental of video,CUUR0000SERA04,细项(level 3),已核实,≤1998,窗口最早观测年份,数字可复制,R
+音频设备,Audio equipment,CUUR0000SERA05,细项(level 3),已核实,≤1998,窗口最早观测年份,电子硬件，可贸易,R
+录制音乐与订阅,Recorded music and music subscriptions,CUUR0000SERA06,细项(level 3),已核实,≤1998,窗口最早观测年份,数字可复制,R
+宠物及宠物用品,Pets and pet products,CUUR0000SERB01,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 宠物食品/用品混合，不定向,中性
+宠物服务（含兽医）,Pet services including veterinary,CUUR0000SERB02,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力照护服务（兽医/寄养/美容）,N
+运动车辆（含自行车）,Sports vehicles including bicycles,CUUR0000SERC01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+运动装备,Sports equipment,CUUR0000SERC02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+摄影器材,Photographic equipment and supplies,CUUR0000SERD01,细项(level 3),已核实,≤1998,窗口最早观测年份,电子硬件，可贸易,R
+摄影师与照片冲洗,Photographers and photo processing,CUUR0000SERD02,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 人力服务（偏N）与数字化（偏R）混合，不定向,中性
+缝纫机/布料/辅料,Sewing machines fabric and supplies,CUUR0000SERE02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+乐器及配件,Music instruments and accessories,CUUR0000SERE03,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+俱乐部会费/参与费,Club membership for shopping clubs fraternal or other organizations or participant sports fees,CUUR0000SERF01,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力/场地服务,N
+门票,Admissions,CUUR0000SERF02,细项(level 3),已核实,≤1998,窗口最早观测年份,现场演出/赛事，人力与场地密集,N
+课程与指导费,Fees for lessons or instructions,CUUR0000SERF03,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力教学服务,N
+报纸与杂志,Newspapers and magazines,CUUR0000SERG01,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 信息商品（偏R）但纸媒成本上行（偏N），不定向,中性
+娱乐书籍,Recreational books,CUUR0000SERG02,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 可复制信息商品（同软件逻辑），但定价偏版权，置信度中,R
+新车与二手车,New and used motor vehicles,CUUR0000SETA,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SETA01/02，不入检验,排除
+汽车燃油,Motor fuel,CUUR0000SETB,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SETB01汽油/SETB02其他燃油，不入检验,排除
+机动车零配件,Motor vehicle parts and equipment,CUUR0000SETC,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SETC01-02，不入检验,排除
+机动车维修保养,Motor vehicle maintenance and repair,CUUR0000SETD,商品组聚合(level 2),已核实,≤1998,窗口最早观测年份,聚合层；含子项 SETD01-03（车身修理/维护保养/维修），不入检验,排除
+机动车保险,Motor vehicle insurance,CUUR0000SETE,细项(level 3),已核实,≤1998,窗口最早观测年份,保险服务,N
+机动车税费,Motor vehicle fees,CUUR0000SETF,细项(level 3),已核实,≤1998,窗口最早观测年份,税/规费驱动，外生,中性
+机票,Airline fares,CUUR0000SETG01,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 自动化生产率高（偏R）但燃油主导且属服务（偏N），不定向,中性
+其他城际交通,Other intercity transportation,CUUR0000SETG02,细项(level 3),已核实,≤1998,窗口最早观测年份,城际巴士/火车/船运，人力服务,N
+市内交通,Intracity transportation,CUUR0000SETG03,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 公交/地铁（偏N）与网约车平台（偏R）混合，不定向,中性
+理发及其他个人护理服务,Haircuts and other personal care services,CUUR0000SEGC01,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力服务（理发/美容），无法库存,N
+法律服务,Legal services,CUUR0000SEGD01,细项(level 3),已核实,≤1998,窗口最早观测年份,牌照管制的人力专业服务,N
+殡葬服务,Funeral expenses,CUUR0000SEGD02,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力服务,N
+洗衣与干洗服务,Laundry and dry cleaning services,CUUR0000SEGD03,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力服务（洗衣店）,N
+服装修补与其他服装服务,Apparel services other than laundry and dry cleaning,CUUR0000SEGD04,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力服务（改衣/修补）,N
+金融服务,Financial services,CUUR0000SEGD05,细项(level 3),已核实,≤1998,窗口最早观测年份,牌照管制的人力专业服务,N
+机动车车身修理,Motor vehicle body work,CUUR0000SETD01,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力维修服务,N
+机动车维护保养,Motor vehicle maintenance and servicing,CUUR0000SETD02,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力维修服务,N
+机动车维修,Motor vehicle repair,CUUR0000SETD03,细项(level 3),已核实,≤1998,窗口最早观测年份,现场人力维修服务,N
+男西装与外套,"Men's suits, sport coats, and outerwear",CUUR0000SEAA01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+男内衣/睡衣/泳装及配饰,"Men's underwear, nightwear, swimwear and accessories",CUUR0000SEAA02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+男衬衫与毛衣,Men's shirts and sweaters,CUUR0000SEAA03,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+男裤与短裤,Men's pants and shorts,CUUR0000SEAA04,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+女外套,Women's outerwear,CUUR0000SEAC01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+女连衣裙,Women's dresses,CUUR0000SEAC02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+女套装与单件,Women's suits and separates,CUUR0000SEAC03,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+女内衣/睡衣/泳装及配饰,"Women's underwear, nightwear, swimwear and accessories",CUUR0000SEAC04,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（服装）,R
+地面覆盖物,Floor coverings,CUUR0000SEHH01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（家居）,R
+窗帘与窗饰,Window coverings,CUUR0000SEHH02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（家居）,R
+其他家纺布艺,Other linens,CUUR0000SEHH03,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（家居）,R
+卧室家具,Bedroom furniture,CUUR0000SEHJ01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（家居耐用）,R
+客厅/厨房/餐厅家具,"Living room, kitchen, and dining room furniture",CUUR0000SEHJ02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（家居耐用）,R
+其他家具,Other furniture,CUUR0000SEHJ03,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（家居耐用）,R
+大家电,Major appliances,CUUR0000SEHK01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（耐用电子）,R
+其他家电,Other appliances,CUUR0000SEHK02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品（耐用电子）,R
+钟表灯具装饰品,"Clocks, lamps, and decorator items",CUUR0000SEHL01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+餐具,Dishes and flatware,CUUR0000SEHL03,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+非电炊具与餐具,Nonelectric cookware and tableware,CUUR0000SEHL04,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+工具五金耗材,"Tools, hardware and supplies",CUUR0000SEHM01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+户外装备与耗材,Outdoor equipment and supplies,CUUR0000SEHM02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+轮胎,Tires,CUUR0000SETC01,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+汽车配件（除轮胎）,Vehicle accessories other than tires,CUUR0000SETC02,细项(level 3),已核实,≤1998,窗口最早观测年份,可贸易制成品,R
+室内植物花卉,Indoor plants and flowers,CUUR0000SEHL02,细项(level 3),已核实,≤1998,窗口最早观测年份,⚠️ 鲜活易腐、本地生产为主，混合不定向（不机械继承父类R）,中性
