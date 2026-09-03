@@ -1,0 +1,66 @@
+﻿series_id,中文品类名,BLS_item_title,H1分组,positionality,grade,confidence,flag,literature,rationale
+CUUR0000SEMD01,医院服务,Hospital services,N,0,0,高,,Solnick & Hemenway 1998/2005（健康为最非位置性领域）,医疗健康的效用是绝对的——人们要绝对健康而非相对健康
+CUUR0000SEEB01,大学学费,College tuition and fees,N,1,2,高,,Hirsch 1976（教育为社会位置性商品）; Frank 1985（文凭筛选/信号）,高等教育的核心价值含文凭信号与地位排序
+CUUR0000SAM2,医疗护理服务,Medical care services,N,0,0,高,,Solnick & Hemenway 1998/2005,同医院服务——健康为绝对价值
+CUUR0000SEEB03,托儿照护,Day care and preschool,N,0,0,中,复核,无直接位置性文献; 类比健康照护,托管照护为绝对需求；儿童人力资本竞争仅为弱元素
+CUUR0000SEHC01,住房（位置性）,Owners' equivalent rent of primary residence,N,1,3,高,,Hirsch 1976（物理位置性商品）; Frank 1985; Solnick & Hemenway 1998/2005（住房高位置性）,住房位置稀缺——邻里与地段是社会排序核心
+CUUR0000SEHA,主要住所租金,Rent of primary residence,N,1,3,高,,Hirsch 1976; Solnick & Hemenway 1998/2005,同住房位置性
+CUUR0000SEHD,租户与家庭保险,Tenants' and household insurance,N,0,0,高,,Frank 1985（不可观察的非位置性商品）,保险为私人安心、不可观察
+CUUR0000SERB02,宠物服务（含兽医）,Pet services including veterinary,N,0,0,中,,类比健康照护 Solnick & Hemenway 1998/2005,宠物健康为绝对价值
+CUUR0000SERF01,俱乐部会费/参与费,Club membership for shopping clubs fraternal or other organizations or participant sports fees,N,0,1,低,ambiguous,Veblen 1899（有闲阶级社交俱乐部）; 但 CPI 口径混购物俱乐部与健身,社交俱乐部有地位维度而购物俱乐部无——混合偏非位置性
+CUUR0000SERF02,门票,Admissions,N,0,0,中,,Solnick & Hemenway 1998（休闲为非位置性）,现场娱乐为私人休闲享受
+CUUR0000SERF03,课程与指导费,Fees for lessons or instructions,N,0,1,低,复核,Hirsch 1976 社会位置性延伸（人力资本竞争）; Frank 1999（育儿军备竞赛）,技能/证书含相对竞争但含兴趣班——弱位置性
+CUUR0000SETE,机动车保险,Motor vehicle insurance,N,0,0,高,,Frank 1985,保险不可观察、绝对安心
+CUUR0000SETG02,其他城际交通,Other intercity transportation,N,0,0,中,,公共交通为功能性出行,城际巴士/火车为功能出行、非地位
+CUUR0000SEGC01,理发及其他个人护理服务,Haircuts and other personal care services,N,0,1,低,复核,Frank 1985（外表修饰含地位）; Solnick & Hemenway 2005（外表位置性）,外表有地位元素但理发以卫生基本需求为主
+CUUR0000SEGD01,法律服务,Legal services,N,0,0,高,,不可观察专业服务,法律服务价值为绝对、与相对地位无关
+CUUR0000SEGD02,殡葬服务,Funeral expenses,N,0,0,中,,必要仪式服务,殡葬为绝对必要服务——虽有仪式等级但属非地位消费
+CUUR0000SEGD03,洗衣与干洗服务,Laundry and dry cleaning services,N,0,0,高,,不可观察私人服务,洗衣为私人照护
+CUUR0000SEGD04,服装修补与其他服装服务,Apparel services other than laundry and dry cleaning,N,0,0,高,,不可观察私人服务,修补为私人维护
+CUUR0000SEGD05,金融服务,Financial services,N,0,0,高,,Frank 1985（储蓄/金融为不可观察非位置性）,金融服务为私人资产功能
+CUUR0000SETD01,机动车车身修理,Motor vehicle body work,N,0,0,高,,不可观察维护服务,车辆维修为绝对功能需求
+CUUR0000SETD02,机动车维护保养,Motor vehicle maintenance and servicing,N,0,0,高,,不可观察维护服务,同上
+CUUR0000SETD03,机动车维修,Motor vehicle repair,N,0,0,高,,不可观察维护服务,同上
+CUUR0000SEED03,手机通信服务,Wireless telephone services,R,0,0,中,,通信为功能必需; 地位信号在硬件非资费（Heffetz 2011）,通信服务为绝对功能需求
+CUUR0000SEEE02,电脑软件,Computer software and accessories,R,0,0,中,,软件为功能工具、家庭私有消费（Heffetz 2011 低可见性）,工具属性为主
+CUUR0000SERE01,玩具,Toys,R,0,0,中,,儿童游戏为私人消遣,玩具为私人玩耍
+CUUR0000SERA01,电视机,Televisions,R,0,1,中,复核,家庭娱乐设备、弱展示元素（Heffetz 2011 娱乐设备中等可见性）,功能为主、弱地位
+CUUR0000SEAF,婴幼儿服装,Infants' and toddlers' apparel,R,1,2,高,,Frank 1985; Charles et al. 2009（服装显性消费）; Heffetz 2011,服装为可见地位商品
+CUUR0000SEAB,童男装,Boys' apparel,R,1,2,高,,Frank 1985; Charles et al. 2009,同上
+CUUR0000SEAD,童女装,Girls' apparel,R,1,2,高,,Frank 1985; Charles et al. 2009,同上
+CUUR0000SEAE01,男鞋,Men's footwear,R,1,2,高,,Frank 1985; Charles et al. 2009,鞋类为可见地位商品
+CUUR0000SEAE02,童鞋,Boys' and girls' footwear,R,1,2,高,,Frank 1985; Charles et al. 2009,同上
+CUUR0000SEAE03,女鞋,Women's footwear,R,1,2,高,,Frank 1985; Charles et al. 2009,同上
+CUUR0000SERA03,其他视频设备,Other video equipment,R,0,1,中,复核,同电视机、弱展示（Heffetz 2011）,电子硬件功能为主、弱地位
+CUUR0000SERA04,视频购买/订阅/租赁,Purchase subscription and rental of video,R,0,0,中,,内容流媒体为功能消费,私人娱乐消费
+CUUR0000SERA05,音频设备,Audio equipment,R,0,1,中,复核,同电视机、弱展示,电子硬件功能为主、弱地位
+CUUR0000SERA06,录制音乐与订阅,Recorded music and music subscriptions,R,0,0,中,,内容消费为私人享乐,私人娱乐消费
+CUUR0000SERC01,运动车辆（含自行车）,Sports vehicles including bicycles,R,0,0,中,,运动/出行工具、休闲为主,非汽车级地位商品
+CUUR0000SERC02,运动装备,Sports equipment,R,0,0,中,,运动休闲、健康导向,私人休闲装备
+CUUR0000SERD01,摄影器材,Photographic equipment and supplies,R,0,1,中,复核,爱好者装备地位、弱,电子硬件功能为主、弱地位
+CUUR0000SERE02,缝纫机/布料/辅料,Sewing machines fabric and supplies,R,0,0,中,,手作功能耗材,私人手作用品
+CUUR0000SERE03,乐器及配件,Music instruments and accessories,R,0,0,中,,音乐休闲（业余消遣）,私人休闲（业余级）
+CUUR0000SERG02,娱乐书籍,Recreational books,R,0,0,中,,私人阅读休闲,私人娱乐消费
+CUUR0000SEAA01,男西装与外套,"Men's suits, sport coats, and outerwear",R,1,2,高,,Frank 1985; Charles et al. 2009,服装为可见地位商品
+CUUR0000SEAA02,男内衣/睡衣/泳装及配饰,"Men's underwear, nightwear, swimwear and accessories",R,1,2,中,复核,服装类整体位置性（Frank 1985）; 但内衣可见性低,泳装/配饰可见、内衣不可见——服装类整体位置性
+CUUR0000SEAA03,男衬衫与毛衣,Men's shirts and sweaters,R,1,2,高,,Frank 1985; Charles et al. 2009,服装为可见地位商品
+CUUR0000SEAA04,男裤与短裤,Men's pants and shorts,R,1,2,高,,Frank 1985; Charles et al. 2009,同上
+CUUR0000SEAC01,女外套,Women's outerwear,R,1,2,高,,Frank 1985; Charles et al. 2009,同上
+CUUR0000SEAC02,女连衣裙,Women's dresses,R,1,2,高,,Frank 1985; Charles et al. 2009,同上
+CUUR0000SEAC03,女套装与单件,Women's suits and separates,R,1,2,高,,Frank 1985; Charles et al. 2009,同上
+CUUR0000SEAC04,女内衣/睡衣/泳装及配饰,"Women's underwear, nightwear, swimwear and accessories",R,1,2,中,复核,服装类整体位置性（Frank 1985）; 但内衣可见性低,泳装/配饰可见、内衣不可见——服装类整体位置性
+CUUR0000SEHH01,地面覆盖物,Floor coverings,R,1,2,中,,Frank 1999（家居地位）; Heffetz 2011（家用耐用品可见性）,家居为可见地位展示
+CUUR0000SEHH02,窗帘与窗饰,Window coverings,R,1,2,中,,Frank 1999; Heffetz 2011,同上
+CUUR0000SEHH03,其他家纺布艺,Other linens,R,1,2,中,,Frank 1999; Heffetz 2011,同上
+CUUR0000SEHJ01,卧室家具,Bedroom furniture,R,1,2,中,,Frank 1999; Heffetz 2011,家具为可见家居地位
+CUUR0000SEHJ02,客厅/厨房/餐厅家具,"Living room, kitchen, and dining room furniture",R,1,2,中,,Frank 1999; Heffetz 2011,同上
+CUUR0000SEHJ03,其他家具,Other furniture,R,1,2,中,,Frank 1999; Heffetz 2011,同上
+CUUR0000SEHK01,大家电,Major appliances,R,0,0,中,,功能必需耐用品（冰箱/洗衣机）,功能必需品、无地位维度
+CUUR0000SEHK02,其他家电,Other appliances,R,0,1,中,复核,小家电有生活方式展示元素、弱,功能为主、弱生活方式展示
+CUUR0000SEHL01,钟表灯具装饰品,"Clocks, lamps, and decorator items",R,1,2,中,,Frank 1999（家居地位）,装饰品为家居地位展示
+CUUR0000SEHL03,餐具,Dishes and flatware,R,0,1,中,复核,餐具/银器有宴请展示元素、弱,功能为主、弱宴请展示
+CUUR0000SEHL04,非电炊具与餐具,Nonelectric cookware and tableware,R,0,0,中,,功能炊具,功能必需品
+CUUR0000SEHM01,工具五金耗材,"Tools, hardware and supplies",R,0,0,中,,功能耗材,功能中间品
+CUUR0000SEHM02,户外装备与耗材,Outdoor equipment and supplies,R,0,0,中,,户外休闲装备,私人休闲装备
+CUUR0000SETC01,轮胎,Tires,R,0,0,中,,功能中间品,车辆功能配件
+CUUR0000SETC02,汽车配件（除轮胎）,Vehicle accessories other than tires,R,0,0,中,,功能配件,车辆功能配件
