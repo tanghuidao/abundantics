@@ -1,0 +1,38 @@
+name: Probe BLS data sources (read-only)
+
+# 一次性只读探测：确认 GitHub runner 对 www.bls.gov（CE PUMD + LPC/MFP）的可达性。
+# 用途：说明书 D 腿一（ProdGrowth_k）与腿二（η_k）的数据源前置探测。
+# 不写任何数据文件、不改任何逻辑，仅 curl + 记录 HTTP 状态/内容类型/文件魔数。用完即删。
+# 背景：BLS v2 API 不覆盖生产率数据；CE PUMD 与 LPC 扁平文件都挂在 www.bls.gov
+# （而非说明书 A/B 里被 403 的 download.bls.gov）。本探测坐实 runner 是否可直连 www.bls.gov。
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Range-probe URLs (status + content-type)
+        run: |
+          echo "=== range GET (first 2KB) ==="
+          for u in \
+            "https://www.bls.gov/cex/pumd/data/comma/intrvw24.zip" \
+            "https://www.bls.gov/cex/pumd/data/csv/intrvw24.zip" \
+            "https://www.bls.gov/cex/pumd/data/sas/intrvw24.zip" \
+            "https://www.bls.gov/cex/pumd/ce-pumd-interview-diary-dictionary.xlsx" \
+            "https://www.bls.gov/productivity/tables/labor-productivity-detailed-industries.xlsx" \
+            "https://www.bls.gov/productivity/tables/labor-productivity-major-sectors.xlsx" \
+            "https://www.bls.gov/productivity/tables/total-factor-productivity-major-sectors-historical.xlsx" \
+            "https://download.bls.gov/pub/time.series/cu/cu.data.0.Current" \
+          ; do
+            res=$(curl -sS -o /tmp/probe.bin -w "%{http_code}|%{content_type}|%{size_download}" --max-time 60 -r 0-2047 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36" "$u" 2>&1)
+            echo "$res  <-  $u"
+          done
+      - name: Full-download critical files (verify real bytes, not 403 HTML)
+        run: |
+          echo "=== full download ==="
+          curl -sS -o /tmp/intrvw24.zip -w "intrvw24.zip  HTTP=%{http_code} size=%{size_download} type=%{content_type}\n" --max-time 300 -A "Mozilla/5.0" "https://www.bls.gov/cex/pumd/data/comma/intrvw24.zip"
+          echo "intrvw24.zip magic: $(head -c 2 /tmp/intrvw24.zip | xxd -p)"
+          curl -sS -o /tmp/lpc.xlsx -w "lpc.xlsx  HTTP=%{http_code} size=%{size_download} type=%{content_type}\n" --max-time 120 -A "Mozilla/5.0" "https://www.bls.gov/productivity/tables/labor-productivity-detailed-industries.xlsx"
+          echo "lpc.xlsx magic: $(head -c 2 /tmp/lpc.xlsx | xxd -p)"
