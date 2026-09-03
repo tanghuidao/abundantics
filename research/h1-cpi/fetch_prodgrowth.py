@@ -27,10 +27,12 @@ MFP major industries（N 组）series ID（已实测确认 8 个行业）：
     指数序列直接算；同比序列（LP 同比 / L001000000）先累积成指数（基年=首年 100）再算。
     窗口：IP 2006-2025；MFP 2014-2024。窗口如实记录，不强行统一。
 
-BLS v2 API 限流（官方 FAQ 实测口径，2026-09-03 纠正）：
-    注册 key：500 请求/天、50 series/次、20 年/次、速率 50 请求/10 秒。
-    HTTP 429 = 超限（速率或日配额）。本脚本通过「只试首选 sector + 单次请求 + 0.3s 间隔 + 429 退避重试」
-    把总请求量压到 ~50 次以内，远低于配额。
+BLS v2 API 限流（官方 FAQ + 实测，2026-09-03 纠正）：
+    注册 key：500 请求/天、50 series/次、速率 50 请求/10 秒。
+    ⚠️ 年限：官方表格写 20 年/次，但实测 20 年请求被静默拒绝（HTTP 200 + 空 data），
+       10 年/段才是可行上限（第3次运行靠 10 年/段成功）。故 fetch_full 按 10 年/段分段。
+    HTTP 429 = 超限（速率或日配额）。本脚本通过「只试首选 sector + 10年分段 + 0.3s 间隔 + 429 退避重试」
+    把总请求量压到 ~170 次以内，远低于 500/天。
 
 运行环境：GitHub Actions runner（api.bls.gov 仅 runner 可达，本地沙盒 403）。
 """
@@ -45,8 +47,9 @@ import requests
 API_URL = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 API_KEY = os.environ.get("BLS_API_KEY", "")
 
-START_YEAR = 2006          # IP 窗口起点（2006-2025 = 20 个完整年度，正好 20 年/次上限）
+START_YEAR = 2006          # IP 窗口起点（2006-2025 = 20 个完整年度）
 END_YEAR = 2025            # 末年（2026 年数据尚未发布完整年度）
+MAX_YEARS = 10             # BLS 单次请求实际上限 10 年（第3次成功靠 10 年/段；20 年请求被静默拒）
 
 # 速率控制：BLS 上限 50 请求/10 秒（≈5 请求/秒），取 0.3s 间隔（≈3.3 请求/秒）留余量
 REQUEST_INTERVAL = 0.3
@@ -116,6 +119,10 @@ def post_series(series_id, start_year, end_year):
             resp.raise_for_status()
             _request_count += 1
             body = resp.json()
+            status = body.get("status", "")
+            if status != "REQUEST_SUCCEEDED":
+                msg = body.get("message", "")
+                print(f"    [warn] {series_id} BLS status={status} message={msg}", flush=True)
             results = body.get("Results") or {}
             for series in (results.get("series") or []):
                 if series.get("seriesID") == series_id:
@@ -198,8 +205,15 @@ def annualized_growth(index_series):
 
 
 def fetch_full(series_id):
-    """单次请求拉全 START_YEAR-END_YEAR（20 年 = 20 年/次上限，无需分段）。"""
-    return post_series(series_id, START_YEAR, END_YEAR)
+    """分 10 年/段拉全 START_YEAR-END_YEAR，返回原始 data 列表。
+    BLS 单次请求实际上限 10 年（非官方表格写的 20 年），20 年请求会被静默拒绝。"""
+    all_data = []
+    s = START_YEAR
+    while s <= END_YEAR:
+        e = min(s + MAX_YEARS - 1, END_YEAR)
+        all_data.extend(post_series(series_id, s, e))
+        s = e + 1
+    return all_data
 
 
 # ---------------------------------------------------------------------------
