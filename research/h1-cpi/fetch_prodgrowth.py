@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-说明书 D 腿一：ProdGrowth_k —— 近20年劳动生产率年化增长率（混合口径版）
-====================================================================
+说明书 D 腿一：ProdGrowth_k —— 近20年劳动生产率年化增长率（混合口径版 v2）
+========================================================================
 
 口径（用户 2026-09-03 拍板「混合口径」）：
     R 组（可自动化/制造业+信息业）→ BLS Industry Productivity（IP，详细行业，`IPU` 系列）
@@ -9,10 +9,11 @@
     原因：IP survey 对服务业（教育61/金融52/专业54/其他81/房地产53/运输48/娱乐71）无详细行业
           series，N 组在 IP 口径下 22 品类全缺失；MFP 主要行业覆盖上述全部服务业。
 
-IP survey（R 组）series ID（已实测）：
+IP survey（R 组）series ID（第3次运行已实测确认命中）：
     IPU + [sector 1位] + N + [NAICS 6位，左对齐右补下划线] + [measure 9位]
     例：IPUEN315___L000000000 = 制造业 NAICS 315 服装制造劳动生产率指数
     measure L000000000 = 劳动生产率指数（2017=100）；L001000000 = 逐年百分比变化（需累积）。
+    sector 确定映射：31-33→E（制造业）、51→J（信息业）。只试首选 sector，绝不遍历 A-Z。
 
 MFP major industries（N 组）series ID（已实测确认 8 个行业）：
     MPU + [sector 4位] + [measure 2位] + [duration 1位]
@@ -26,27 +27,36 @@ MFP major industries（N 组）series ID（已实测确认 8 个行业）：
     指数序列直接算；同比序列（LP 同比 / L001000000）先累积成指数（基年=首年 100）再算。
     窗口：IP 2006-2025；MFP 2014-2024。窗口如实记录，不强行统一。
 
+BLS v2 API 限流（官方 FAQ 实测口径，2026-09-03 纠正）：
+    注册 key：500 请求/天、50 series/次、20 年/次、速率 50 请求/10 秒。
+    HTTP 429 = 超限（速率或日配额）。本脚本通过「只试首选 sector + 单次请求 + 0.3s 间隔 + 429 退避重试」
+    把总请求量压到 ~50 次以内，远低于配额。
+
 运行环境：GitHub Actions runner（api.bls.gov 仅 runner 可达，本地沙盒 403）。
-    免费 key 限制 500 请求/天、50 series/次、10 年/次。
-    本脚本逐个 series POST（避免批量含无效 series 导致整批 REQUEST_FAILED）。
 """
 
 import csv
 import os
 import sys
+import time
 
 import requests
 
 API_URL = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 API_KEY = os.environ.get("BLS_API_KEY", "")
 
-START_YEAR = 2006          # IP 窗口起点（2006-2025 = 20 个完整年度）
+START_YEAR = 2006          # IP 窗口起点（2006-2025 = 20 个完整年度，正好 20 年/次上限）
 END_YEAR = 2025            # 末年（2026 年数据尚未发布完整年度）
-MAX_YEARS = 10             # BLS 单次请求最多 10 年
+
+# 速率控制：BLS 上限 50 请求/10 秒（≈5 请求/秒），取 0.3s 间隔（≈3.3 请求/秒）留余量
+REQUEST_INTERVAL = 0.3
+# 429 退避重试：遇 429 最多重试 3 次，间隔递增（10s / 30s / 60s）
+MAX_RETRIES = 3
+RETRY_BACKOFF = [10, 30, 60]
 
 # ---- R 组：IP survey（详细行业） ----
 
-# NAICS 前2位 -> sector 字母（已实测确认）
+# NAICS 前2位 -> sector 字母（已实测确认）。只试首选 sector，不遍历。
 IP_SECTOR_MAP = {
     "31": "E", "32": "E", "33": "E",  # 制造业
     "51": "J",                          # 信息业
@@ -56,7 +66,6 @@ IP_SECTOR_MAP = {
     "21": "Z",                          # 矿业
     "62": "R",                          # 医疗保健
 }
-IP_ALL_SECTORS = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 # measure 优先级：指数优先，百分比变化兜底
 IP_MEASURES = ["L000000000", "L001000000"]
 
@@ -79,33 +88,53 @@ MFP_MEASURES = [("06", "2", "LP指数"), ("06", "3", "LP同比")]
 CROSSWALK = "research/h1-cpi/naics_crosswalk.csv"
 OUTPUT = "research/h1-cpi/prodgrowth.csv"
 
-
-def read_crosswalk():
-    """读 naics_crosswalk.csv，返回行列表。"""
-    with open(CROSSWALK, encoding="utf-8-sig") as f:
-        rows = list(csv.DictReader(f))
-    return rows
+_request_count = 0
 
 
 def post_series(series_id, start_year, end_year):
     """单个 series POST，返回 data 列表（可能为空 = 无观测/系列不存在）。
-    健壮处理 BLS 的各种返回结构（REQUEST_FAILED / Results=null / data=[]）。"""
+    含 0.3s 速率间隔 + 429 退避重试。健壮处理各种返回结构。"""
+    global _request_count
     payload = {
         "seriesid": [series_id],
         "startyear": str(start_year),
         "endyear": str(end_year),
         "registrationkey": API_KEY,
     }
-    try:
-        resp = requests.post(API_URL, json=payload, timeout=180)
-        resp.raise_for_status()
-        body = resp.json()
-        results = body.get("Results") or {}
-        for series in (results.get("series") or []):
-            if series.get("seriesID") == series_id:
-                return series.get("data") or []
-    except Exception as e:
-        print(f"    [warn] {series_id} POST 失败: {e}", flush=True)
+    for attempt in range(1 + MAX_RETRIES):
+        try:
+            resp = requests.post(API_URL, json=payload, timeout=180)
+            if resp.status_code == 429:
+                # 限流：退避重试
+                if attempt < MAX_RETRIES:
+                    wait = RETRY_BACKOFF[min(attempt, len(RETRY_BACKOFF) - 1)]
+                    print(f"    [429] {series_id} 限流，{wait}s 后重试({attempt+1}/{MAX_RETRIES})", flush=True)
+                    time.sleep(wait)
+                    continue
+                print(f"    [warn] {series_id} 持续 429，放弃", flush=True)
+                return []
+            resp.raise_for_status()
+            _request_count += 1
+            body = resp.json()
+            results = body.get("Results") or {}
+            for series in (results.get("series") or []):
+                if series.get("seriesID") == series_id:
+                    return series.get("data") or []
+            return []
+        except requests.exceptions.HTTPError as e:
+            if resp.status_code == 429:
+                if attempt < MAX_RETRIES:
+                    wait = RETRY_BACKOFF[min(attempt, len(RETRY_BACKOFF) - 1)]
+                    print(f"    [429] {series_id} 限流，{wait}s 后重试({attempt+1}/{MAX_RETRIES})", flush=True)
+                    time.sleep(wait)
+                    continue
+            print(f"    [warn] {series_id} POST 失败: {e}", flush=True)
+            return []
+        except Exception as e:
+            print(f"    [warn] {series_id} POST 失败: {e}", flush=True)
+            return []
+        finally:
+            time.sleep(REQUEST_INTERVAL)
     return []
 
 
@@ -127,8 +156,7 @@ def annual_observations(data):
 
 
 def accumulate_pct_to_index(obs):
-    """把逐年百分比变化序列 [(year, pct_change), ...] 累积成指数（基年=首年 100）。
-    用于 IP 的 L001000000 和 MFP 的 LP 同比（06+3）。"""
+    """把逐年百分比变化序列 [(year, pct_change), ...] 累积成指数（基年=首年 100）。"""
     if not obs:
         return []
     idx = []
@@ -152,8 +180,7 @@ def to_index_series(obs, is_percent_change):
 
 
 def annualized_growth(index_series):
-    """从指数序列算年化增长率 g = (I_end/I_start)^(1/(Y_end-Y_start)) - 1。
-    返回 dict 或 None（观测不足两年）。"""
+    """从指数序列算年化增长率 g = (I_end/I_start)^(1/(Y_end-Y_start)) - 1。"""
     if len(index_series) < 2:
         return None
     y0, v0 = index_series[0]
@@ -171,18 +198,12 @@ def annualized_growth(index_series):
 
 
 def fetch_full(series_id):
-    """分 10 年/段拉全 START_YEAR-END_YEAR，返回原始 data 列表。"""
-    all_data = []
-    s = START_YEAR
-    while s <= END_YEAR:
-        e = min(s + MAX_YEARS - 1, END_YEAR)
-        all_data.extend(post_series(series_id, s, e))
-        s = e + 1
-    return all_data
+    """单次请求拉全 START_YEAR-END_YEAR（20 年 = 20 年/次上限，无需分段）。"""
+    return post_series(series_id, START_YEAR, END_YEAR)
 
 
 # ---------------------------------------------------------------------------
-# R 组：IP survey 探测
+# R 组：IP survey 探测（只试首选 sector）
 # ---------------------------------------------------------------------------
 
 def build_ip_series_id(naics, sector, measure="L000000000"):
@@ -191,29 +212,23 @@ def build_ip_series_id(naics, sector, measure="L000000000"):
 
 
 def probe_ip(naics):
-    """探测 IP survey 的正确 sector+measure，返回 (series_id, 指数序列, 口径标签) 或 None。
-    顺序：首选 sector 优先；每个 sector 先试指数 measure，再试百分比 measure。"""
-    has_primary = naics[:2] in IP_SECTOR_MAP
-    sectors = []
-    if has_primary:
-        sectors.append(IP_SECTOR_MAP[naics[:2]])
-    for s in IP_ALL_SECTORS:
-        if s not in sectors:
-            sectors.append(s)
+    """探测 IP survey 首选 sector 的 series，返回 (series_id, 指数序列, 口径标签) 或 None。
+    只试 IP_SECTOR_MAP 确定的首选 sector，先指数 measure 后百分比 measure。
+    首选 sector 无该 NAICS 时直接判缺失（IP 对细分制造业/服务业的覆盖本就有限）。"""
+    sector = IP_SECTOR_MAP.get(naics[:2])
+    if not sector:
+        return None, None, None
 
-    measures = IP_MEASURES if has_primary else ["L000000000"]
-
-    for s in sectors:
-        for measure in measures:
-            sid = build_ip_series_id(naics, s, measure)
-            data = fetch_full(sid)
-            if not data:
-                continue
-            obs = annual_observations(data)
-            idx = to_index_series(obs, is_percent_change=(measure == "L001000000"))
-            if idx and len(idx) >= 2:
-                label = "IP(详细行业·LP指数)" if measure == "L000000000" else "IP(详细行业·LP同比→累积)"
-                return sid, idx, label
+    for measure in IP_MEASURES:
+        sid = build_ip_series_id(naics, sector, measure)
+        data = fetch_full(sid)
+        if not data:
+            continue
+        obs = annual_observations(data)
+        idx = to_index_series(obs, is_percent_change=(measure == "L001000000"))
+        if idx and len(idx) >= 2:
+            label = "IP(详细行业·LP指数)" if measure == "L000000000" else "IP(详细行业·LP同比→累积)"
+            return sid, idx, label
     return None, None, None
 
 
@@ -239,6 +254,13 @@ def probe_mfp(naics):
             label = "MFP(主要行业·LP指数)" if duration == "2" else "MFP(主要行业·LP同比→累积)"
             return sid, idx, label
     return None, None, None
+
+
+def read_crosswalk():
+    """读 naics_crosswalk.csv，返回行列表。"""
+    with open(CROSSWALK, encoding="utf-8-sig") as f:
+        rows = list(csv.DictReader(f))
+    return rows
 
 
 def main():
@@ -271,7 +293,7 @@ def main():
                 print(f"  缺失(N/MFP) {code:>6}", flush=True)
 
     n_hit = len(found)
-    print(f"[腿一] 探测完成：命中 {n_hit} 个，无数据 {len(missing)} 个", flush=True)
+    print(f"[腿一] 探测完成：命中 {n_hit} 个，无数据 {len(missing)} 个，总请求 {_request_count} 次", flush=True)
 
     # ---- 写 prodgrowth.csv ----
     fieldnames = [
