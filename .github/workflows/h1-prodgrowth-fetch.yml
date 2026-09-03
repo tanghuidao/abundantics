@@ -26,10 +26,9 @@ jobs:
         run: pip install requests
 
       - name: Fetch industry productivity and compute annualized growth
-        working-directory: research/h1-cpi
         env:
           BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
-        run: python fetch_prodgrowth.py
+        run: python research/h1-cpi/fetch_prodgrowth.py
 
       - name: Commit and push prodgrowth.csv
         run: |
