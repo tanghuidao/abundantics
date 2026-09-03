@@ -1,0 +1,40 @@
+name: h1-prodgrowth-fetch
+
+# 说明书 D 腿一：ProdGrowth_k —— 近20年劳动生产率年化增长率
+# 数据源：BLS v2 API，IP survey（Industry Productivity），measure L000000000（output per hour 指数）。
+# 属于 abundantics（丰裕学）仓库 H1 研究，与 token-parity（TEPI）无关。
+# 产出 research/h1-cpi/prodgrowth.csv（65 品类 -> 近20年劳动生产率年化增长率）。
+# 手动触发（一次性构建自变量，非每日更新）。
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prodgrowth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch industry productivity and compute annualized growth
+        working-directory: research/h1-cpi
+        env:
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
+        run: python fetch_prodgrowth.py
+
+      - name: Commit and push prodgrowth.csv
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add research/h1-cpi/prodgrowth.csv
+          git commit -m "chore(data): h1 prodgrowth 劳动生产率年化增长率 (BLS IP)" || echo "no changes to commit"
+          git push

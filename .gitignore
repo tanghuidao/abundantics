@@ -30,3 +30,6 @@ __pycache__/
 _tmp_tepi_full.txt
 TEPI_交接提示词_新窗口.md
 TEPI_交接提示词_新窗口_纯文本版.txt
+
+# CE PUMD 原始数据（NBER 下载的 .sav，体积大，不进 git）
+research/h1-cpi/ce_pumd_raw/
