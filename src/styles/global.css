@@ -64,6 +64,146 @@
   padding: 0.5em 0;
 }
 
+/* ============ Research article — academic prose style ============ */
+.research-article {
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+.research-article p {
+  margin: 0.9em 0;
+  text-align: justify;
+}
+
+/* --- Section headings: distinct family from body, bold, ruled --- */
+.research-article h2,
+.research-article h3 {
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+  color: #1a1a18;
+}
+.research-article h2 {
+  font-size: 1.3em;
+  margin: 2.2em 0 0.8em;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid #e5e1d8;
+}
+.research-article h3 {
+  font-size: 1.1em;
+  margin: 1.6em 0 0.55em;
+}
+.art-zh .research-article h2,
+.art-zh .research-article h3 {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+.art-en .research-article h2,
+.art-en .research-article h3 {
+  font-family: 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+}
+
+/* --- Tables: booktabs style, centered --- */
+.research-article table {
+  margin: 1.8em auto;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+.research-article thead th {
+  border-top: 2px solid #1a1a18;
+  border-bottom: 1px solid #1a1a18;
+  font-weight: 700;
+  padding: 0.55em 1.2em;
+  text-align: left;
+  white-space: nowrap;
+  background: none;
+}
+.research-article tbody td {
+  padding: 0.5em 1.2em;
+  vertical-align: middle;
+  text-align: left;
+}
+.research-article tbody tr:last-child td {
+  border-bottom: 2px solid #1a1a18;
+}
+.research-article tbody tr {
+  transition: background-color 0.15s ease;
+}
+.research-article tbody tr:hover {
+  background: rgba(229, 225, 216, 0.3);
+}
+.research-article td:first-child,
+.research-article th:first-child {
+  white-space: nowrap;
+}
+
+/* --- Formula / code blocks: light panel, centered, never dark --- */
+.research-article pre {
+  background: #f4f1e9 !important;
+  border: 1px solid #e5e1d8;
+  border-radius: 6px;
+  padding: 1em 1.5em;
+  margin: 1.5em auto;
+  font-size: 0.88em;
+  line-height: 1.7;
+  text-align: center;
+  overflow-x: auto;
+}
+.research-article pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+  color: #1a1a18;
+}
+.research-article code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.88em;
+  background: rgba(229, 225, 216, 0.5);
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  color: #1a1a18;
+}
+
+/* --- Blockquote (e.g. translation note) --- */
+.research-article blockquote {
+  margin: 1.4em 0;
+  padding: 0.15em 1.2em;
+  border-left: 3px solid #c8402a;
+  color: #6b6862;
+  font-size: 0.95em;
+}
+.research-article blockquote p {
+  margin: 0.45em 0;
+}
+
+/* --- Rules & lists --- */
+.research-article hr {
+  border: none;
+  border-top: 1px solid #e5e1d8;
+  margin: 2.4em 0;
+}
+.research-article ul {
+  list-style: disc;
+  padding-left: 1.6em;
+  margin: 1em 0;
+}
+.research-article ol {
+  list-style: decimal;
+  padding-left: 1.6em;
+  margin: 1em 0;
+}
+.research-article li {
+  margin: 0.35em 0;
+}
+
+/* --- Math --- */
+.research-article .katex-display {
+  margin: 1.7em 0;
+}
+.research-article .katex {
+  font-size: 1.05em;
+}
+
 /* Scrollbar for dark theme */
 .term-scroll::-webkit-scrollbar {
   width: 6px;
