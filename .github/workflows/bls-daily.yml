@@ -5,7 +5,9 @@ name: Update BLS CPI data (fetch & push only)
 #
 # BLS CPI 数据月度发布、且历史会 revision，因此每日全量重拉窗口（1998 至今）：
 # - 及时捕捉每月中旬发布的新月度数据；
-# - 数据量小（12 序列 × ~340 月），每日 1 次 API 请求，远低于免费 key 500 次/天上限。
+# - 序列数 = 已核实全集（status==已核实，截至 2026-09-08 共 182 序列），
+#   窗口 1998-至今 ~28 年；按 20 年 × 50 series 双维度切片，每日约 8 次 BLS API 请求
+#   （≪ 免费 key 500 次/天上限）。
 # 数据落地 public/api/bls/（与 public/api/parity/ 对称，前端可直接 fetch）。
 
 on:

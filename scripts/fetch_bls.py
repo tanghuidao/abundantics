@@ -2,15 +2,19 @@
 """
 fetch_bls.py
 
-拉取世纪图表（H1）的 12 个 BLS CPI-U（未季调）序列月度数据，
+拉取全部已核实的 BLS CPI-U（未季调）序列月度数据
+（status==已核实，与 research/h1-cpi/ 假说验证保持单一信息源），
 写入 public/api/bls/series.json（主数据，前端渲染用）与 series_long.csv（长表，分析用）。
 
 设计约定：
-- 序列清单从 category_mapping.csv 读取（单一信息源，不在此硬编码第二份清单）。
-- 数据窗口 1998 至今（世纪图表窗口；12 序列起始年份均早于 1998，见核验说明）。
+- 序列清单从 research/h1-cpi/category_mapping.csv 读取（单一信息源 = h1_cpi 权威版，
+  不在此硬编码第二份清单）。当前为全量读取（含 status==降级 的 1 行大学教科书），
+  使 public/api/bls/ 与丰裕学权威版严格一致；如需排除降级行对齐 h1_cpi_archive.py
+  第 71 行的「已核实」过滤，请在 load_mapping() 里加 status 筛选。
+- 数据窗口 1998 至今（与 h1_cpi 验证窗口一致；详见 research/h1-cpi/ 核验说明）。
 - BLS_API_KEY 从环境变量读取（GitHub Actions Secret）。
-- BLS 免费 key 单次请求有 20 年跨度限制，故按 ≤20 年分块拉取后合并（否则只返回
-  startyear 起的 20 年，最新年份会被截断）。
+- BLS 免费 key 单次请求有 20 年跨度 + 50 序列两个硬限制，故按 (年份, 序列)
+  两维度分块拉取后合并（任一限制单独违反即触发 "REQUEST_NOT_PROCESSED"）。
 - 原子写入：全部序列都拿到才写文件；任何序列缺失/请求失败则报错退出（非零），
   保留已有数据不动，让 workflow 变红（主数据不做静默降级）。
 - BLS CPI 月度发布 + 历史会 revision，故每日全量重拉（数据量小，自愈安全）。
@@ -28,11 +32,14 @@ from datetime import datetime
 import requests
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAPPING_CSV = os.path.join(ROOT, "category_mapping.csv")
+# 单一信息源：与 research/h1-cpi/ 假说验证共用同一份权威 category_mapping.csv。
+# 路径变更历史：v1.0（2026-09-02）位于仓库根 → cb362df 迁入 research/h1-cpi/ → 2026-09-08 跟进改路径。
+MAPPING_CSV = os.path.join(ROOT, "research", "h1-cpi", "category_mapping.csv")
 OUTPUT_DIR = os.path.join(ROOT, "public", "api", "bls")
 BLS_API = "https://api.bls.gov/publicAPI/v2/timeseries/data/"
 START_YEAR = 1998
-CHUNK_YEARS = 20  # BLS 免费 key 单次请求最大跨度
+CHUNK_YEARS = 20  # BLS 免费 key 单次请求最大跨度（年份维度）
+BLS_BATCH = 50    # BLS v2 单请求序列数上限（序列维度，与 h1_cpi_archive.py 一致）
 
 
 def load_mapping():
@@ -73,18 +80,30 @@ def fetch_chunk(series_ids, key, start_year, end_year):
 
 
 def fetch_all(series_ids, key, start_year, end_year):
-    """分块拉取并合并，返回 {series_id: {date_key: data_point}}。"""
+    """分块拉取并合并，返回 {series_id: {date_key: data_point}}。
+
+    按两个维度切片：
+    - 年份：CHUNK_YEARS（20 年，BLS 免费 key 单请求年份跨度上限）
+    - 序列：BLS_BATCH（50 个，BLS v2 单请求序列数上限）
+    """
     merged = {sid: {} for sid in series_ids}
     cur = start_year
     while cur <= end_year:
         chunk_end = min(cur + CHUNK_YEARS - 1, end_year)
-        print(f"[fetch_bls] fetching {cur}-{chunk_end}...", file=sys.stderr)
-        for r in fetch_chunk(series_ids, key, cur, chunk_end):
-            sid = r["seriesID"]
-            if sid not in merged:
-                continue
-            for d in r.get("data", []):
-                merged[sid][f"{d.get('year')}-{d.get('period')}"] = d
+        n_batches = (len(series_ids) - 1) // BLS_BATCH + 1
+        for i in range(0, len(series_ids), BLS_BATCH):
+            batch = series_ids[i:i + BLS_BATCH]
+            print(
+                f"[fetch_bls] fetching {cur}-{chunk_end} "
+                f"batch {i // BLS_BATCH + 1}/{n_batches} ({len(batch)} series)...",
+                file=sys.stderr,
+            )
+            for r in fetch_chunk(batch, key, cur, chunk_end):
+                sid = r["seriesID"]
+                if sid not in merged:
+                    continue
+                for d in r.get("data", []):
+                    merged[sid][f"{d.get('year')}-{d.get('period')}"] = d
         cur = chunk_end + 1
     return merged
 
