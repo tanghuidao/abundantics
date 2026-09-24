@@ -101,26 +101,31 @@
   font-family: 'Noto Serif SC', Georgia, 'Times New Roman', serif;
 }
 
-/* --- Tables: booktabs style, centered --- */
+/* --- Tables: booktabs style, columns sized by content, full text width --- */
 .research-article table {
+  width: 100%;
   margin: 1.8em auto;
   border-collapse: collapse;
-  font-size: 0.92em;
+  table-layout: auto;
+  font-size: 0.82em;
   line-height: 1.55;
 }
 .research-article thead th {
   border-top: 2px solid #1a1a18;
   border-bottom: 1px solid #1a1a18;
   font-weight: 700;
-  padding: 0.55em 1.2em;
+  padding: 0.5em 0.8em;
   text-align: left;
-  white-space: nowrap;
+  vertical-align: bottom;
+  white-space: normal;
   background: none;
 }
 .research-article tbody td {
-  padding: 0.5em 1.2em;
-  vertical-align: middle;
+  padding: 0.45em 0.8em;
+  vertical-align: top;
   text-align: left;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 .research-article tbody tr:last-child td {
   border-bottom: 2px solid #1a1a18;
@@ -131,6 +136,7 @@
 .research-article tbody tr:hover {
   background: rgba(229, 225, 216, 0.3);
 }
+/* 首列为标签列：保持单行，避免被内容密集的列挤成碎行 */
 .research-article td:first-child,
 .research-article th:first-child {
   white-space: nowrap;
@@ -174,6 +180,16 @@
 }
 .research-article blockquote p {
   margin: 0.45em 0;
+}
+
+/* --- Reference list: one size down, tight leading (section is always last) --- */
+.research-article h2[id="参考文献"] ~ p,
+.research-article h2[id="References"] ~ p,
+.research-article h2[id="references"] ~ p {
+  margin: 0.45em 0;
+  font-size: 0.88em;
+  line-height: 1.7;
+  text-align: left;
 }
 
 /* --- Rules & lists --- */
