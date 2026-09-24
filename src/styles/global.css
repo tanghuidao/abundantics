@@ -136,10 +136,21 @@
 .research-article tbody tr:hover {
   background: rgba(229, 225, 216, 0.3);
 }
-/* 首列为标签列：保持单行，避免被内容密集的列挤成碎行 */
+/* 首列为标签列：允许折行。若用 nowrap，长中文标签会独占宽度（最长标签决定首列宽），
+   把内容密集的末尾列挤到每行只剩两三个字 */
 .research-article td:first-child,
 .research-article th:first-child {
-  white-space: nowrap;
+  white-space: normal;
+}
+/* 四列表格（主张—证据—性质一类）：首列收窄让位，末列留足可读宽度。
+   仅匹配「存在第 4 列的表格」，不影响 3 列 / 2 列表格 */
+.research-article table:has(thead th:nth-child(4):last-child) th:first-child,
+.research-article table:has(thead th:nth-child(4):last-child) td:first-child {
+  width: 19%;
+}
+.research-article table:has(thead th:nth-child(4):last-child) th:last-child,
+.research-article table:has(thead th:nth-child(4):last-child) td:last-child {
+  width: 24%;
 }
 
 /* --- Formula / code blocks: light panel, centered, never dark --- */
