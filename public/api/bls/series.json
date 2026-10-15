@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-14T05:15:37Z",
+  "generated_at": "2026-10-15T05:02:42Z",
   "source": "U.S. Bureau of Labor Statistics, CPI-U (not seasonally adjusted)",
   "startyear": 1998,
   "series": [
@@ -2405,6 +2405,13 @@
           "value": 459.659,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 462.98,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -4825,6 +4832,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 1003.724,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -7243,6 +7257,13 @@
           "value": 653.623,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 655.37,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -9663,6 +9684,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 407.335,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -12081,6 +12109,13 @@
           "value": 443.579,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 445.31,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -14501,6 +14536,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 347.662,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -16919,6 +16961,13 @@
           "value": 47.61,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 47.602,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -19339,6 +19388,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 28.234,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -21757,6 +21813,13 @@
           "value": 28.729,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 30.084,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -24177,6 +24240,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 95.693,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -26596,6 +26666,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 336.94,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -28965,6 +29042,13 @@
           "value": 770.986,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 772.195,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -31385,6 +31469,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 361.392,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -33803,6 +33894,13 @@
           "value": 593.003,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 593.651,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -36223,6 +36321,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 145.854,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -38641,6 +38746,13 @@
           "value": 136.752,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 140.043,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -41061,6 +41173,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 295.862,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -43479,6 +43598,13 @@
           "value": 150.304,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 150.903,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -45899,6 +46025,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 610.165,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -48317,6 +48450,13 @@
           "value": 329.351,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 341.573,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -50737,6 +50877,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 334.742,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -53155,6 +53302,13 @@
           "value": 289.136,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 291.651,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -55575,6 +55729,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 287.899,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -57993,6 +58154,13 @@
           "value": 292.722,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 293.952,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -60413,6 +60581,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 339.287,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -62831,6 +63006,13 @@
           "value": 301.226,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 303.386,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -65251,6 +65433,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 324.55,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -67669,6 +67858,13 @@
           "value": 338.938,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 340.073,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -70089,6 +70285,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 131.675,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -72507,6 +72710,13 @@
           "value": 133.087,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 136.987,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -74927,6 +75137,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 115.702,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -77345,6 +77562,13 @@
           "value": 235.375,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 237.848,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -79765,6 +79989,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 395.263,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -82183,6 +82414,13 @@
           "value": 187.331,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 190.303,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -84603,6 +84841,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 186.433,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -87021,6 +87266,13 @@
           "value": 168.589,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 169.319,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -89441,6 +89693,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 167.799,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -91859,6 +92118,13 @@
           "value": 124.154,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 124.34,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -94279,6 +94545,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 326.054,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -96698,6 +96971,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 73.634,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -98116,6 +98396,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 51.226,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -99533,6 +99820,13 @@
           "value": 128.58,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 129.052,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -101953,6 +102247,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 350.905,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -104372,6 +104673,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 304.692,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -105790,6 +106098,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 151.286,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -107207,6 +107522,13 @@
           "value": 171.232,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 171.839,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -109627,6 +109949,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 432.092,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -112045,6 +112374,13 @@
           "value": 353.268,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 354.21,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -114465,6 +114801,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 156.418,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -115882,6 +116225,13 @@
           "value": 108.685,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 108.736,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -118302,6 +118652,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 402.832,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -120720,6 +121077,13 @@
           "value": 297.579,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 301.796,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -123140,6 +123504,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 330.625,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -125558,6 +125929,13 @@
           "value": 253.398,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 260.51,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -127978,6 +128356,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 257.922,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -130396,6 +130781,13 @@
           "value": 326.605,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 336.943,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -132816,6 +133208,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 332.069,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -134234,6 +134633,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 87.724,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -135651,6 +136057,13 @@
           "value": 159.26,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 159.462,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -138071,6 +138484,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 434.668,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -140489,6 +140909,13 @@
           "value": 283.954,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 284.899,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -142909,6 +143336,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 451.293,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -145327,6 +145761,13 @@
           "value": 440.982,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 442.25,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -147747,6 +148188,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 459.562,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -150165,6 +150613,13 @@
           "value": 447.267,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 448.539,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -152585,6 +153040,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 417.722,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -155003,6 +155465,13 @@
           "value": 446.989,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 448.545,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -157423,6 +157892,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 294.261,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -158840,6 +159316,13 @@
           "value": 132.313,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 132.343,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -161260,6 +161743,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 154.506,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -163678,6 +164168,13 @@
           "value": 121.64,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 125.13,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -166098,6 +166595,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 236.951,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -167515,6 +168019,13 @@
           "value": 34.46,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 34.674,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -169935,6 +170446,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 112.108,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -172354,6 +172872,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 124.168,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -173772,6 +174297,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 33.486,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -175189,6 +175721,13 @@
           "value": 163.701,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 163.202,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -177609,6 +178148,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 235.799,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -180027,6 +180573,13 @@
           "value": 128.897,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 129.449,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -182447,6 +183000,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 87.003,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -184865,6 +185425,13 @@
           "value": 34.066,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 35.413,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -187285,6 +187852,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 212.15,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -189703,6 +190277,13 @@
           "value": 307.785,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 314.589,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -192123,6 +192704,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 299.568,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -194541,6 +195129,13 @@
           "value": 69.208,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 69.03,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -196961,6 +197556,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 321.758,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -199379,6 +199981,13 @@
           "value": 301.724,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 301.738,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -201799,6 +202408,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 297.942,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -204217,6 +204833,13 @@
           "value": 135.873,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 138.202,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -206637,6 +207260,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 129.74,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -209055,6 +209685,13 @@
           "value": 114.186,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 116.447,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -211475,6 +212112,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 113.463,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -213893,6 +214537,13 @@
           "value": 160.331,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 161.769,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -216313,6 +216964,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 167.708,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -218731,6 +219389,13 @@
           "value": 139.65,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 142.099,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -221151,6 +221816,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 178.077,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -223569,6 +224241,13 @@
           "value": 230.226,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 239.04,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -225989,6 +226668,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 938.353,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -228407,6 +229093,13 @@
           "value": 284.648,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 284.889,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -230827,6 +231520,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 99.946,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -233245,6 +233945,13 @@
           "value": 397.868,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 398.783,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -235665,6 +236372,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 185.629,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -238083,6 +238797,13 @@
           "value": 374.865,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 376.541,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -240503,6 +241224,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 614.498,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -242921,6 +243649,13 @@
           "value": 88.47,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 89.359,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -245341,6 +246076,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 450.402,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -247759,6 +248501,13 @@
           "value": 196.067,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 195.407,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -250179,6 +250928,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 445.381,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -252597,6 +253353,13 @@
           "value": 174.806,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 175.093,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -255017,6 +255780,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 335.364,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -257435,6 +258205,13 @@
           "value": 61.748,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 60.625,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -259855,6 +260632,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 131.707,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -262273,6 +263057,13 @@
           "value": 85.543,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 85.122,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -264693,6 +265484,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 56.284,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -267112,6 +267910,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 117.025,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -269530,6 +270335,13 @@
           "value": 243.521,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 243.245,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -274096,6 +274908,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 457.48,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -276515,6 +277334,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 110.72,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -278269,6 +279095,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 136.151,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -279687,6 +280520,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 131.324,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -281104,6 +281944,13 @@
           "value": 110.294,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 110.727,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -283524,6 +284371,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 613.182,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -285942,6 +286796,13 @@
           "value": 109.716,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 115.644,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -288362,6 +289223,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 83.757,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -290780,6 +291648,13 @@
           "value": 27.381,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 27.758,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -293200,6 +294075,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 95.747,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -295618,6 +296500,13 @@
           "value": 245.522,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 244.872,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -298038,6 +298927,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 379.872,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -300456,6 +301352,13 @@
           "value": 180.417,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 182.053,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -302876,6 +303779,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 86.379,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -305295,6 +306205,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 72.903,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -307685,6 +308602,13 @@
           "value": 134.623,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 133.708,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -310105,6 +311029,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 103.377,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -312523,6 +313454,13 @@
           "value": 130.755,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 132.068,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -314943,6 +315881,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 167.926,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -317362,6 +318307,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 498.583,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -319766,6 +320718,13 @@
           "value": 422.123,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 425.309,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -322186,6 +323145,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 267.183,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -324604,6 +325570,13 @@
           "value": 98.52,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 99.067,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -327024,6 +327997,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 126.325,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -329442,6 +330422,13 @@
           "value": 362.487,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 386.707,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -331862,6 +332849,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 189.584,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -334281,6 +335275,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 468.491,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -336692,6 +337693,13 @@
           "value": 848.231,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 846.102,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -339112,6 +340120,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 218.111,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -341530,6 +342545,13 @@
           "value": 309.736,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 315.948,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -343950,6 +344972,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 151.083,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -346369,6 +347398,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 378.477,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -348787,6 +349823,13 @@
           "value": 228.729,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 229.752,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -353374,6 +354417,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 418.227,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -355792,6 +356842,13 @@
           "value": 254.638,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 255.882,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -358212,6 +359269,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 313.286,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -360631,6 +361695,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 469.761,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -362965,6 +364036,13 @@
           "value": 452.937,
           "period": "M07",
           "periodName": "July",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 461.988,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -365385,6 +366463,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 398.008,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -367803,6 +368888,13 @@
           "value": 314.151,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 316.108,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -370223,6 +371315,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 99.397,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -372641,6 +373740,13 @@
           "value": 194.315,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 194.743,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -375061,6 +376167,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 88.047,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -377479,6 +378592,13 @@
           "value": 140.267,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 141.458,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -379899,6 +381019,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 110.814,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -382317,6 +383444,13 @@
           "value": 110.963,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 111.562,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -384737,6 +385871,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 79.467,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -387155,6 +388296,13 @@
           "value": 117.226,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 117.375,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -389575,6 +390723,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 131.098,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -391993,6 +393148,13 @@
           "value": 87.777,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 86.491,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -394413,6 +395575,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 39.766,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -396831,6 +398000,13 @@
           "value": 142.209,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 139.145,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -399251,6 +400427,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 110.149,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -401669,6 +402852,13 @@
           "value": 74.172,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 74.205,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -404089,6 +405279,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 87.762,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -406507,6 +407704,13 @@
           "value": 76.432,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 75.918,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -408927,6 +410131,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 40.257,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -411345,6 +412556,13 @@
           "value": 46.963,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 47.384,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -413765,6 +414983,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 85.97,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -416183,6 +417408,13 @@
           "value": 130.385,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 130.734,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -418603,6 +419835,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 110.761,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -421021,6 +422260,13 @@
           "value": 159.302,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 159.985,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
@@ -423441,6 +424687,13 @@
           "period": "M08",
           "periodName": "August",
           "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 234.871,
+          "period": "M09",
+          "periodName": "September",
+          "footnotes": ""
         }
       ]
     },
@@ -425831,6 +427084,13 @@
           "value": 167.05,
           "period": "M08",
           "periodName": "August",
+          "footnotes": ""
+        },
+        {
+          "date": "2026-09",
+          "value": 170.693,
+          "period": "M09",
+          "periodName": "September",
           "footnotes": ""
         }
       ]
