@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "method_version": "0.1",
-  "date": "2026-11-10",
-  "generated_at": "2026-11-10T07:41:48Z",
+  "date": "2026-11-11",
+  "generated_at": "2026-11-11T07:01:24Z",
   "indices": {
     "R_M": {
-      "value": 0.0729,
+      "value": 0.0722,
       "unit": "USD/kWh",
-      "change_1d": 0.0002
+      "change_1d": -0.0007
     },
     "R_A": {
       "value": 16.89,
@@ -15,14 +15,14 @@
       "change_1d": 0
     },
     "Lambda": {
-      "value": 231.7,
+      "value": 233.8,
       "unit": "dimensionless",
-      "change_1d": -0.69
+      "change_1d": 2.14
     },
     "Omega": {
-      "value": 5.64,
+      "value": 5.65,
       "unit": "dimensionless",
-      "change_1d": -0.003
+      "change_1d": 0.009
     }
   },
   "sources": [
